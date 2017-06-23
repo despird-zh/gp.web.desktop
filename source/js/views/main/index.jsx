@@ -138,7 +138,7 @@ class App extends Component {
                   <div className="info-sub-topic">
                     <div className="topic-wrapper">
                       <p className="info-topic">
-                        Gitter Support - please visist <a href="#">http:xxs.com</a>
+                        Gitter Support - please visist <a href="#">http:xxs.com</a> this is a demo title. ok! 
                       </p>
                     </div>
                   </div>

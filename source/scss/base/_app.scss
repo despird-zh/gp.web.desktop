@@ -12,7 +12,7 @@ html {
 }
 
 html,body,#root {
-    font-family: 'Roboto', sans-serif;
+    font-family: SourceSansLocal,source-sans-pro,Source Sans Pro,-apple-system,Roboto,pt sans,calibri,sans-serif;
     margin: 0; 
     padding: 0;
     height: 100%;
@@ -36,6 +36,68 @@ body {
 
 * {
     box-sizing: border-box;
+}
+
+
+button, input[type=button], input[type=reset], input[type=submit] {
+    cursor: pointer;
+    overflow: visible;
+    line-height: normal;
+}
+
+button, input, select, textarea {
+    margin: 0;
+    font-size: 100%;
+    vertical-align: middle;
+}
+
+a {
+  color: #ff4081;
+  text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    max-height: 370px;
+    height: auto;
+    border: 0;
+    -ms-interpolation-mode: bicubic;
+}
+
+ul, ol {
+    margin-top: 0;
+    margin-bottom: .6;
+}
+
+ul {
+    list-style: disc;
+}
+
+ul, ol {
+    padding: 0;
+    margin: 0 0 10px 25px;
+}
+
+p {
+    margin-bottom: 1.3em;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+h2 {
+    font-size: 1.424em;
+}
+
+h1, h2, h3, h4, h5 {
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.2;
 }
 
 .container{
@@ -677,69 +739,4 @@ body {
 
 .clearfix:after{
     clear: both;
-}
-
-button, input[type=button], input[type=reset], input[type=submit] {
-    cursor: pointer;
-    -webkit-appearance: button;
-}
-
-button, input {
-    overflow: visible;
-    line-height: normal;
-}
-
-button, input, select, textarea {
-    margin: 0;
-    font-size: 100%;
-    vertical-align: middle;
-}
-
-a {
-  color: #ff4081;
-  text-decoration: none;
-}
-
-img {
-    max-width: 100%;
-    max-height: 370px;
-    height: auto;
-    border: 0;
-    -ms-interpolation-mode: bicubic;
-}
-
-ul, ol {
-    margin-top: 0;
-    margin-bottom: .6;
-}
-
-ul {
-    list-style: disc;
-}
-
-ul, ol {
-    padding: 0;
-    margin: 0 0 10px 25px;
-}
-
-p {
-    margin-bottom: 1.3em;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-}
-
-h1 {
-    font-size: 2em;
-    margin: 0.67em 0;
-}
-
-h2 {
-    font-size: 1.424em;
-}
-
-h1, h2, h3, h4, h5 {
-    margin: 0;
-    font-weight: 600;
-    line-height: 1.2;
 }
