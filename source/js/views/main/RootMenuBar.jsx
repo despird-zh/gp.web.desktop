@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class FooterBar extends React.Component {
+class RootMenuBar extends React.Component {
 
   render() {
     return (
@@ -13,9 +13,9 @@ class FooterBar extends React.Component {
 }
 
 
-FooterBar.propTypes = {
+RootMenuBar.propTypes = {
   style: PropTypes.object,
   muiTheme: PropTypes.object,
 };
 
-export default FooterBar;
+export default RootMenuBar;

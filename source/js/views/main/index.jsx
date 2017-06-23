@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import Throttle from 'lodash.throttle';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -7,11 +8,12 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Paper from 'material-ui/Paper';
 import { grey200 } from 'material-ui/styles/colors';
 import typography from 'material-ui/styles/typography';
-import HeaderBar from './HeaderBar';
-import FooterBar from './FooterBar';
+import PageHeaderBar from './PageHeaderBar';
+import RootMenuBar from './RootMenuBar';
 import SigninDialog from '../component/Signin/SigninDialog';
 import AffiliateBars from '../component/AffiliateBars';
 import ActionHomeMenu from 'material-ui/svg-icons/action/home';
+
 const rootTheme = getMuiTheme(lightBaseTheme);
 
 const styles = {
@@ -26,6 +28,8 @@ const styles = {
   },
 
 };
+
+injectTapEventPlugin();
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
