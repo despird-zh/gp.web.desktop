@@ -120,25 +120,6 @@ h1, h2, h3, h4, h5 {
             z-index: 2;
         }
 
-        .nano {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            .nano-content {
-                position: absolute;
-                overflow: scroll;
-                overflow-x: hidden;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-            }
-        }
-
-        .nano-content {
-            display: flex;
-            flex-direction: column;
-        }
         .menu-bar {
 
             position: relative;

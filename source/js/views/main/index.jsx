@@ -48,8 +48,8 @@ class App extends Component {
           <aside className="root-menu-container">
             <section className="root-menu">
              <nav className="menu-bar">
-              <div className="menu-bar-inner nano">
-                <ul className="menu-opts nano-content">
+              <div className="menu-bar-inner ">
+                <ul className="menu-opts ">
                   <li className="menu-opts__header-spacer">
                     <svg className="logo-icon" viewBox="0 0 18 25">
                         <rect x="15" y="5" width="2" height="10"></rect>
