@@ -1,0 +1,93 @@
+$font-color: #fff;
+$font-color-alter: #333;
+$message-color: #ffffff;
+
+.chat {
+  ul {
+    
+    li {
+
+      .message-bar time {
+          font-size: 0.8rem;
+          color: rgba(0,0,0,.35);
+          margin-top: 3px;
+          float: right;
+          cursor: default;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+      }
+      .message-bar time:before{
+          content:"\f017";
+          color: #ddd;
+          font-family: FontAwesome;
+          display: inline-block;
+          margin-right: 4px;
+      }
+      
+      .message {
+
+        background-color: $message-color;
+
+        
+        &:before{
+          content: '';
+          position: absolute;
+          border-top: 16px solid rgba(0,0,0,0.05);
+          border-left: 16px solid transparent;
+          border-right: 16px solid transparent;
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: 0;
+          border-top: 17px solid $message-color;
+          border-left: 17px solid transparent;
+          border-right: 17px solid transparent;
+        }
+
+        p {
+          margin: 0;
+          padding: 0;
+          transition: all 0.1s;
+        }
+      }
+    }
+    
+    li.other {
+      
+      .message {
+
+        &:before {
+          margin: -11px -18px 0 0;
+          right: 0;
+        }
+
+        &:after{
+          content: '';
+          right: 0;
+          margin: 0 -15px 0 0;
+        }
+      }
+    }
+
+    li.you {
+      
+      .message {
+        
+        &:before {
+          margin: -11px 0 0 -18px;
+          left: 0;
+        }
+
+        &:after{
+          content: '';
+          left: 0;
+          margin: 0 0 0 -15px;
+        }
+      }
+    }
+  }
+}
