@@ -17,43 +17,56 @@ import { hashHistory } from 'react-router';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { openSignin, signoff } from '../../store/actions/authActions';
 
-function getStyles(muiTheme) {
-  const {
-    appBar,
-    button: {
-      iconButtonSize,
-    },
-    zIndex,
-
-  } = muiTheme;
-
-  const styles = {
-    
-  };
-
-  return styles;
-}
 
 class HeaderBar extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    this.styles = getStyles(this.props.muiTheme);
   }
 
   render() {
 
     return (
-
-      <div style={ this.styles.root } className='content'>
-
+      <div className="page-header">
+        <div className="page-header-group avatar-group">
+          <label className="avatar-label">
+            <img height="48" width="48" src="https://avatars-01.gitter.im/group/iv/3/57542c12c43b8c601976fa66?s=48"/>
+          </label>
+        </div>
+        <div className="page-header-group info-group">
+          <div className="info-sub-heading">
+            <h1 className="info-heading">
+              <a href="https://github.com/gitterHQ/gitter" target="_blank">gitterHQ/gitter</a>
+            </h1>
+          </div>
+          <div className="info-sub-topic">
+            <div className="topic-wrapper">
+              <p className="info-topic">
+                Gitter Support - please visist <a href="#">http:xxs.com</a> this is a demo title. ok! 
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="page-header-group actions-group">
+          <a className="header-action">
+            <i className="fa fa-globe" ></i>
+          </a>
+          <button className="header-action">
+            <i className="fa fa-star-o" ></i>
+          </button>
+          <button className="header-action">
+            <i className="fa fa-cog" ></i>
+          </button>
+          <div className="header-profile">
+            <img src="https://avatars-02.gitter.im/gh/uv/3/despird-zh" className="profile-avatar"/>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 HeaderBar.propTypes = {
-  openSignin: PropTypes.func,
   muiTheme: PropTypes.object,
   signoff: PropTypes.func,
   authenticated: PropTypes.bool,
