@@ -45,17 +45,28 @@ class App extends Component {
     this.setState({ menuActive: !this.state.menuActive});
   }
 
+  refMenuBar = (refMenuBar) =>{
+    this._menuBar = refMenuBar;
+  }
+
+  setActiveMenu = (menuName) => {
+    this._menuBar.setActiveMenu(menuName);
+  }
+
   render() {
-    console.log(this.props)
     return (
       <MuiThemeProvider muiTheme={ rootTheme }>
         <div className='container'>
           <RootMenuBar 
+            ref={ this.refMenuBar }
             menuActive={ this.state.menuActive }
             onMenuSwitch={ this.onMenuSwitch }
           />
           <div className={ this.state.menuActive ? 'page-layout root-menu-pinned':'page-layout'}>
-            {this.props.children}
+            {this.props.children && React.cloneElement(this.props.children, {
+              setActiveMenu: this.setActiveMenu,
+              muiTheme: rootTheme,
+            })}
           </div>
         </div>
       </MuiThemeProvider>

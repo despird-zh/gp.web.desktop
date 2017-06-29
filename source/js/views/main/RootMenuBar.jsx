@@ -11,6 +11,10 @@ class RootMenuBar extends React.Component {
     super(props);
   }
 
+  setActiveMenu = (menuName) => {
+    console.log(menuName);
+  }
+
   render() {
 
     let { menuActive, onMenuSwitch } = this.props;

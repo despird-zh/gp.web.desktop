@@ -20,6 +20,11 @@ class DevPage extends Component {
   onCollapseSwitch = () =>{
     this.setState({ collapsed: !this.state.collapsed });
   }
+
+  onTest = () => {
+    console.log(this);
+    console.log(this.$parent);
+  }
   render() {
 
     return (
@@ -39,7 +44,7 @@ class DevPage extends Component {
           </div>
           <div className="page-content">
             <div className="content-body">
-              xxqqq
+              <RaisedButton label="Primary" primary={true} onTouchTap={this.onTest}/>
             </div>
             <footer className="content-footer">
               xx
