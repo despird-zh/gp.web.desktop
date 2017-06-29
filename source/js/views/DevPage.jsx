@@ -22,8 +22,7 @@ class DevPage extends Component {
   }
 
   onTest = () => {
-    console.log(this);
-    console.log(this.$parent);
+    this.props.setActiveMenu('xxx2');
   }
   render() {
 
