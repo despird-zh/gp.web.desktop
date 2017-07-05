@@ -38,19 +38,22 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { menuActive : true};
+    this.state = { 
+        menuPaneInvisible : true,
+        menuPane: null
+      };
   }
 
   onMenuSwitch = () => {
-    this.setState({ menuActive: !this.state.menuActive});
+    this.setState({ menuPaneInvisible: !this.state.menuPaneInvisible});
   }
 
   refMenuBar = (refMenuBar) =>{
     this._menuBar = refMenuBar;
   }
 
-  setActiveMenu = (menuName) => {
-    this._menuBar.setActiveMenu(menuName);
+  setRootMenu = (menuPaneInvisible, menuPane) => {
+    this.setState({menuPaneInvisible, menuPane});
   }
 
   render() {
@@ -59,10 +62,11 @@ class App extends Component {
         <div className='container'>
           <RootMenuBar 
             ref={ this.refMenuBar }
-            menuActive={ this.state.menuActive }
+            menuPaneInvisible={ this.state.menuPaneInvisible }
+            menuPane={ this.state.menuPane }
             onMenuSwitch={ this.onMenuSwitch }
           />
-          <div className={ this.state.menuActive ? 'page-layout root-menu-pinned':'page-layout'}>
+          <div className={ this.state.menuPaneInvisible ? 'page-layout root-menu-pinned':'page-layout'}>
             {this.props.children && React.cloneElement(this.props.children, {
               setActiveMenu: this.setActiveMenu,
               muiTheme: rootTheme,

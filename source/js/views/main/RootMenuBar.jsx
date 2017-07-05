@@ -17,7 +17,7 @@ class RootMenuBar extends React.Component {
 
   render() {
 
-    let { menuActive, onMenuSwitch } = this.props;
+    let { menuPane, menuPaneInvisible, onMenuSwitch } = this.props;
 
     return (
       <aside className="root-menu-container">
@@ -81,7 +81,7 @@ class RootMenuBar extends React.Component {
           </div>
          </nav>
          <div >
-          <div className={ menuActive ? 'menu-panel active':'menu-panel'}>
+          <div className={ menuPaneInvisible ? 'menu-panel active':'menu-panel'}>
             <div className="header-brand">
               <img className="header-brand-logo" src="//cdn03.gitter.im/_s/708c5ff/images/svg/gitter-logos/logo-white-lettering.svg"/>
             </div>

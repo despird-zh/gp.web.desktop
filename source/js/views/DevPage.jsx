@@ -55,6 +55,13 @@ class DevPage extends Component {
   }
 }
 
+const RootMenuContent = ({ }) => {
+  
+  return (<div>
+    ssss
+  </div>);
+};
+
 export default connect(
   (state) => ({}),
   (dispatch) => (
