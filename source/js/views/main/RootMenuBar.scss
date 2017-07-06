@@ -1,3 +1,4 @@
+$menu-height: 55px;
 .root-menu-container{
 
     width: 7.5rem;
@@ -90,8 +91,8 @@
             text-align: center;
             width: 7.4rem;
             min-width: 7.4rem;
-            height: 65px;
-            min-height: 65px;
+            height: $menu-height;
+            min-height: $menu-height;
             //line-height: 65px;
             position: fixed;
             left: 0;
@@ -99,19 +100,19 @@
             background-color: #fff;
             padding-right: 1px;
             &.opt-all{
-                top: 65px;
+                top: 70px;
             }
             &.opt-search{
-                top: 130px;
+                top: 70px + $menu-height * 1;
             }
             &.opt-query{
-                top: 195px;
-            }
-            &.opt-pinner{
-                bottom: 0;
+                top: 70px + $menu-height * 2;
             }
             &.opt-plus{
-                bottom: 65px;
+                top: 70px + $menu-height * 3;
+            }
+            &.opt-pinner{
+                bottom: 5px;
             }
         }
 
@@ -125,85 +126,7 @@
 
             }
         }
-        .menu-opt__container{
-            width: 100%;
-            height: 100%;
-            
-
-            .menu-opt__badge-wrapper{
-
-                display: block;
-            }
-
-            .menu-opt__badge{
-                box-sizing: border-box;
-                position: absolute;
-                top: 38%;
-                left: 63%;
-                transform: translateX(-50%) translateY(-50%);
-                display: block;
-                width: 1.4rem;
-                height: 1.4rem;
-                border: 2px solid white;
-                border-radius: 100%;
-                color: transparent;
-                z-index: 3;
-                visibility: hidden;
-                transform: translateX(-100%) translateY(-50%);
-                background-color: transparent;
-                
-                transition: visibility 0s ease .2s,transform .2s cubic-bezier(1,2.5,.5,.76),background-color .2s ease,border-color .2s ease;
-                
-                &.has-mentions{
-                    visibility: visible;
-                    transition-delay: 0s;
-                    transform: translateX(-50%) translateY(-50%);
-                    background-color: #f68d42;
-                    border-color: white;
-                   
-                    &.paulse-animation{
-                        animation-name: unread-indicator-subtle-pulse-animation;
-                        animation-duration: 2s;
-                        animation-timing-function: ease;
-                    }   
-                }
-            }
-
-            &.active > .menu-opt__button:before{
-                transform: translateX(0);
-            }
-            &.active > .menu-opt__button{
-                opacity: 1;
-            }
-            .menu-opt__button{
-                display: block;
-                width: 100%;
-                height: 100%;
-                padding: 0;
-                opacity: .45;
-                background-color: #fdfdfd;
-                border: 0;
-                transition: opacity .1s ease-in;
-                color: inherit;
-                text-decoration: none;
-                font-size: 0;
-                line-height: 0;
-                text-align: center;
-                outline: none;
-                &:before{
-                    content: ' ';
-                    display: inline-block;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    height: 100%;
-                    width: .5rem;
-                    transform: translateX(-100%);
-                    transition: transform .2s linear;
-                    background-color: currentColor;
-                }
-            }
-        }
+        
     }
     
     .menu-panel{

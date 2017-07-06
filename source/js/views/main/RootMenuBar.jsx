@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ActionHomeMenu from 'material-ui/svg-icons/action/home';
+import NavFirstPage from 'material-ui/svg-icons/navigation/first-page';
+import NavLastPage from 'material-ui/svg-icons/navigation/last-page';
+import IconButton from 'material-ui/IconButton';
 
 import './RootMenuBar.scss';
 
@@ -16,6 +19,9 @@ function getStyles(muiTheme) {
     },
     menuPaneHeader:{
       backgroundColor: baseTheme.palette.primary1Color,
+    },
+    switchButton:{
+      color: baseTheme.palette.primary2Color,
     }
   };
 }
@@ -50,28 +56,23 @@ class RootMenuBar extends React.Component {
                   </svg>
               </li>
               <li className="menu-opt opt-all">
-                <div className="menu-opt__container active">
-                  <div className="menu-opt__badge-wrapper">
-                    <span className="menu-opt__badge paulse-animation has-mentions">
-                    </span>
-                  </div>
-                  <button className="menu-opt__button">
-                    <ActionHomeMenu/>
-                  </button>
-                </div>
+                  <FloatingActionButton mini={true} >
+                    <ActionHomeMenu />
+                  </FloatingActionButton>
+                
               </li>
               <li className="menu-opt opt-search">
-                  <FloatingActionButton mini={true} style={{}}>
+                  <FloatingActionButton mini={true} >
                     <ActionHomeMenu />
                   </FloatingActionButton>
               </li>
-              <li className="menu-opt opt-query" style={{padding:10}}>
+              <li className="menu-opt opt-query">
                 <FloatingActionButton mini={true} disabled={true}>
                   <ContentAdd />
                 </FloatingActionButton>
               </li>
-              <li className="menu-opt " style={{padding:10}}>
-                  <FloatingActionButton mini={true} style={{}}>
+              <li className="menu-opt opt-plus">
+                  <FloatingActionButton mini={true}>
                     <ContentAdd />
                   </FloatingActionButton>
               </li>
@@ -80,19 +81,10 @@ class RootMenuBar extends React.Component {
                 </ul>
               </li>
 
-              <li className="menu-opt opt-plus">
-                <div className="menu-opt__container">
-                  <button className="menu-opt__button">
-                    <ActionHomeMenu/>
-                  </button>
-                </div>
-              </li>
               <li className="menu-opt opt-pinner">
-                <div className="menu-opt__container">
-                  <button className="menu-opt__button" onClick={ onMenuSwitch }>
-                    <ActionHomeMenu/>
-                  </button>
-                </div>
+                <IconButton onTouchTap={ onMenuSwitch } iconStyle={styles.switchButton}>
+                  {menuPaneVisible ? <NavFirstPage /> : <NavLastPage/>}
+                </IconButton>
               </li>
             </ul>
           </div>
