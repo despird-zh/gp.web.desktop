@@ -156,17 +156,7 @@
             padding-top: 17px;
             margin-left: 6px;
             margin-right: 12px;
-            &:before {
-                content: '';
-                display: block;
-                position: absolute;
-                top: 50%;
-                left: 0;
-                height: 4.3rem;
-                border-right: 1px solid rgba(0,0,0,.1);
-                transform: translateY(-50%);
-            }
-
+ 
             .profile-avatar{
                 width: 30px;
                 min-width: 30px;

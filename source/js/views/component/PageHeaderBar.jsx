@@ -17,14 +17,25 @@ import { hashHistory } from 'react-router';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { openSignin, signoff } from '../../store/actions/authActions';
 
+function getStyles(muiTheme) {
+  const { baseTheme } = muiTheme;
+
+  return {
+    pageHeader: {
+      backgroundColor: baseTheme.palette.primary1Color,
+    }
+  };
+}
 
 class HeaderBar extends React.Component {
 
   constructor(props, context) {
     super(props, context);
+    this.styles = getStyles(props.muiTheme);
   }
 
   render() {
+
 
     return (
       <div className="page-header">

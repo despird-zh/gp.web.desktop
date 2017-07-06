@@ -1,9 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import ActionHomeMenu from 'material-ui/svg-icons/action/home';
 
 import './RootMenuBar.scss';
+
+function getStyles(muiTheme) {
+
+  const { baseTheme } = muiTheme;
+
+  return {
+    menuOptHeader: {
+      backgroundColor: baseTheme.palette.primary1Color,
+    },
+    menuPaneHeader:{
+      backgroundColor: baseTheme.palette.primary1Color,
+    }
+  };
+}
 
 class RootMenuBar extends React.Component {
 
@@ -17,7 +32,8 @@ class RootMenuBar extends React.Component {
 
   render() {
 
-    let { menuPane, menuPaneInvisible, onMenuSwitch } = this.props;
+    let { menuPane, menuPaneVisible, onMenuSwitch, muiTheme } = this.props;
+    let styles = getStyles(muiTheme);
 
     return (
       <aside className="root-menu-container">
@@ -25,7 +41,7 @@ class RootMenuBar extends React.Component {
          <nav className="menu-bar">
           <div className="menu-bar-inner ">
             <ul className="menu-opts ">
-              <li className="menu-opts__header-spacer">
+              <li className="menu-opts__header-spacer" style={styles.menuOptHeader}>
                 <svg className="logo-icon" viewBox="0 0 18 25">
                     <rect x="15" y="5" width="2" height="10"></rect>
                     <rect x="10" y="5" width="2" height="20"></rect>
@@ -45,18 +61,19 @@ class RootMenuBar extends React.Component {
                 </div>
               </li>
               <li className="menu-opt opt-search">
-                <div className="menu-opt__container">
-                  <button className="menu-opt__button">
-                    <ActionHomeMenu/>
-                  </button>
-                </div>
+                  <FloatingActionButton mini={true} style={{}}>
+                    <ActionHomeMenu />
+                  </FloatingActionButton>
               </li>
-              <li className="menu-opt opt-query">
-                <div className="menu-opt__container">
-                  <button className="menu-opt__button">
-                    <ActionHomeMenu/>
-                  </button>
-                </div>
+              <li className="menu-opt opt-query" style={{padding:10}}>
+                <FloatingActionButton mini={true} disabled={true}>
+                  <ContentAdd />
+                </FloatingActionButton>
+              </li>
+              <li className="menu-opt " style={{padding:10}}>
+                  <FloatingActionButton mini={true} style={{}}>
+                    <ContentAdd />
+                  </FloatingActionButton>
               </li>
               <li className="menu-opt-collection">
                 <ul className="menu-opt-collection-list">
@@ -81,10 +98,10 @@ class RootMenuBar extends React.Component {
           </div>
          </nav>
          <div >
-          <div className={ menuPaneInvisible ? 'menu-panel active':'menu-panel'}>
-            <div className="header-brand">
+          <div className={ menuPaneVisible ? 'menu-panel active':'menu-panel'}>
+            <div className="header-brand" style={styles.menuPaneHeader}>
               <img className="header-brand-logo" src="//cdn03.gitter.im/_s/708c5ff/images/svg/gitter-logos/logo-white-lettering.svg"/>
-            </div>
+            </div>           
             <header className="panel-header">
               <div>
                 <div className="panel-header__container active">
@@ -92,6 +109,9 @@ class RootMenuBar extends React.Component {
                 </div>
               </div>
             </header>
+            {
+              (menuPane) ? menuPane: null
+            }
           </div>
          </div>
         </section>

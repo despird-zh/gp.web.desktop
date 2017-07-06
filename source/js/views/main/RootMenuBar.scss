@@ -72,7 +72,7 @@
                 position: absolute;
                 top: 0;
                 right: -1px;
-                background-color: #753a88;
+                background-color: inherit;
             }
         }
         .logo-icon{
@@ -92,7 +92,7 @@
             min-width: 7.5rem;
             height: 65px;
             min-height: 65px;
-            line-height: 65px;
+            //line-height: 65px;
             position: fixed;
             left: 0;
             color: #ed1965;
@@ -241,7 +241,7 @@
                 position: absolute;
                 top: 0;
                 right: -1px;
-                background-color: #753a88;
+                background-color: inherit;
             }
 
             .header-brand-logo {

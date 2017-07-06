@@ -10,11 +10,22 @@ import PageHeaderBar from './component/PageHeaderBar';
 import NavFirstPage from 'material-ui/svg-icons/navigation/first-page';
 import NavLastPage from 'material-ui/svg-icons/navigation/last-page';
 
+function getStyles(muiTheme) {
+  const { baseTheme } = muiTheme;
+
+  return {
+    pageHeader: {
+      backgroundColor: baseTheme.palette.primary1Color,
+    }
+  };
+}
+
 class DevPage extends Component {
 
   constructor(props, context) {
     super(props, context);
     this.state = {collapsed: false};
+    this.styles = getStyles(props.muiTheme);
   }
 
   onCollapseSwitch = () =>{
@@ -22,14 +33,25 @@ class DevPage extends Component {
   }
 
   onTest = () => {
-    this.props.setActiveMenu('xxx2');
+    this.props.resetRootMenu({menuPaneVisible:true, menuPane: (<RootMenuContent test1={this.onTest1}/>) });
   }
+
+  onTest1 = () => {
+    console.log('12------3')
+  }
+
+
+  componentDidMount(){
+    this.props.resetRootMenu({menuPaneVisible:true, menuPane: (<RootMenuContent test1={this.onTest1}/>) });
+  }
+
   render() {
+    let { muiTheme } = this.props;
 
     return (
       <div className="page-wrapper">
-        <header className="page-header-wrapper">
-          <PageHeaderBar/>
+        <header className="page-header-wrapper" style={this.styles.pageHeader}>
+          <PageHeaderBar muiTheme={ muiTheme }/>
         </header>
         <div className="page-content-wrapper">
           <div className="page-right-menu">
@@ -55,10 +77,10 @@ class DevPage extends Component {
   }
 }
 
-const RootMenuContent = ({ }) => {
+const RootMenuContent = ({ test1 }) => {
   
   return (<div>
-    ssss
+    <RaisedButton label="Test" primary={true} onTouchTap={test1}/>
   </div>);
 };
 
