@@ -88,14 +88,15 @@
             position: relative;
             color: white;
             text-align: center;
-            width: 7.5rem;
-            min-width: 7.5rem;
+            width: 7.4rem;
+            min-width: 7.4rem;
             height: 65px;
             min-height: 65px;
             //line-height: 65px;
             position: fixed;
             left: 0;
             color: #ed1965;
+            background-color: #fff;
             padding-right: 1px;
             &.opt-all{
                 top: 65px;
