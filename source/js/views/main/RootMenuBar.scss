@@ -34,9 +34,11 @@ $menu-height: 55px;
 
         .menu-bar-inner {
             position: absolute;
-            top: 260px;
-            bottom: 130px;
+            top: 70px + $menu-height * 4;
+            bottom: 70px ;
             height: auto;
+            width: 100%;
+            background-color: #fff;
         }
 
         .menu-opts{
@@ -46,6 +48,7 @@ $menu-height: 55px;
             margin-left: 0;
             margin-bottom: 0;
             list-style: none;
+            height:100%
         }
 
         .menu-opts__header-spacer{
