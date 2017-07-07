@@ -6,6 +6,7 @@ import HomePage from './views/home';
 
 import DevPage from './views/DevPage';
 import AboutPage from './views/AboutPage';
+import WGroupGridListPage from './views/wgroup/WGroupGridListPage';
 
 export const getRoutes = (store) => {
   const ensureAuthenticated = (nextState, replace) => { // eslint-disable-line no-unused-vars
@@ -31,6 +32,7 @@ export const getRoutes = (store) => {
     <Route path='/' component={ App }>
       <IndexRoute component={ DevPage } />
       <Route path='dev' component={ DevPage } />
+      <Route path='wgroup-list' component={ WGroupGridListPage } />
       <Route path='about' component={ AboutPage } />
     </Route>
   );

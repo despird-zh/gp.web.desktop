@@ -8,16 +8,18 @@ import IconButton from 'material-ui/IconButton';
 import ActViewList from 'material-ui/svg-icons/action/view-list';
 import ActViewModule from 'material-ui/svg-icons/action/view-module';
 
+import PageHeaderBar from '../component/PageHeaderBar';
 import AuthConnect from '../component/AuthConnect';
 
 function getStyles(muiTheme) {
-  const { baseTheme:{ palette } } = muiTheme;
+  const { baseTheme:{ palette },paper } = muiTheme;
 
   return {
     root: {
       display: 'flex',
       position: 'relative',
       marginTop: 10,
+
       flexWrap: 'wrap',
       justifyContent: 'space-around',
     },
@@ -25,9 +27,23 @@ function getStyles(muiTheme) {
       color: palette.primary2Color,
     },
     gridList: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      margin: 0,
       width: '100%',
-      overflowY: 'auto',
+      padding: 10,
+      overflowY: 'auto'
     },
+    tileItem: {
+      boxShadow: paper.zDepthShadows[2],
+      width:240, 
+      height:140, 
+      borderRadius: 6, 
+      margin: 10
+    },
+    pageHeader: {
+      backgroundColor: palette.primary1Color,
+    }
   };
 }
 
@@ -108,27 +124,32 @@ class WGroupGridListPage extends React.Component {
 
   render() {
     const styles = this.styles;
+    let { muiTheme } = this.props;
 
     return (
-      <div style={ styles.root }>
-        <GridList
-          cellHeight={140}
-          style={styles.gridList}
-          cols={5}
-          padding={15}
-        >
-          <Subheader>December</Subheader>
-          {tilesData.map((tile) => (
-            <GridTile
-              key={tile.author}
-              title={tile.title}
-              subtitle={<span>by <b>{tile.author}</b></span>}
-              actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
-            >
-              <img src={tile.img} />
-            </GridTile>
-          ))}
-        </GridList>
+      <div className="page-wrapper">
+        <header className="page-header-wrapper" style={styles.pageHeader}>
+          <PageHeaderBar muiTheme={ muiTheme }/>
+        </header>
+        <div className="page-content-wrapper">
+          <div className="page-content">
+            <div
+              style={styles.gridList}>
+              <Subheader>December</Subheader>
+              {tilesData.map((tile) => (
+                <GridTile
+                  key={tile.author}
+                  style={ styles.tileItem }
+                  title={tile.title}
+                  subtitle={<span>by <b>{tile.author}</b></span>}
+                  actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
+                >
+                  <img src={tile.img} />
+                </GridTile>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -142,7 +163,6 @@ WGroupGridListPage.propTypes = {
 const NewComponent = AuthConnect(
   WGroupGridListPage,
   (state) => ({
-    wgrouplist: state.wgroup.get('wgrouplist'),
   }),
   { });
 

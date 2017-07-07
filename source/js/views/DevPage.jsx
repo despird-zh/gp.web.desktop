@@ -24,6 +24,7 @@ class DevPage extends Component {
 
   constructor(props, context) {
     super(props, context);
+    console.log(context)
     this.state = {collapsed: false};
     this.styles = getStyles(props.muiTheme);
   }
