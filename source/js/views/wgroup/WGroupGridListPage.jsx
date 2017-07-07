@@ -4,12 +4,16 @@ import PropTypes from 'prop-types';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-import IconButton from 'material-ui/IconButton';
 import ActViewList from 'material-ui/svg-icons/action/view-list';
 import ActViewModule from 'material-ui/svg-icons/action/view-module';
+import RaisedButton from 'material-ui/RaisedButton';
+import Divider from 'material-ui/Divider';
+import IconButton from 'material-ui/IconButton';
+import ActionHome from 'material-ui/svg-icons/action/home';
 
 import PageHeaderBar from '../component/PageHeaderBar';
 import AuthConnect from '../component/AuthConnect';
+import Chip from '../mui-ext/Chip';
 
 function getStyles(muiTheme) {
   const { baseTheme:{ palette },paper } = muiTheme;
@@ -36,10 +40,10 @@ function getStyles(muiTheme) {
     },
     tileItem: {
       boxShadow: paper.zDepthShadows[2],
-      width:240, 
-      height:140, 
+      width:'18rem', 
+      height:'12rem', 
       borderRadius: 6, 
-      margin: 10
+      margin: '0.8rem'
     },
     pageHeader: {
       backgroundColor: palette.primary1Color,
@@ -104,18 +108,7 @@ class WGroupGridListPage extends React.Component {
   }
 
   componentDidMount() {
-    const styles = this.styles;
-    const buttons = [
-      <IconButton key="bookmark" iconStyle={ styles.iconBtn } onTouchTap={ this.test }>
-        <ActViewList />
-      </IconButton>,
-      <IconButton key="track" iconStyle={ styles.iconBtn } onTouchTap={ this.test }>
-        <ActViewModule />
-      </IconButton>
-      ];
-    if (this.props.setCurrentPage) {
-      this.props.setCurrentPage('gridlist', { buttons });
-    }
+    this.props.resetRootMenu({menuPaneVisible:true, menuPane: (<RootMenuContent test1={this.onTest1}/>) });
   }
 
   test = () => {
@@ -154,6 +147,67 @@ class WGroupGridListPage extends React.Component {
     );
   }
 }
+
+const RootMenuContent = ({ test1 }) => {
+  
+  const handleDelete = () => {};
+
+  return (
+  <div>
+    <header className="panel-header"> 
+      <div className="panel-header__container active">
+        <h3 className="panel-header__title">Tag Filter</h3>
+        <IconButton tooltip="SVG Icon" disableTouchRipple={true}>
+      <ActionHome />
+    </IconButton>
+      </div>
+    </header>
+    <div style={{padding:'0 15px 15px'}}>
+      <div style={{display: 'flex',flexWrap: 'wrap'}}>
+        <Chip
+          key={1}
+          onRequestDelete={handleDelete}
+          style={{margin: '8px 4px'}}>
+          Test Tag
+        </Chip>
+        <Chip
+          key={2}
+          onRequestDelete={handleDelete}
+          style={{margin: '8px 4px'}}>
+          Test Tag
+        </Chip>
+      </div>
+      <Divider />
+      <div style={{display: 'flex',flexWrap: 'wrap'}}>
+        <Chip
+          key={1}
+          onRequestAdd={handleDelete}
+          style={{margin: '8px 4px'}}>
+          Test Tag
+        </Chip>
+        <Chip
+          key={2}
+          onRequestAdd={handleDelete}
+          style={{margin: '8px 4px '}}>
+          Test Tag
+        </Chip>
+                <Chip
+          key={3}
+          onRequestAdd={handleDelete}
+          style={{margin: '8px 4px'}}>
+          Test Tag
+        </Chip>
+                <Chip
+          key={4}
+          onRequestAdd={handleDelete}
+          style={{margin: '8px 4px'}}>
+          Test Tag
+        </Chip>
+      </div>
+    </div>
+  </div>
+  );
+};
 
 WGroupGridListPage.propTypes = {
   setCurrentPage: PropTypes.func,

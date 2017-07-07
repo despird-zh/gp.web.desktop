@@ -93,14 +93,7 @@ class RootMenuBar extends React.Component {
           <div className={ menuPaneVisible ? 'menu-panel active':'menu-panel'}>
             <div className="header-brand" style={styles.menuPaneHeader}>
               <img className="header-brand-logo" src="//cdn03.gitter.im/_s/708c5ff/images/svg/gitter-logos/logo-white-lettering.svg"/>
-            </div>           
-            <header className="panel-header">
-              <div>
-                <div className="panel-header__container active">
-                  <h2 className="panel-header__title">All Conversations</h2>
-                </div>
-              </div>
-            </header>
+            </div>       
             {
               (menuPane) ? menuPane: null
             }
