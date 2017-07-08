@@ -180,12 +180,12 @@ $menu-height: 55px;
 
         .panel-header {
             position: relative;
-            min-height: 4.5rem;
+            min-height: $menu-height;
             overflow: hidden;
             text-align: left;
-
+            margin: 1rem 0;
             .panel-header__container{
-                height: 45px;
+                height: $menu-height;
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -219,7 +219,7 @@ $menu-height: 55px;
                     text-overflow: ellipsis;
                     text-transform: uppercase;
                     padding: 0 0 0 1.6rem;
-                    line-height: 45px;
+                    line-height: $menu-height;
                     color: #a2a3a3;
                 }
             }

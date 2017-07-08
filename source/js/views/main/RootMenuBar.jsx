@@ -37,7 +37,7 @@ class RootMenuBar extends React.Component {
   }
 
   render() {
-    console.log(this.props)
+
     let { menuPane, menuPaneVisible, onMenuSwitch, muiTheme } = this.props;
     let styles = getStyles(muiTheme);
 

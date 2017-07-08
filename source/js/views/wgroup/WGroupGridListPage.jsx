@@ -11,6 +11,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import ActionHome from 'material-ui/svg-icons/action/home';
+import ActionSearch from 'material-ui/svg-icons/action/search';
+import TextField from 'material-ui/TextField';
 
 import PageHeaderBar from '../component/PageHeaderBar';
 import AuthConnect from '../component/AuthConnect';
@@ -18,22 +20,23 @@ import Chip from '../mui-ext/Chip';
 
 function getStyles(muiTheme) {
   const { baseTheme:{ palette },paper } = muiTheme;
-  console.log(palette)
   return {
     chipItem: {
-      marginBottom: 10, 
-      marginRight:10,
-
+      marginBottom: '1rem', 
+      marginRight:'1rem',
     },
     iconBtn: {
       color: palette.primary2Color,
+    },
+    topBar:{
+      padding: '1rem 2rem 0',
     },
     gridList: {
       display: 'flex',
       flexWrap: 'wrap',
       margin: 0,
       width: '100%',
-      padding: 10,
+      padding: '0 1rem 1rem',
       overflowY: 'auto'
     },
     tileItem: {
@@ -96,7 +99,6 @@ class WGroupGridListPage extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = { profileExpand: false };
     this.styles = getStyles(props.muiTheme);
   }
@@ -127,8 +129,18 @@ class WGroupGridListPage extends React.Component {
         </header>
         <div className="page-content-wrapper">
           <div className="page-content">
-            <div
-              style={styles.gridList}>
+            <div style={styles.topBar}>
+              <TextField
+                  hintText="Hint Text"
+                />
+              <IconButton>
+                <ActionSearch/>
+              </IconButton>
+              <IconButton>
+                <CommClearAll />
+              </IconButton>
+            </div>
+            <div style={styles.gridList}>
               <Subheader>December</Subheader>
               {tilesData.map((tile) => (
                 <GridTile
@@ -157,8 +169,8 @@ const RootMenuContent = ({ test1, styles }) => {
   <div>
     <header className="panel-header"> 
       <div className="panel-header__container active">
-        <h3 className="panel-header__title">Tag Filter</h3>
-        <IconButton disableTouchRipple={true}>
+        <h2 className="panel-header__title">Tag Filter</h2>
+        <IconButton >
           <CommClearAll />
         </IconButton>
       </div>
@@ -211,7 +223,7 @@ const RootMenuContent = ({ test1, styles }) => {
 };
 
 WGroupGridListPage.propTypes = {
-  setCurrentPage: PropTypes.func,
+  resetRootMenu: PropTypes.func,
   muiTheme: PropTypes.object,
 };
 

@@ -312,6 +312,7 @@ class Chip extends Component {
     }
 
     return (
+      
       <EnhancedButton
         {...other}
         {...buttonEventHandlers}
