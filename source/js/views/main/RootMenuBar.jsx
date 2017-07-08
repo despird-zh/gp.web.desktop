@@ -37,7 +37,7 @@ class RootMenuBar extends React.Component {
   }
 
   render() {
-
+    console.log(this.props)
     let { menuPane, menuPaneVisible, onMenuSwitch, muiTheme } = this.props;
     let styles = getStyles(muiTheme);
 
@@ -59,7 +59,7 @@ class RootMenuBar extends React.Component {
                   <FloatingActionButton mini={true} >
                     <ActionHomeMenu />
                   </FloatingActionButton>
-                
+
               </li>
               <li className="menu-opt opt-search">
                   <FloatingActionButton mini={true} >
@@ -80,25 +80,24 @@ class RootMenuBar extends React.Component {
                 <ul className="menu-opt-collection-list">
                 </ul>
               </li>
-
+            { (menuPane) ?
               <li className="menu-opt opt-pinner">
                 <IconButton onTouchTap={ onMenuSwitch } iconStyle={styles.switchButton}>
                   {menuPaneVisible ? <NavFirstPage /> : <NavLastPage/>}
                 </IconButton>
-              </li>
+              </li> : null
+            }
             </ul>
           </div>
          </nav>
-         <div >
+         { (menuPane) ?
           <div className={ menuPaneVisible ? 'menu-panel active':'menu-panel'}>
             <div className="header-brand" style={styles.menuPaneHeader}>
               <img className="header-brand-logo" src="//cdn03.gitter.im/_s/708c5ff/images/svg/gitter-logos/logo-white-lettering.svg"/>
-            </div>       
-            {
-              (menuPane) ? menuPane: null
-            }
-          </div>
-         </div>
+            </div>
+            { menuPane }
+          </div> : null
+         }
         </section>
       </aside>
     );

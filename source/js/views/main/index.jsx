@@ -55,10 +55,7 @@ class App extends Component {
 
   resetRootMenu = ({menuPaneVisible, menuPane, menuActive}) => {
 
-    let newState = {};
-    if(menuPaneVisible) newState.menuPaneVisible = menuPaneVisible;
-    if(menuPane) newState.menuPane = menuPane;
-    if(menuActive) newState.menuActive = menuActive;
+    let newState = {menuPaneVisible, menuPane, menuActive};
 
     this.setState( newState );
   }
@@ -75,7 +72,7 @@ class App extends Component {
             onMenuSwitch={ this.onMenuSwitch }
             muiTheme={ rootTheme }
           />
-          <div className={ this.state.menuPaneVisible ? 'page-layout root-menu-pinned':'page-layout'}>
+          <div className={ this.state.menuPaneVisible && this.state.menuPane ? 'page-layout root-menu-pinned':'page-layout'}>
             {this.props.children && React.cloneElement(this.props.children, {
               resetRootMenu: this.resetRootMenu,
               muiTheme: rootTheme,

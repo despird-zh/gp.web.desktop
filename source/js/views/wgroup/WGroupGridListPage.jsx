@@ -6,6 +6,7 @@ import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import ActViewList from 'material-ui/svg-icons/action/view-list';
 import ActViewModule from 'material-ui/svg-icons/action/view-module';
+import CommClearAll from 'material-ui/svg-icons/communication/clear-all';
 import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
@@ -17,15 +18,12 @@ import Chip from '../mui-ext/Chip';
 
 function getStyles(muiTheme) {
   const { baseTheme:{ palette },paper } = muiTheme;
-
+  console.log(palette)
   return {
-    root: {
-      display: 'flex',
-      position: 'relative',
-      marginTop: 10,
+    chipItem: {
+      marginBottom: 10, 
+      marginRight:10,
 
-      flexWrap: 'wrap',
-      justifyContent: 'space-around',
     },
     iconBtn: {
       color: palette.primary2Color,
@@ -39,7 +37,7 @@ function getStyles(muiTheme) {
       overflowY: 'auto'
     },
     tileItem: {
-      boxShadow: paper.zDepthShadows[2],
+      boxShadow: paper.zDepthShadows[1],
       width:'18rem', 
       height:'12rem', 
       borderRadius: 6, 
@@ -108,7 +106,10 @@ class WGroupGridListPage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.resetRootMenu({menuPaneVisible:true, menuPane: (<RootMenuContent test1={this.onTest1}/>) });
+    this.props.resetRootMenu({
+      menuPaneVisible:true, 
+      menuPane: (<RootMenuContent test1={this.onTest1} styles={this.styles}/>) 
+    });
   }
 
   test = () => {
@@ -148,7 +149,7 @@ class WGroupGridListPage extends React.Component {
   }
 }
 
-const RootMenuContent = ({ test1 }) => {
+const RootMenuContent = ({ test1, styles }) => {
   
   const handleDelete = () => {};
 
@@ -157,9 +158,9 @@ const RootMenuContent = ({ test1 }) => {
     <header className="panel-header"> 
       <div className="panel-header__container active">
         <h3 className="panel-header__title">Tag Filter</h3>
-        <IconButton tooltip="SVG Icon" disableTouchRipple={true}>
-      <ActionHome />
-    </IconButton>
+        <IconButton disableTouchRipple={true}>
+          <CommClearAll />
+        </IconButton>
       </div>
     </header>
     <div style={{padding:'0 15px 15px'}}>
@@ -167,40 +168,40 @@ const RootMenuContent = ({ test1 }) => {
         <Chip
           key={1}
           onRequestDelete={handleDelete}
-          style={{margin: '8px 4px'}}>
+          style={styles.chipItem}>
           Test Tag
         </Chip>
         <Chip
           key={2}
           onRequestDelete={handleDelete}
-          style={{margin: '8px 4px'}}>
+          style={styles.chipItem}>
           Test Tag
         </Chip>
       </div>
-      <Divider />
+      <Divider style={{marginBottom:10}}/>
       <div style={{display: 'flex',flexWrap: 'wrap'}}>
         <Chip
           key={1}
           onRequestAdd={handleDelete}
-          style={{margin: '8px 4px'}}>
+          style={styles.chipItem}>
           Test Tag
         </Chip>
         <Chip
           key={2}
           onRequestAdd={handleDelete}
-          style={{margin: '8px 4px '}}>
+          style={styles.chipItem}>
           Test Tag
         </Chip>
                 <Chip
           key={3}
           onRequestAdd={handleDelete}
-          style={{margin: '8px 4px'}}>
+          style={styles.chipItem}>
           Test Tag
         </Chip>
-                <Chip
+        <Chip
           key={4}
           onRequestAdd={handleDelete}
-          style={{margin: '8px 4px'}}>
+          style={styles.chipItem}>
           Test Tag
         </Chip>
       </div>

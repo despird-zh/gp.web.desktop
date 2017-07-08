@@ -24,7 +24,7 @@ class DevPage extends Component {
 
   constructor(props, context) {
     super(props, context);
-    console.log(context)
+
     this.state = {collapsed: false};
     this.styles = getStyles(props.muiTheme);
   }
@@ -43,7 +43,9 @@ class DevPage extends Component {
 
 
   componentDidMount(){
+    //this.props.resetRootMenu({menuPaneVisible:true, menuPane: null });
     this.props.resetRootMenu({menuPaneVisible:true, menuPane: (<RootMenuContent test1={this.onTest1}/>) });
+    //this.props.resetRootMenu({menuPaneVisible:false, menuPane: (<RootMenuContent test1={this.onTest1}/>) });
   }
 
   render() {
