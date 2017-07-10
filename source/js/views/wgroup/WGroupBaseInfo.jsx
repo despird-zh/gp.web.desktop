@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Divider from 'material-ui/Divider';
 import Toggle from 'material-ui/Toggle';
-
 import ContentSave from 'material-ui/svg-icons/content/save';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
@@ -11,7 +10,8 @@ import {
   StepLabel,
   StepContent,
 } from 'material-ui/Stepper';
-
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import EditorInsPhoto from 'material-ui/svg-icons/editor/insert-photo';
 import FlatButton from 'material-ui/FlatButton';
 
 import Stepper from '../mui-ext/Stepper';
@@ -48,7 +48,6 @@ function getStyles(muiTheme) {
       textTransform: 'uppercase',
       padding: '0 0 0 1.6rem',
       lineHeight: '5.5rem',
-      color: '#a2a3a3'
     },
     inputItem: {
       width: '50%',
@@ -93,6 +92,8 @@ class WGroupBaseInfo extends Component {
     }
   };
 
+  onAvatarOpen = () => {};
+  onAvatarSave = () => {};
   renderStepActions(step) {
     const {stepIndex} = this.state;
 
@@ -120,38 +121,142 @@ class WGroupBaseInfo extends Component {
   }
 
   render() {
-const {finished, stepIndex} = this.state;
-
+    const {finished, stepIndex} = this.state;
+    const {errtips, muiTheme} = this.props;
+    const styles = getStyles(muiTheme);
+    
     return (
       <div style={ this.props.style }>
+        <h3 style={ styles.panelTitle }>Workgroup Information</h3>
+        <Divider />
+        <div style={ styles.container }>
+          <TextField
+            style={ styles.inputItem }
+            hintText='16 letters'
+            floatingLabelText='Account'
+            errorText={ errtips.account }
+          />
+          <TextField
+            style={ styles.inputItem }
+            hintText='no more than 32 letters'
+            errorText={ errtips['full-name'] }
+            floatingLabelText='Group Name'
+          />
+        </div>
+        <div style={ { display: 'flex' } }>
+          <TextField
+            style={ styles.inputItem }
+            hintText='16 letters'
+            floatingLabelText='Description'
+            multiLine={true}
+            rows={2}
+            errorText={ errtips.account }/>
+          <Paper style={ styles.avatarCard } zDepth={ 1 }>
+            <img src='assets/img/book2.jpg' style={{ width: 70, height: 70, borderRadius: 5}} />
+          </Paper>
+          <div style={ { display: 'flex', flexDirection: 'column-reverse', width: 40 } }>
+            <FloatingActionButton mini={true} style={ { marginBottom: 10 } } onTouchTap={ this.onAvatarOpen } >
+              <EditorInsPhoto />
+            </FloatingActionButton>
+          </div>
+          <AvatarEditDialog ref={ this.props.setEditorRef } onSave={ this.onAvatarSave } />
+        </div>
         <Stepper activeStep={stepIndex} orientation="vertical">
           <Step>
-            <StepLabel>Select campaign settings</StepLabel>
+            <StepLabel>Manage & Control</StepLabel>
             <StepContent>
-              <p>
-                For each ad campaign that you create, you can control how much
-                you're willing to spend on clicks and conversions, which networks
-                and geographical locations you want your ads to show on, and more.
-              </p>
+              <div style={ styles.container }>
+                <TextField
+                  style={ styles.inputItem }
+                  hintText='16 letters'
+                  floatingLabelText='Manager'
+                  errorText={ errtips.account }
+                />
+                <TextField
+                  style={ styles.inputItem }
+                  hintText='no more than 32 letters'
+                  errorText={ errtips['full-name'] }
+                  floatingLabelText='Administrator'
+                />
+              </div>
+              <div style={ styles.container }>
+                <TextField
+                  style={ styles.inputItem }
+                  hintText='16 letters'
+                  floatingLabelText='Organization'
+                  errorText={ errtips.account }
+                />
+                <TextField
+                  style={ styles.inputItem }
+                  hintText='no more than 32 letters'
+                  errorText={ errtips['full-name'] }
+                  floatingLabelText='State'
+                />
+              </div>
               {this.renderStepActions(0)}
             </StepContent>
           </Step>
           <Step>
             <StepLabel>Create an ad group</StepLabel>
             <StepContent>
-              <p>An ad group contains one or more ads which target a shared set of keywords.</p>
+              <div style={ { display: 'flex', flexDirection: 'row' } }>
+                <Toggle
+                  label='Topic on/off'
+                  style={ { width: '33.3%', marginTop: 40, paddingRight: 30, paddingLeft: 10 } }
+                />
+                <Toggle
+                  label='Share on/off'
+                  style={ { width: '33.3%', marginTop: 40, paddingRight: 30, paddingLeft: 10 } }
+                />
+                <Toggle
+                  label='Link on/off'
+                  style={ { width: '33.3%', marginTop: 40, paddingRight: 30, paddingLeft: 10 } }
+                />
+              </div>
               {this.renderStepActions(1)}
             </StepContent>
           </Step>
           <Step>
             <StepLabel>Create an ad</StepLabel>
             <StepContent>
-              <p>
-                Try out different ad text to see what brings in the most customers,
-                and learn how to enhance your ads using features like ad extensions.
-                If you run into any problems with your ads, find out how to tell if
-                they're running and how to resolve approval issues.
-              </p>
+              <div style={ styles.container }>
+                <TextField
+                  style={ styles.inputItem }
+                  hintText='16 letters'
+                  floatingLabelText='Storage'
+                  errorText={ errtips.account }
+                />
+                <TextField
+                  style={ styles.inputItem }
+                  hintText='no more than 32 letters'
+                  errorText={ errtips['full-name'] }
+                  floatingLabelText='State'
+                />
+              </div>
+              <div style={ styles.container }>
+                <Toggle
+                  label='Public Cabinet on/off'
+                  style={ { width: '50%', marginTop: 40, paddingRight: 30, paddingLeft: 10 } }
+                />
+                <TextField
+                  style={ styles.inputItem }
+                  hintText='no more than 32 letters'
+                  errorText={ errtips['full-name'] }
+                  floatingLabelText='capacity'
+                />
+              </div>
+              <div style={ styles.container }>
+                <Toggle
+                  label='Private Cabinet on/off'
+                  style={ { width: '50%', marginTop: 40, paddingRight: 30, paddingLeft: 10 } }
+                />
+                <TextField
+                  style={ styles.inputItem }
+                  hintText='no more than 32 letters'
+                  errorText={ errtips['full-name'] }
+                  floatingLabelText='capacity'
+                />
+              </div>
               {this.renderStepActions(2)}
             </StepContent>
           </Step>

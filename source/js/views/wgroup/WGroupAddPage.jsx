@@ -43,8 +43,8 @@ class WGroupAddPage extends Component {
         </header>
         <div className="page-content-wrapper">
           <div className="page-content" style={{overflowY:'auto', padding:'0 1.5rem 1.5rem', display:'flex', flexDirection:'row'}}>
-            <WGroupBaseInfo muiTheme={ muiTheme } errtips={{}} style={{flex:'1'}}/>
-            <WGroupMemberInfo style={{flexBasis:400, flexShrink:0, flexGrow: 0}}/>
+            <WGroupBaseInfo muiTheme={ muiTheme } errtips={{}} style={{flex:'1', paddingRight: '1.5rem'}}/>
+            <WGroupMemberInfo muiTheme={ muiTheme } style={{flexBasis:400, flexShrink:0, flexGrow: 0}}/>
           </div>
         </div>
       </div>

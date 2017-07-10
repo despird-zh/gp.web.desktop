@@ -64,14 +64,10 @@ const WGroupBaseInfo = ({ errtips, onChange, baseinfo, setEditorRef, onAvatarSav
     <div style={ styles.container }>
       <div style={ styles.left }>
         <h3 style={ styles.panelTitle }>Avatar Information</h3>
-
         <Divider />
         <div style={ { display: 'flex' } }>
           <Paper style={ styles.avatarCard } zDepth={ 1 }>
-            <img
-              src='assets/img/book2.jpg'
-              style={ { width: 70, height: 70 } }
-            />
+            <img src='assets/img/book2.jpg' style={{ width: 70, height: 70 }} />
           </Paper>
           <div style={ { display: 'flex', flexDirection: 'column-reverse', width: 100 } }>
             <RaisedButton label='Change' style={ { marginBottom: 10 } } onTouchTap={ onAvatarOpen } />

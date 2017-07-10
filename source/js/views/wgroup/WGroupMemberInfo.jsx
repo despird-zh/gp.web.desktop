@@ -233,4 +233,4 @@ const MemberInfo = ({ styles, onHandleClear, onHandleSave, ...props }) => {
   );
 };
 /*eslint-enable */
-export default muiThemeable()(WGroupMemberInfo);
+export default WGroupMemberInfo;
