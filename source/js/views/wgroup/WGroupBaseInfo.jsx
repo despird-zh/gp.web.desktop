@@ -8,12 +8,13 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import {
   Step,
-  Stepper,
   StepLabel,
   StepContent,
 } from 'material-ui/Stepper';
+
 import FlatButton from 'material-ui/FlatButton';
 
+import Stepper from '../mui-ext/Stepper';
 import AvatarEditDialog from '../component/imgeditor/AvatarEditDialog';
 
 function getStyles(muiTheme) {
@@ -118,15 +119,11 @@ class WGroupBaseInfo extends Component {
     );
   }
 
-  componentDidMount(){
-    this.props.resetRootMenu({menuPaneVisible:true, menuPane: null });
-  }
-
   render() {
 const {finished, stepIndex} = this.state;
 
     return (
-      <div style={{maxWidth: 380, maxHeight: 400, margin: 'auto'}}>
+      <div style={ this.props.style }>
         <Stepper activeStep={stepIndex} orientation="vertical">
           <Step>
             <StepLabel>Select campaign settings</StepLabel>
