@@ -132,7 +132,7 @@ class WGroupBaseInfo extends Component {
       <div style={ this.props.style }>
         <h3 style={ styles.panelTitle }>Workgroup Information</h3>
         <Divider />
-        <div style={ styles.topContainer }>
+        <div style={ styles.container }>
           <TextField
             style={ styles.inputItem }
             hintText='16 letters'
