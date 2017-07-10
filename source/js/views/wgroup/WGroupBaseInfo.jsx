@@ -20,9 +20,12 @@ import AvatarEditDialog from '../component/imgeditor/AvatarEditDialog';
 function getStyles(muiTheme) {
   const { baseTheme: { spacing, palette } } = muiTheme;
   return {
+    topContainer: {
+      display: 'flex',
+      marginTop: -14,
+    },
     container: {
       display: 'flex',
-      marginTop: spacing.desktopGutterMini,
     },
     left: {
       marginRight: spacing.desktopGutter,
@@ -129,7 +132,7 @@ class WGroupBaseInfo extends Component {
       <div style={ this.props.style }>
         <h3 style={ styles.panelTitle }>Workgroup Information</h3>
         <Divider />
-        <div style={ styles.container }>
+        <div style={ styles.topContainer }>
           <TextField
             style={ styles.inputItem }
             hintText='16 letters'
@@ -165,7 +168,7 @@ class WGroupBaseInfo extends Component {
           <Step>
             <StepLabel>Manage & Control</StepLabel>
             <StepContent>
-              <div style={ styles.container }>
+              <div style={ styles.topContainer }>
                 <TextField
                   style={ styles.inputItem }
                   hintText='16 letters'
@@ -202,15 +205,15 @@ class WGroupBaseInfo extends Component {
               <div style={ { display: 'flex', flexDirection: 'row' } }>
                 <Toggle
                   label='Topic on/off'
-                  style={ { width: '33.3%', marginTop: 40, paddingRight: 30, paddingLeft: 10 } }
+                  style={ { width: '33.3%', marginTop: 10, paddingRight: 30, paddingLeft: 10 } }
                 />
                 <Toggle
                   label='Share on/off'
-                  style={ { width: '33.3%', marginTop: 40, paddingRight: 30, paddingLeft: 10 } }
+                  style={ { width: '33.3%', marginTop: 10, paddingRight: 30, paddingLeft: 10 } }
                 />
                 <Toggle
                   label='Link on/off'
-                  style={ { width: '33.3%', marginTop: 40, paddingRight: 30, paddingLeft: 10 } }
+                  style={ { width: '33.3%', marginTop: 10, paddingRight: 30, paddingLeft: 10 } }
                 />
               </div>
               {this.renderStepActions(1)}
@@ -219,17 +222,19 @@ class WGroupBaseInfo extends Component {
           <Step>
             <StepLabel>Create an ad</StepLabel>
             <StepContent>
-              <div style={ styles.container }>
+              <div style={ styles.topContainer }>
                 <TextField
                   style={ styles.inputItem }
                   hintText='16 letters'
                   floatingLabelText='Storage'
+                  inputStyle={{marginTop:0}}
                   errorText={ errtips.account }
                 />
                 <TextField
                   style={ styles.inputItem }
                   hintText='no more than 32 letters'
                   errorText={ errtips['full-name'] }
+                  inputStyle={{marginTop:0}}
                   floatingLabelText='State'
                 />
               </div>
