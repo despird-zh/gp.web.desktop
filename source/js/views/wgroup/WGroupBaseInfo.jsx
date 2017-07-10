@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Divider from 'material-ui/Divider';
 import Toggle from 'material-ui/Toggle';
-import RaisedButton from 'material-ui/RaisedButton';
+
 import ContentSave from 'material-ui/svg-icons/content/save';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
+import {
+  Step,
+  Stepper,
+  StepLabel,
+  StepContent,
+} from 'material-ui/Stepper';
+import FlatButton from 'material-ui/FlatButton';
+
 import AvatarEditDialog from '../component/imgeditor/AvatarEditDialog';
 
 function getStyles(muiTheme) {
@@ -57,146 +66,115 @@ function getStyles(muiTheme) {
     },
   };
 }
-/*eslint-disable */
-const WGroupBaseInfo = ({ errtips, onChange, baseinfo, setEditorRef, onAvatarSave, onAvatarOpen, muiTheme, ...props }) => {
-  const styles = getStyles(muiTheme);
-  return (
-    <div style={ styles.container }>
-      <div style={ styles.left }>
-        <h3 style={ styles.panelTitle }>Avatar Information</h3>
+class WGroupBaseInfo extends Component {
 
-        <Divider />
-        <div style={ { display: 'flex' } }>
-          <Paper style={ styles.avatarCard } zDepth={ 1 }>
-            <img
-              src='assets/img/book2.jpg'
-              style={ { width: 70, height: 70 } }
-            />
-          </Paper>
-          <div style={ { display: 'flex', flexDirection: 'column-reverse', width: 100 } }>
-            <RaisedButton label='Change' style={ { marginBottom: 10 } } onTouchTap={ onAvatarOpen } />
-          </div>
-          <AvatarEditDialog ref={ setEditorRef } onSave={ onAvatarSave } />
-        </div>
-        <div style={ styles.container }>
-          <TextField
-            style={ styles.inputItem }
-            hintText='16 letters'
-            floatingLabelText='Account'
-            errorText={ errtips.account }
-          />
-          <TextField
-            style={ styles.inputItem }
-            hintText='no more than 32 letters'
-            errorText={ errtips['full-name'] }
-            floatingLabelText='Group Name'
-          />
-        </div>
-        <div style={ styles.container }>
-          <TextField
-            style={ styles.inputItem }
-            hintText='16 letters'
-            floatingLabelText='Manager'
-            errorText={ errtips.account }
-          />
-          <TextField
-            style={ styles.inputItem }
-            hintText='no more than 32 letters'
-            errorText={ errtips['full-name'] }
-            floatingLabelText='Administrator'
-          />
-        </div>
-        <div style={ styles.container }>
-          <TextField
-            style={ styles.inputItem }
-            hintText='16 letters'
-            floatingLabelText='Organization'
-            errorText={ errtips.account }
-          />
-          <TextField
-            style={ styles.inputItem }
-            hintText='no more than 32 letters'
-            errorText={ errtips['full-name'] }
-            floatingLabelText='State'
-          />
-        </div>
-        <div style={ styles.container }>
-          <TextField
-            style={ styles.inputItem }
-            hintText='16 letters'
-            floatingLabelText='Description'
-            errorText={ errtips.account }
-          />
-        </div>
-        <div style={ { display: 'flex', flexDirection: 'row' } }>
-          <Toggle
-            label='Topic on/off'
-            style={ { width: '33.3%', marginTop: 40, paddingRight: 30, paddingLeft: 10 } }
-          />
-          <Toggle
-            label='Share on/off'
-            style={ { width: '33.3%', marginTop: 40, paddingRight: 30, paddingLeft: 10 } }
-          />
-          <Toggle
-            label='Link on/off'
-            style={ { width: '33.3%', marginTop: 40, paddingRight: 30, paddingLeft: 10 } }
-          />
-        </div>
-        <div style={ styles.container }>
-          <TextField
-            style={ styles.inputItem }
-            hintText='16 letters'
-            floatingLabelText='Storage'
-            errorText={ errtips.account }
-          />
-          <TextField
-            style={ styles.inputItem }
-            hintText='no more than 32 letters'
-            errorText={ errtips['full-name'] }
-            floatingLabelText='State'
-          />
-        </div>
-        <div style={ styles.container }>
-          <Toggle
-            label='Public Cabinet on/off'
-            style={ { width: '50%', marginTop: 40, paddingRight: 30, paddingLeft: 10 } }
-          />
-          <TextField
-            style={ styles.inputItem }
-            hintText='no more than 32 letters'
-            errorText={ errtips['full-name'] }
-            floatingLabelText='capacity'
-          />
-        </div>
-        <div style={ styles.container }>
-          <Toggle
-            label='Private Cabinet on/off'
-            style={ { width: '50%', marginTop: 40, paddingRight: 30, paddingLeft: 10 } }
-          />
-          <TextField
-            style={ styles.inputItem }
-            hintText='no more than 32 letters'
-            errorText={ errtips['full-name'] }
-            floatingLabelText='capacity'
-          />
-        </div>
-        <div>
+  constructor(props, context) {
+    super(props, context);
+    this.styles = getStyles(props.muiTheme);
+    this.state = {
+      finished: false,
+      stepIndex: 0,
+    };
+  }
+
+  handleNext = () => {
+    const {stepIndex} = this.state;
+    this.setState({
+      stepIndex: stepIndex + 1,
+      finished: stepIndex >= 2,
+    });
+  };
+
+  handlePrev = () => {
+    const {stepIndex} = this.state;
+    if (stepIndex > 0) {
+      this.setState({stepIndex: stepIndex - 1});
+    }
+  };
+
+  renderStepActions(step) {
+    const {stepIndex} = this.state;
+
+    return (
+      <div style={{margin: '12px 0'}}>
         <RaisedButton
-          label="Save"
-          labelPosition="before"
+          label={stepIndex === 2 ? 'Finish' : 'Next'}
+          disableTouchRipple={true}
+          disableFocusRipple={true}
           primary={true}
-          icon={<ContentSave />}
-          style={styles.button}
+          onTouchTap={this.handleNext}
+          style={{marginRight: 12}}
         />
-        </div>
+        {step > 0 && (
+          <FlatButton
+            label="Back"
+            disabled={stepIndex === 0}
+            disableTouchRipple={true}
+            disableFocusRipple={true}
+            onTouchTap={this.handlePrev}
+          />
+        )}
       </div>
+    );
+  }
 
-      <div style={ styles.right }>
-       
-        
+  componentDidMount(){
+    this.props.resetRootMenu({menuPaneVisible:true, menuPane: null });
+  }
+
+  render() {
+const {finished, stepIndex} = this.state;
+
+    return (
+      <div style={{maxWidth: 380, maxHeight: 400, margin: 'auto'}}>
+        <Stepper activeStep={stepIndex} orientation="vertical">
+          <Step>
+            <StepLabel>Select campaign settings</StepLabel>
+            <StepContent>
+              <p>
+                For each ad campaign that you create, you can control how much
+                you're willing to spend on clicks and conversions, which networks
+                and geographical locations you want your ads to show on, and more.
+              </p>
+              {this.renderStepActions(0)}
+            </StepContent>
+          </Step>
+          <Step>
+            <StepLabel>Create an ad group</StepLabel>
+            <StepContent>
+              <p>An ad group contains one or more ads which target a shared set of keywords.</p>
+              {this.renderStepActions(1)}
+            </StepContent>
+          </Step>
+          <Step>
+            <StepLabel>Create an ad</StepLabel>
+            <StepContent>
+              <p>
+                Try out different ad text to see what brings in the most customers,
+                and learn how to enhance your ads using features like ad extensions.
+                If you run into any problems with your ads, find out how to tell if
+                they're running and how to resolve approval issues.
+              </p>
+              {this.renderStepActions(2)}
+            </StepContent>
+          </Step>
+        </Stepper>
+        {finished && (
+          <p style={{margin: '20px 0', textAlign: 'center'}}>
+            <a
+              href="#"
+              onClick={(event) => {
+                event.preventDefault();
+                this.setState({stepIndex: 0, finished: false});
+              }}
+            >
+              Click here
+            </a> to reset the example.
+          </p>
+        )}
       </div>
-    </div>
-  );
-};
-/*eslint-enable */
+    );
+  }
+}
+
 export default WGroupBaseInfo;

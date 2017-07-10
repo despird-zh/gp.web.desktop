@@ -6,7 +6,6 @@ import NavLastPage from 'material-ui/svg-icons/navigation/last-page';
 import { Link } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 
-
 import { snackAction, loaderAction } from '../../store/actions/appActions';
 import PageHeaderBar from '../component/PageHeaderBar';
 import WGroupBaseInfo from './WGroupBaseInfo';
@@ -22,28 +21,14 @@ function getStyles(muiTheme) {
   };
 }
 
-class DevPage extends Component {
+class WGroupAddPage extends Component {
 
   constructor(props, context) {
     super(props, context);
-
-    this.state = {collapsed: false};
     this.styles = getStyles(props.muiTheme);
   }
 
-  onCollapseSwitch = () =>{
-    this.setState({ collapsed: !this.state.collapsed });
-  }
-
-  onTest = () => {
-    this.props.resetRootMenu({menuPaneVisible:true, menuPane: (<RootMenuContent test1={this.onTest1}/>) });
-  }
-
-  onTest1 = () => {
-    console.log('12------3')
-  }
-
-
+  //<WGroupBaseInfo muiTheme={ muiTheme } errtips={{}}/>
   componentDidMount(){
     this.props.resetRootMenu({menuPaneVisible:true, menuPane: null });
   }
@@ -66,13 +51,6 @@ class DevPage extends Component {
   }
 }
 
-const RootMenuContent = ({ test1 }) => {
-  
-  return (<div>
-    <RaisedButton label="Test" primary={true} onTouchTap={test1}/>
-  </div>);
-};
-
 export default connect(
   (state) => ({}),
   (dispatch) => (
@@ -81,4 +59,4 @@ export default connect(
       loaderAction,
     }, dispatch)
   )
-)(DevPage);
+)(WGroupAddPage);
