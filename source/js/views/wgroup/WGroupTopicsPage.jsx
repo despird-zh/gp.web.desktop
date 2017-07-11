@@ -235,7 +235,7 @@ const RootMenuContent = ({ test1, styles }) => {
           style={styles.chipItem}>
           Test Tag
         </Chip>
-                <Chip
+        <Chip
           key={3}
           onRequestAdd={handleDelete}
           style={styles.chipItem}>
