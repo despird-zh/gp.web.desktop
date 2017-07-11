@@ -94,6 +94,7 @@ class WGroupTopicsPage extends Component {
   render() {
     let { muiTheme } = this.props;
     const styles = this.styles;
+    const titleCol = Object.assign({}, styles.column, { paddingTop: 10, paddingBottom: 10});
     const numCol = Object.assign({}, styles.column, { width: 60, textAlign: 'center' });
     const cateCol = Object.assign({}, styles.column, { width: 100 });
     const userCol = Object.assign({}, styles.column, { width: 160, verticalAlign: 'middle' });
@@ -140,7 +141,7 @@ class WGroupTopicsPage extends Component {
               </TableHeader>
               <TableBody displayRowCheckbox={ false }>
                 <TableRow>
-                  <TableRowColumn style={ styles.column }>
+                  <TableRowColumn style={ titleCol }>
                     <span style={ { fontSize: 14, fontWeight: 600 } }>
                       <a href='/slsl' style={ styles.topicTitle }>如何构建一个出色的应用特别是SPA?</a>
                     </span>
@@ -152,8 +153,8 @@ class WGroupTopicsPage extends Component {
                   </TableRowColumn>
                   <TableRowColumn style={ cateCol }>
                     <span style={ { display: 'block', height: 18, verticalAlign: 'middle' } }>
-                      <AVStop style={ { width: 16, height: 16, color: 'red', float: 'left', marginTop: 3, marginRight: 5 } } />
-                    Develop
+                      <AVStop style={ { width: 16, height: 16, color: 'red', display: 'inline-block', verticalAlign:'middle', marginTop: 3, marginRight: 5 } } />
+                      Develop
                     </span>
                   </TableRowColumn>
                   <TableRowColumn style={ userCol }>
@@ -171,8 +172,8 @@ class WGroupTopicsPage extends Component {
                   </TableRowColumn>
                   <TableRowColumn style={ cateCol }>
                     <span style={ { display: 'block', height: 18, verticalAlign: 'middle' } }>
-                      <AVStop style={ { width: 18, height: 18, color: 'yellow', float: 'left', marginTop: 3, marginRight: 5 } } />
-                    Develop
+                      <AVStop style={ { width: 16, height: 16, color: 'blue', display: 'inline-block', verticalAlign:'middle', marginTop: 3, marginRight: 5 } } />
+                      正常
                     </span>
                   </TableRowColumn>
                   <TableRowColumn style={ userCol }>
