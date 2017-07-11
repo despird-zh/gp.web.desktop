@@ -153,7 +153,7 @@ class WGroupTopicsPage extends Component {
                   </TableRowColumn>
                   <TableRowColumn style={ cateCol }>
                     <span style={ { display: 'block', height: 18, verticalAlign: 'middle' } }>
-                      <AVStop style={ { width: 16, height: 16, color: 'red', display: 'inline-block', verticalAlign:'middle', marginTop: 3, marginRight: 5 } } />
+                      <AVStop style={ { width: 16, height: 16, color: 'red', display: 'inline-block', verticalAlign:'middle', marginTop: -2, marginRight: 5 } } />
                       Develop
                     </span>
                   </TableRowColumn>
@@ -172,7 +172,7 @@ class WGroupTopicsPage extends Component {
                   </TableRowColumn>
                   <TableRowColumn style={ cateCol }>
                     <span style={ { display: 'block', height: 18, verticalAlign: 'middle' } }>
-                      <AVStop style={ { width: 16, height: 16, color: 'blue', display: 'inline-block', verticalAlign:'middle', marginTop: 3, marginRight: 5 } } />
+                      <AVStop style={ { width: 16, height: 16, color: 'blue', display: 'inline-block', verticalAlign:'middle', marginTop: -2, marginRight: 5 } } />
                       正常
                     </span>
                   </TableRowColumn>
