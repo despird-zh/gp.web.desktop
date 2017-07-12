@@ -20,6 +20,7 @@ import NavLastPage from 'material-ui/svg-icons/navigation/last-page';
 import PageHeaderBar from '../component/PageHeaderBar';
 import AuthConnect from '../component/AuthConnect';
 import Chip from '../mui-ext/Chip';
+import WGroupProfileInfo from './WGroupProfileInfo';
 
 function getStyles(muiTheme) {
   const { baseTheme:{ palette },paper } = muiTheme;
@@ -141,6 +142,7 @@ class WGroupGridListPage extends React.Component {
           { this.state.collapsed ? null:(<div className="page-right-menu">
             <div className={ this.state.collapsed ? "right-menu collapsed":"right-menu " }>
               <div className="menu-body">
+                <WGroupProfileInfo muiTheme = {muiTheme}/>
               </div>
               <div className="menu-footer">
                 <IconButton onTouchTap={ this.onCollapseSwitch } iconStyle={this.styles.switchButton}>
