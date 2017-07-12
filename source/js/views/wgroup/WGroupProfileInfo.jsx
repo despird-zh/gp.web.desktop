@@ -41,6 +41,7 @@ function getStyles(muiTheme) {
   return {
     descr: {
       lineHeight: 1.3,
+      marginBottom: '1rem',
       color: baseTheme.palette.secondaryTextColor,
     },
     smallIcon: {
@@ -92,13 +93,13 @@ class WGroupProfileInfo extends React.Component {
       <div style={ this.props.style }>
         <div style={ { display: 'flex' } }>
           <Avatar src='assets/img/uxceo-128.jpg' size={ 60 } style={ { marginTop: 5, marginLeft: 5, marginRight: 5, borderRadius: 5 } } />
-          <div style={ { flex: 1, marginLeft: 5 } }>
+          <div style={ { flex: 1, marginLeft: '1rem', marginTop: '0.5rem' } }>
             <h4>ExissEvilGrp</h4>
             <p style={ styles.descr }>are used for general functions and reduce the amount of layering on the screen</p>
           </div>
         </div>
         <div style={ { padding: 10 } }>
-          <div style={ { display: 'flex' } }>
+          <div style={ { display: 'flex'} }>
             <a style={ { flexGrow: 1, textDecoration: 'none' } }>
               <h3 style={ { textAlign: 'center' } }>14</h3>
               <span style={ { display: 'block', textAlign: 'center' } }>
