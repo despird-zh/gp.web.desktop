@@ -249,7 +249,7 @@ class WGroupTopicPage extends Component {
                   <p>Thanks and happy coding!</p>
                 </div>
                 <div style={ styles.comments }>
-                  <div style={{ position:'absolute', right: 10, top:-45, width:40}}>
+                  <div style={{ position:'absolute', right: 0, top:-45, width:40}}>
                     <IconButton style={ styles.answerSortBtn } iconStyle={ styles.answerSortBtnIcon }>
                       <ContentAdd/>
                     </IconButton>
