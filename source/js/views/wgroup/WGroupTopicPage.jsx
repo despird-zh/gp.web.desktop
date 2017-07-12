@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 import Avatar from 'material-ui/Avatar';
+import CommClearAll from 'material-ui/svg-icons/communication/clear-all';
 import ActGavel from 'material-ui/svg-icons/action/gavel';
 import ActDone from 'material-ui/svg-icons/action/done';
 import NviArrowDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
@@ -35,6 +36,10 @@ function getStyles(muiTheme) {
   const { baseTheme:{ palette } } = muiTheme;
 
   return {
+    chipItem: {
+      marginBottom: '1rem', 
+      marginRight:'1rem',
+    },
     pageHeader: {
       backgroundColor: palette.primary1Color,
     },
@@ -128,11 +133,8 @@ class WGroupTopicPage extends Component {
     console.log('12------3')
   }
 
-
   componentDidMount(){
-    //this.props.resetRootMenu({menuPaneVisible:true, menuPane: null });
-    this.props.resetRootMenu({menuPaneVisible:true, menuPane: (<RootMenuContent test1={this.onTest1}/>) });
-    //this.props.resetRootMenu({menuPaneVisible:false, menuPane: (<RootMenuContent test1={this.onTest1}/>) });
+    this.props.resetRootMenu({menuPaneVisible:true, menuPane: (<RootMenuContent test1={this.onTest1} styles={this.styles}/>) });
   }
 
   render() {
@@ -298,7 +300,7 @@ class WGroupTopicPage extends Component {
                   23
                 </div>
                 <IconButton iconStyle={ styles.iconBtn }><NviArrowDown/></IconButton>
-                <IconButton iconStyle={ styles.iconBtn }><ActDone/></IconButton>
+                <IconButton style={{width:32, height:32, padding:5}} iconStyle={{ color:'blue' }}><ActDone/></IconButton>
               </div>
               <div style={{ flex: 1 }}>
                 <div>
@@ -366,13 +368,9 @@ class WGroupTopicPage extends Component {
                 </div>
                 <div className="post-content">
                   <p>Hey guys!</p>
-
                   <p>If you use vanilla redux in your app and ever got tired writing structures like</p>
-
                   <p>I understand there are things like React's Immutability Helpers and <code>immutable-js</code>, but if you don't want to have additional data abstraction layer and just want simple helpers with, basically, no special API, <code>update-js</code> might serve you well.</p>
-
                   <p>Any comments and feedback are very welcome.</p>
-
                   <p>Thanks and happy coding!</p>
                 </div>
                 
@@ -413,11 +411,65 @@ class WGroupTopicPage extends Component {
   }
 }
 
-const RootMenuContent = ({ test1 }) => {
-  
-  return (<div>
-    <RaisedButton label="Test" primary={true} onTouchTap={test1}/>
-  </div>);
+const RootMenuContent = ({ test1 ,styles}) => {
+
+  const handleDelete = () => {};
+
+  return (
+  <div>
+    <header className="panel-header"> 
+      <div className="panel-header__container active">
+        <h2 className="panel-header__title">Tag Filter</h2>
+        <IconButton >
+          <CommClearAll />
+        </IconButton>
+      </div>
+    </header>
+    <div style={{padding:'0 15px 15px'}}>
+      <div style={{display: 'flex',flexWrap: 'wrap'}}>
+        <Chip
+          key={1}
+          onRequestDelete={handleDelete}
+          style={styles.chipItem}>
+          Test Tag
+        </Chip>
+        <Chip
+          key={2}
+          onRequestDelete={handleDelete}
+          style={styles.chipItem}>
+          Test Tag
+        </Chip>
+      </div>
+      <Divider style={{marginBottom:10}}/>
+      <div style={{display: 'flex',flexWrap: 'wrap'}}>
+        <Chip
+          key={1}
+          onRequestAdd={handleDelete}
+          style={styles.chipItem}>
+          Test Tag
+        </Chip>
+        <Chip
+          key={2}
+          onRequestAdd={handleDelete}
+          style={styles.chipItem}>
+          Test Tag
+        </Chip>
+        <Chip
+          key={3}
+          onRequestAdd={handleDelete}
+          style={styles.chipItem}>
+          Test Tag
+        </Chip>
+        <Chip
+          key={4}
+          onRequestAdd={handleDelete}
+          style={styles.chipItem}>
+          Test Tag
+        </Chip>
+      </div>
+    </div>
+  </div>
+  );
 };
 
 export default connect(
