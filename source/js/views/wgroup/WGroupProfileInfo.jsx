@@ -121,7 +121,7 @@ class WGroupProfileInfo extends React.Component {
           </div>
           { expandContent }
         </div>
-        <Tabs style={ { marginTop: 10 } }>
+        <Tabs style={ { marginTop: 10} } tabItemContainerStyle={{backgroundColor:'#e0e0e0'}}>
           <Tab icon={ <ActionFlightTakeoff /> }>
             <List style={ { marginTop: 0 } }>
               <Subheader style={ { lineHeight: '38px' } }>Top 5 Hotest</Subheader>
