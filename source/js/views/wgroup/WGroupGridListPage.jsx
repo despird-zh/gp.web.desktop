@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
-import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import ActInfoOutLine from 'material-ui/svg-icons/action/info-outline';
 import ActViewList from 'material-ui/svg-icons/action/view-list';
 import ActViewModule from 'material-ui/svg-icons/action/view-module';
 import CommClearAll from 'material-ui/svg-icons/communication/clear-all';
@@ -13,6 +13,9 @@ import IconButton from 'material-ui/IconButton';
 import ActionHome from 'material-ui/svg-icons/action/home';
 import ActionSearch from 'material-ui/svg-icons/action/search';
 import TextField from 'material-ui/TextField';
+
+import NavFirstPage from 'material-ui/svg-icons/navigation/first-page';
+import NavLastPage from 'material-ui/svg-icons/navigation/last-page';
 
 import PageHeaderBar from '../component/PageHeaderBar';
 import AuthConnect from '../component/AuthConnect';
@@ -48,6 +51,9 @@ function getStyles(muiTheme) {
     },
     pageHeader: {
       backgroundColor: palette.primary1Color,
+    },
+    switchButton:{
+      color: palette.primary2Color,
     }
   };
 }
@@ -99,12 +105,16 @@ class WGroupGridListPage extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { profileExpand: false };
+    this.state = { collapsed: true};
     this.styles = getStyles(props.muiTheme);
   }
 
-  componentWillMount() {
-    if (this.props.setCurrentPage) { this.props.setCurrentPage('gridlist'); }
+  onCollapseSwitch = () =>{
+    this.setState({ collapsed: !this.state.collapsed });
+  }
+
+  onShowDetail = () => {
+    this.setState({ collapsed: false });
   }
 
   componentDidMount() {
@@ -128,15 +138,26 @@ class WGroupGridListPage extends React.Component {
           <PageHeaderBar muiTheme={ muiTheme }/>
         </header>
         <div className="page-content-wrapper">
+          { this.state.collapsed ? null:(<div className="page-right-menu">
+            <div className={ this.state.collapsed ? "right-menu collapsed":"right-menu " }>
+              <div className="menu-body">
+              </div>
+              <div className="menu-footer">
+                <IconButton onTouchTap={ this.onCollapseSwitch } iconStyle={this.styles.switchButton}>
+                  {this.state.collapsed ? <NavFirstPage /> : <NavLastPage/>}
+                </IconButton>
+              </div>
+            </div>
+          </div>)}
           <div className="page-content">
             <div style={styles.topBar}>
               <TextField
                   hintText="Hint Text"
                 />
-              <IconButton>
+              <IconButton tooltip="search workgroups" tooltipPosition="bottom-center">
                 <ActionSearch/>
               </IconButton>
-              <IconButton>
+              <IconButton tooltip="clear all the condition" tooltipPosition="bottom-center">
                 <CommClearAll />
               </IconButton>
             </div>
@@ -146,10 +167,9 @@ class WGroupGridListPage extends React.Component {
                 <GridTile
                   key={tile.author}
                   style={ styles.tileItem }
-                  title={tile.title}
+                  title={<a href="#">tile.title</a>}
                   subtitle={<span>by <b>{tile.author}</b></span>}
-                  actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
-                >
+                  actionIcon={<IconButton onTouchTap={ this.onShowDetail }><ActInfoOutLine color="white" /></IconButton>}>
                   <img src={tile.img} />
                 </GridTile>
               ))}
@@ -169,7 +189,7 @@ const RootMenuContent = ({ test1, styles }) => {
   <div>
     <header className="panel-header"> 
       <div className="panel-header__container active">
-        <h2 className="panel-header__title">Tag Filter</h2>
+        <h2 className="panel-header__title">Quick Filter</h2>
         <IconButton >
           <CommClearAll />
         </IconButton>
@@ -181,13 +201,13 @@ const RootMenuContent = ({ test1, styles }) => {
           key={1}
           onRequestDelete={handleDelete}
           style={styles.chipItem}>
-          Test Tag
+          Joined
         </Chip>
         <Chip
           key={2}
           onRequestDelete={handleDelete}
           style={styles.chipItem}>
-          Test Tag
+          Top 10(Active)
         </Chip>
       </div>
       <Divider style={{marginBottom:10}}/>

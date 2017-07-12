@@ -9,13 +9,16 @@ import PageHeaderBar from './component/PageHeaderBar';
 
 import NavFirstPage from 'material-ui/svg-icons/navigation/first-page';
 import NavLastPage from 'material-ui/svg-icons/navigation/last-page';
-
+import IconButton from 'material-ui/IconButton';
 function getStyles(muiTheme) {
   const { baseTheme } = muiTheme;
 
   return {
     pageHeader: {
       backgroundColor: baseTheme.palette.primary1Color,
+    },
+    switchButton:{
+      color: baseTheme.palette.primary2Color,
     }
   };
 }
@@ -62,7 +65,9 @@ class DevPage extends Component {
               <div className="menu-body">
               </div>
               <div className="menu-footer">
-                { this.state.collapsed ? <NavFirstPage onClick={ this.onCollapseSwitch }/> : <NavLastPage onClick={ this.onCollapseSwitch }/>}
+                <IconButton onTouchTap={ this.onCollapseSwitch } iconStyle={this.styles.switchButton}>
+                  {this.state.collapsed ? <NavFirstPage /> : <NavLastPage/>}
+                </IconButton>
               </div>
             </div>
           </div>

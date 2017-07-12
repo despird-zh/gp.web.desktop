@@ -1,4 +1,5 @@
 $menu-height: 55px;
+$panel-header-height: 4.8rem;
 .root-menu-container{
 
     width: 7.5rem;
@@ -180,12 +181,12 @@ $menu-height: 55px;
 
         .panel-header {
             position: relative;
-            min-height: $menu-height;
+            min-height: $panel-header-height;
             overflow: hidden;
             text-align: left;
             margin: 1rem 0;
             .panel-header__container{
-                height: $menu-height;
+                height: $panel-header-height;
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -194,14 +195,14 @@ $menu-height: 55px;
                 transform: translateY(-100%);
                 opacity: 0;
                 transition: transform .2s ease-in-out,opacity .2s ease-out;
+                transition: background-color .2s ease;
                 box-sizing: border-box;
                 display: -webkit-box;
                 display: -webkit-flex;
                 display: -ms-flexbox;
                 display: flex;
                 align-items: center;
-                transition: background-color .2s ease;
-
+                
                 &.active{
                     opacity: 1;
                     transform: translateY(0);
@@ -219,7 +220,7 @@ $menu-height: 55px;
                     text-overflow: ellipsis;
                     text-transform: uppercase;
                     padding: 0 0 0 1.6rem;
-                    line-height: $menu-height;
+                    line-height: $panel-header-height;
                     color: #a2a3a3;
                 }
             }
