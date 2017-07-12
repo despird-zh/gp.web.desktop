@@ -25,6 +25,8 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import NavFirstPage from 'material-ui/svg-icons/navigation/first-page';
 import NavLastPage from 'material-ui/svg-icons/navigation/last-page';
 import IconButton from 'material-ui/IconButton';
+import Divider from 'material-ui/Divider';
+import Chip from 'material-ui/Chip';
 
 import { snackAction, loaderAction } from '../../store/actions/appActions';
 import PageHeaderBar from '../component/PageHeaderBar';
@@ -63,11 +65,12 @@ function getStyles(muiTheme) {
     },
     answerSortBtn:{padding:12, width:44, height:44},
     answerSortBtnIcon:{ width:20, height:20 ,color: palette.primary2Color},
+    answerSortBtnIcon16:{ width:16, height:16 ,color: palette.primary2Color},
     timeStamp: {
       color: palette.accent3Color,
-      marginRight: 10,
+      marginRight: '1rem',
       float: 'right',
-      fontSize: 12
+      fontSize: '1.2rem'
     },
     post: {
       borderBottomColor: palette.borderColor,
@@ -76,7 +79,7 @@ function getStyles(muiTheme) {
       paddingTop: '1rem'
     },
     answer:{
-      paddingTop: 10,
+      paddingTop: '1rem',
       borderBottomColor: palette.borderColor,
       borderBottomWidth: 1,
       borderBottomStyle: 'solid',
@@ -84,14 +87,15 @@ function getStyles(muiTheme) {
     sumTitle:{
       color: palette.accent3Color,
       display: 'block',
-      fontSize: 12
+      fontSize: '1.2rem',
+      marginBottom: '0.5rem'
     },
     comments: {
       position: 'relative'
     }, 
     comment: {
       display: 'flex', 
-      padding: 10,
+      padding: '1rem 0',
       borderTopColor: palette.borderColor,
       borderTopWidth: 1,
       borderTopStyle: 'solid',
@@ -142,16 +146,79 @@ class WGroupTopicPage extends Component {
         <div className="page-content-wrapper">
           <div className="page-right-menu">
             <div className={ this.state.collapsed ? "right-menu collapsed":"right-menu " }>
-              <div className="menu-body">
-              </div>
-              <div className="menu-footer">
-                <IconButton onTouchTap={ this.onCollapseSwitch } iconStyle={this.styles.switchButton}>
-                  {this.state.collapsed ? <NavFirstPage /> : <NavLastPage/>}
-                </IconButton>
+              <div className="menu-body" style={{padding: '2rem 1.5rem 1.5rem'}}>
+                <div style={{display: 'flex', marginBottom:'1rem'}}>
+                  <div style={{flex:1, textAlign:'center'}}>
+                    <h4 style={ styles.sumTitle }>查阅</h4>
+                    <span style={ { marginRight: 5, verticalAligh:'middle'}}>12K</span>
+                  </div>
+                  <div style={{flex:1, textAlign:'center'}}>
+                    <h4 style={ styles.sumTitle }>回复</h4>
+                    <span style={ { marginRight: 5, verticalAligh:'middle'}}>12K</span>
+                  </div>
+                  <div style={{flex:1, textAlign:'center'}}>
+                    <h4 style={ styles.sumTitle }>参与</h4>
+                    <span style={ { marginRight: 5, verticalAligh:'middle'}}>12</span>
+                  </div>
+                  <div style={{flex:1, textAlign:'center'}}>
+                    <h4 style={ styles.sumTitle }>评论</h4>
+                    <span style={ { marginRight: 5, verticalAligh:'middle'}}>123</span>
+                  </div>
+                </div>
+                <div style={{ display:'block' ,paddingBottom:10}} className="clearfix">
+                  <div style={{float:'left', minWidth:'25%', textAlign:'center'}}>
+                    <h4 style={ styles.sumTitle }>创建</h4>
+                    <div style={{ display:'block'}}>
+                      <a href='' >
+                        <Avatar src={ `assets/img/kerem-128.jpg` } size={ 20 } style={ { marginRight: 5,verticalAlign:'middle'} } /> 
+                      </a>
+                      <span style={ { marginRight: 5, display:'inline-block', verticalAligh:'middle'}}>17天</span>
+                    </div>
+                  </div>
+                  <div style={{float:'left', minWidth:'25%', textAlign:'center'}}>
+                    <h4 style={ styles.sumTitle }>活动</h4>
+                    <div style={{ display:'block'}}>
+                      <a href='' >
+                        <Avatar src={ `assets/img/kerem-128.jpg` } size={ 20 } style={ { marginRight: 5,verticalAlign:'middle'} } /> 
+                      </a>
+                      <span style={ { marginRight: 5, display:'inline-block', verticalAligh:'middle'}}>7H</span>
+                    </div>
+                  </div>
+                </div>
+                <Divider />
+                <div style={{padding:'10px 0'}}>
+                  <Chip style={{margin:4, display: 'inline-block', fontSize: 12}}>
+                    技术
+                  </Chip>
+                  <Chip style={{margin:4, display: 'inline-block'}}>
+                    机械
+                  </Chip>
+                  <Chip style={{margin:4, display: 'inline-block'}}>
+                    加工
+                  </Chip>
+                </div>
+                <Divider />
+                <div>
+                  <h4 style={{paddingTop: 10}}>Hotest topics</h4>
+                  <ul style={{display:'block', paddingLeft: 0, marginTop:10, marginLeft: 0}}>
+                    <li style={{listStyleType:'none', display:'flex', marginLeft:0, marginBottom: '1rem'}}>
+                      <div style={{display: 'inline-block', flexBasis:32, width: 32, marginRight: 5, marginTop:5}}>
+                        <Avatar src={ `assets/img/kerem-128.jpg` } size={ 30 } /> 
+                      </div>
+                      <a href='/f' style={{display:'inline-block', textDecoration: 'none', flex:1, whiteSpace:'normal'}}>fine and expected until the data source is modified in someway (rows are removed, for example)</a>
+                    </li>
+                    <li style={{listStyleType:'none', display:'flex', marginLeft:0, marginBottom: '1rem'}}>
+                      <div style={{display: 'inline-block', flexBasis:32, width: 32, marginRight: 5, marginTop:5}}>
+                        <Avatar src={ `assets/img/kerem-128.jpg` } size={ 30 } /> 
+                      </div>
+                      <a href='/f' style={{display:'inline-block', textDecoration: 'none',flex:1, whiteSpace:'normal'}}>fine and expected until the data source is modified in someway (rows are removed, for example)</a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-          <div className="page-content" style={{overflowY:'auto', padding:'1rem'}}>
+          <div className="page-content" style={{overflowY:'auto', padding:'1.5rem'}}>
           <div style={ styles.post }>
             <div style={{ display: 'flex' }}>
               <div style={{ flexBasis: 60, display: 'flex', flexDirection:'column', paddingLeft: 10, paddingRight:10}}>
@@ -217,7 +284,7 @@ class WGroupTopicPage extends Component {
               <IconButton tooltip="Sort By Activity" style={ styles.answerSortBtn } iconStyle={ styles.answerSortBtnIcon }>
                 <EditBubbleChrt/>
               </IconButton>
-              <IconButton tooltip="Sort By votes" disabled={true} style={ styles.answerSortBtn } iconStyle={ styles.answerSortBtnIcon }>
+              <IconButton tooltip="Sort By votes" style={ styles.answerSortBtn } iconStyle={ styles.answerSortBtnIcon16 }>
                 <ActThumbsUpDown/>
               </IconButton>
             </div>
@@ -242,19 +309,14 @@ class WGroupTopicPage extends Component {
                 </div>
                 <div className="answer-content">
                   <p>Hey guys!</p>
-
                   <p>If you use vanilla redux in your app and ever got tired writing structures like</p>
-
                   <p>I understand there are things like React's Immutability Helpers and <code>immutable-js</code>, but if you don't want to have additional data abstraction layer and just want simple helpers with, basically, no special API, <code>update-js</code> might serve you well.</p>
-
                   <p>Any comments and feedback are very welcome.</p>
-
                   <p>Thanks and happy coding!</p>
                 </div>
-                
                 <div style={ styles.comments }>
-                  <div style={{ position:'absolute', right: 10, top:-45, width:90}}>
-                    <IconButton style={ styles.answerSortBtn } iconStyle={ styles.answerSortBtnIcon }>
+                  <div style={{ position:'absolute', right: 0, top:-45, width:90}}>
+                    <IconButton style={ styles.answerSortBtn } iconStyle={ styles.answerSortBtnIcon16 }>
                       <ActGavel/>
                     </IconButton>
                     <IconButton style={ styles.answerSortBtn } iconStyle={ styles.answerSortBtnIcon }>
@@ -315,7 +377,7 @@ class WGroupTopicPage extends Component {
                 </div>
                 
                 <div style={ styles.comments }>
-                  <div style={{ position:'absolute', right: 10, top:-45, width:40}}>
+                  <div style={{ position:'absolute', right: 0, top:-45, width:40}}>
                     <IconButton style={ styles.answerSortBtn } iconStyle={ styles.answerSortBtnIcon }>
                       <ContentAdd/>
                     </IconButton>

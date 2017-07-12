@@ -141,9 +141,7 @@ class WGroupGridListPage extends React.Component {
         <div className="page-content-wrapper">
           { this.state.collapsed ? null:(<div className="page-right-menu">
             <div className={ this.state.collapsed ? "right-menu collapsed":"right-menu " }>
-              
               <WGroupProfileInfo muiTheme = {muiTheme}  className="menu-body" style={{padding: '1.5rem'}}/>
-              
               <div className="menu-footer">
                 <IconButton onTouchTap={ this.onCollapseSwitch } iconStyle={this.styles.switchButton}>
                   {this.state.collapsed ? <NavFirstPage /> : <NavLastPage/>}
@@ -153,9 +151,7 @@ class WGroupGridListPage extends React.Component {
           </div>)}
           <div className="page-content">
             <div style={styles.topBar}>
-              <TextField
-                  hintText="Input key words"
-                />
+              <TextField hintText="Input key words"/>
               <IconButton tooltip="search workgroups" tooltipPosition="bottom-center">
                 <ActionSearch/>
               </IconButton>
