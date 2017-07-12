@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import { Link } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Avatar from 'material-ui/Avatar';
 import CommClearAll from 'material-ui/svg-icons/communication/clear-all';
 import ActGavel from 'material-ui/svg-icons/action/gavel';
@@ -50,16 +51,6 @@ function getStyles(muiTheme) {
       textDecoration: 'none',
       color: palette.textColor,
     },
-    leftPanel: {
-      flex: 1,
-      paddingRight: 10,
-    },
-    rightPanel: {
-      paddingLeft: 10,
-      flexGrow: 0,
-      flexShrink: 0,
-      flexBasis: 300,
-    },
     iconBtn: {
       color: palette.primary2Color,
     },
@@ -92,8 +83,10 @@ function getStyles(muiTheme) {
     sumTitle:{
       color: palette.accent3Color,
       display: 'block',
-      fontSize: '1.2rem',
-      marginBottom: '0.5rem'
+      fontSize: '1.3rem',
+      fontWeight: 400,
+      marginBottom: '0.5rem',
+      textTransform: 'uppercase'
     },
     comments: {
       position: 'relative'
@@ -151,15 +144,15 @@ class WGroupTopicPage extends Component {
               <div className="menu-body" style={{padding: '2rem 1.5rem 1.5rem'}}>
                 <div style={{display: 'flex', marginBottom:'1rem'}}>
                   <div style={{flex:1, textAlign:'center'}}>
-                    <h4 style={ styles.sumTitle }>查阅</h4>
+                    <h4 style={ styles.sumTitle }>views</h4>
                     <span style={ { marginRight: 5, verticalAligh:'middle'}}>12K</span>
                   </div>
                   <div style={{flex:1, textAlign:'center'}}>
-                    <h4 style={ styles.sumTitle }>回复</h4>
+                    <h4 style={ styles.sumTitle }>replies</h4>
                     <span style={ { marginRight: 5, verticalAligh:'middle'}}>12K</span>
                   </div>
                   <div style={{flex:1, textAlign:'center'}}>
-                    <h4 style={ styles.sumTitle }>参与</h4>
+                    <h4 style={ styles.sumTitle }>joins</h4>
                     <span style={ { marginRight: 5, verticalAligh:'middle'}}>12</span>
                   </div>
                   <div style={{flex:1, textAlign:'center'}}>
@@ -201,21 +194,36 @@ class WGroupTopicPage extends Component {
                 </div>
                 <Divider />
                 <div>
-                  <h4 style={{paddingTop: 10}}>Hotest topics</h4>
-                  <ul style={{display:'block', paddingLeft: 0, marginTop:10, marginLeft: 0}}>
-                    <li style={{listStyleType:'none', display:'flex', marginLeft:0, marginBottom: '1rem'}}>
-                      <div style={{display: 'inline-block', flexBasis:32, width: 32, marginRight: 5, marginTop:5}}>
-                        <Avatar src={ `assets/img/kerem-128.jpg` } size={ 30 } /> 
-                      </div>
-                      <a href='/f' style={{display:'inline-block', textDecoration: 'none', flex:1, whiteSpace:'normal'}}>fine and expected until the data source is modified in someway (rows are removed, for example)</a>
-                    </li>
-                    <li style={{listStyleType:'none', display:'flex', marginLeft:0, marginBottom: '1rem'}}>
-                      <div style={{display: 'inline-block', flexBasis:32, width: 32, marginRight: 5, marginTop:5}}>
-                        <Avatar src={ `assets/img/kerem-128.jpg` } size={ 30 } /> 
-                      </div>
-                      <a href='/f' style={{display:'inline-block', textDecoration: 'none',flex:1, whiteSpace:'normal'}}>fine and expected until the data source is modified in someway (rows are removed, for example)</a>
-                    </li>
-                  </ul>
+                  <h3 style={{
+                    paddingTop: 10, 
+                    color:'rgb(158, 158, 158)',
+                    textRendering: 'optimizeLegibility',
+                    fontSize: '1.5rem',
+                    fontWeight: 400,
+                    lineHeight: '3rem',
+                    textTransform: 'uppercase'}}>Attendees</h3>
+                  <div style={ { paddingTop: '0.5rem', paddingBottom: 10 } }>
+                    <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
+                      <Avatar src='assets/img/uxceo-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
+                    </IconButton>
+                    <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
+                      <Avatar src='assets/img/ok-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
+                    </IconButton>
+                    <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
+                      <Avatar src='assets/img/kolage-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
+                    </IconButton>
+                    <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
+                      <Avatar src='assets/img/jsa-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
+                    </IconButton>
+                    <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
+                      <Avatar src='assets/img/kerem-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
+                    </IconButton>
+                    <IconButton 
+                      style={{width:30, height:30, padding:0, borderRadius:'50%',border:'1px dashed #a3a3a3'}} 
+                      iconStyle={{ marginTop:0}}>
+                      <ContentAdd/>
+                    </IconButton>
+                  </div>
                 </div>
               </div>
             </div>
@@ -466,6 +474,24 @@ const RootMenuContent = ({ test1 ,styles}) => {
           style={styles.chipItem}>
           Test Tag
         </Chip>
+      </div>
+      <Divider />
+      <div>
+        <h4 style={{paddingTop: 10}}>Hotest/Latest topics</h4>
+        <ul style={{display:'block', paddingLeft: 0, marginTop:10, marginLeft: 0}}>
+          <li style={{listStyleType:'none', display:'flex', marginLeft:0, marginBottom: '1rem'}}>
+            <div style={{display: 'inline-block', flexBasis:32, width: 32, marginRight: 5, marginTop:5}}>
+              <Avatar src={ `assets/img/kerem-128.jpg` } size={ 30 } /> 
+            </div>
+            <a href='/f' style={{display:'inline-block', textDecoration: 'none', flex:1, whiteSpace:'normal'}}>fine and expected until the data source is modified in someway (rows are removed, for example)</a>
+          </li>
+          <li style={{listStyleType:'none', display:'flex', marginLeft:0, marginBottom: '1rem'}}>
+            <div style={{display: 'inline-block', flexBasis:32, width: 32, marginRight: 5, marginTop:5}}>
+              <Avatar src={ `assets/img/kerem-128.jpg` } size={ 30 } /> 
+            </div>
+            <a href='/f' style={{display:'inline-block', textDecoration: 'none',flex:1, whiteSpace:'normal'}}>fine and expected until the data source is modified in someway (rows are removed, for example)</a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
