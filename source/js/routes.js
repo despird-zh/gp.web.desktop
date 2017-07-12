@@ -8,6 +8,7 @@ import DevPage from './views/DevPage';
 import AboutPage from './views/AboutPage';
 import WGroupGridListPage from './views/wgroup/WGroupGridListPage';
 import WGroupTopicsPage from './views/wgroup/WGroupTopicsPage';
+import WGroupTopicPage from './views/wgroup/WGroupTopicPage';
 import WGroupAddPage from './views/wgroup/WGroupAddPage';
 
 export const getRoutes = (store) => {
@@ -37,6 +38,7 @@ export const getRoutes = (store) => {
       <Route path='wgroup-list' component={ WGroupGridListPage } />
       <Route path='wgroup-add' component={ WGroupAddPage } />
       <Route path='wgroup-topics' component={ WGroupTopicsPage } />
+      <Route path='wgroup-topic' component={ WGroupTopicPage } />
       <Route path='about' component={ AboutPage } />
     </Route>
   );

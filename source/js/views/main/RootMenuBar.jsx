@@ -56,14 +56,14 @@ class RootMenuBar extends React.Component {
                   </svg>
               </li>
               <li className="menu-opt opt-all">
-                  <FloatingActionButton mini={true}>
-                    <ActionHomeMenu />
-                  </FloatingActionButton>
+                <FloatingActionButton mini={true}>
+                  <ActionHomeMenu />
+                </FloatingActionButton>
               </li>
               <li className="menu-opt opt-search">
-                  <FloatingActionButton mini={true} >
-                    <ActionHomeMenu />
-                  </FloatingActionButton>
+                <FloatingActionButton mini={true} >
+                  <ActionHomeMenu />
+                </FloatingActionButton>
               </li>
               <li className="menu-opt opt-query">
                 <FloatingActionButton mini={true} secondary={true}>
@@ -71,9 +71,9 @@ class RootMenuBar extends React.Component {
                 </FloatingActionButton>
               </li>
               <li className="menu-opt opt-plus">
-                  <FloatingActionButton mini={true}>
-                    <ContentAdd />
-                  </FloatingActionButton>
+                <FloatingActionButton mini={true}>
+                  <ContentAdd />
+                </FloatingActionButton>
               </li>
               <li className="menu-opt-collection">
                 <ul className="menu-opt-collection-list">
