@@ -10,6 +10,7 @@ import FileFolder from 'material-ui/svg-icons/file/folder';
 import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
 import NaviExpandMore from 'material-ui/svg-icons/navigation/expand-more';
 import NaviExpandLess from 'material-ui/svg-icons/navigation/expand-less';
+import CtntLowPriority from 'material-ui/svg-icons/content/low-priority';
 import Popover from 'material-ui/Popover';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
@@ -100,8 +101,8 @@ function getStyles(muiTheme) {
       padding:10, 
       width:600, 
       maxWidth:600,
-      height:200,
-      maxHeight:200
+      height:300,
+      maxHeight:400
     }
   };
 }
@@ -398,9 +399,8 @@ class WGroupRepoPage extends Component {
           </div>
           <div className="page-content" style={{ padding:'1.5rem' }}>
             <div>
-              <IconButton onTouchTap={this.handleRepoTreeTouchTap} style={{width:40, height:40, padding:0}} 
-              iconStyle={{ marginTop:0}}>
-                <FileFolderOpen/>
+              <IconButton onTouchTap={this.handleRepoTreeTouchTap} >
+                <CtntLowPriority/>
               </IconButton>
               <Popover
                 open={this.state.openRepoTree}

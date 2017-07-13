@@ -26,7 +26,7 @@ class TreeView extends React.Component {
     });
 
     return (
-      <ul style={{display:'block', paddingLeft:0, marginTop:0, marginBottom:0}}>
+      <ul style={{display:'block', paddingLeft:0, marginTop:0, marginBottom:0, marginLeft:10}}>
         {rootNodes}
       </ul>
     );
@@ -111,7 +111,7 @@ class TreeNode extends React.Component {
 
     return (
       <li style={{display:'list-item', listStyleType:'none'}}>
-        <div style={{display:'block', textAlign:'left', paddingTop:2, paddingBottom:2}}>
+        <div style={{display:'block', textAlign:'left', paddingTop:5, paddingBottom:5}}>
           <div style={{display:'inline-block', marginRight: 5}} 
             onTouchTap={this.handleTouchTap}
             onMouseEnter={this.handleIconMouseEnter}
@@ -119,13 +119,13 @@ class TreeNode extends React.Component {
             >
             {icon}
           </div>
-          <div style={{display:'inline-block', verticalAlign:'middle'}}>
+          <div style={{display:'inline-block', verticalAlign:'middle', fontSize:16, fontWeight:300}}>
             { node.title }
           </div>
         </div>
         {
           node.expanded && 
-          <ul style={{display:'block', paddingLeft: 25}}>
+          <ul style={{display:'block', paddingLeft: 20, marginLeft:0, marginBottom:0}}>
             {childNodes}
           </ul>
         }
