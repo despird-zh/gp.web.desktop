@@ -13,6 +13,9 @@ import NaviExpandMore from 'material-ui/svg-icons/navigation/expand-more';
 import NaviExpandLess from 'material-ui/svg-icons/navigation/expand-less';
 import CtntLowPriority from 'material-ui/svg-icons/content/low-priority';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import CheckboxOutline from 'material-ui/svg-icons/toggle/check-box-outline-blank';
+import CheckboxChecked from 'material-ui/svg-icons/toggle/check-box';
+import IndeterminateCheckbox from 'material-ui/svg-icons/toggle/indeterminate-check-box';
 import Popover from 'material-ui/Popover';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
@@ -313,7 +316,7 @@ class WGroupRepoPage extends Component {
         <TableRow key={`tr-${row.id}`} selected={ filterRows && filterRows.length > 0} selectable={true}>
           <TableRowColumn style={styles.colname}>
           <div style={{display: 'flex', verticalAlign:'middle'}}>
-            <div style={{flex: '0 0 30px', verticalAlign:'middle' }}>
+            <div style={{flex: '0 0 35px', verticalAlign:'middle' }}>
               <span style={{display:'inline-block', height:'100%', verticalAlign:'middle'}}/>
               <FileFolder style={styles.rowIconStyle}/>
             </div>
@@ -410,7 +413,9 @@ class WGroupRepoPage extends Component {
             </Table>
             <div style={{flex:1, overflow:'hidden'}}>
               <div style={{display:'flex',borderBottom: '1px solid rgb(224, 224, 224)'}}>
-                <IconButton style={{flexShrink:0, flexGrow:0}}><ActSearch/></IconButton>
+                <div style={{flexShrink:0, flexGrow:0, padding: '0.5rem'}}>
+                  <IconButton ><IndeterminateCheckbox/></IconButton>
+                </div>
                 <div style={{flex:1, display: 'flex', verticalAlign:'middle'}}>
                   xxxxx
                 </div>
@@ -422,11 +427,49 @@ class WGroupRepoPage extends Component {
               </div>
               <ul style={{marginLeft:0, padding:0}}>
                 <li style={{paddingLeft:0, display:'flex', borderBottom: '1px solid rgb(224, 224, 224)'}}>
-                <div style={{flexShrink:0, flexGrow:0, padding: '0.5rem 0'}}>
-                  <IconButton ><ActSearch/></IconButton>
+                <div style={{flexShrink:0, flexGrow:0, padding: '0.5rem'}}>
+                  <IconButton ><CheckboxOutline/></IconButton>
                 </div>
                 <div style={{flex:1,display: 'flex', verticalAlign:'middle'}}>
-                  <div style={{flex: '0 0 30px', verticalAlign:'middle' }}>
+                  <div style={{flex: '0 0 35px', verticalAlign:'middle' }}>
+                    <span style={{display:'inline-block', height:'100%', verticalAlign:'middle'}}/>
+                    <FileFolder style={styles.rowIconStyle}/>
+                  </div>
+                  <div style={{ flex:1, width:300 , overflow: 'hidden'}}>
+                    <a style={{ textDecoration: 'none', 
+                      display: 'block',
+                      padding: '0.5rem 0 0.2rem',
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap', cursor: 'pointer',
+                      color:'rgb(0, 151, 167)',
+                      textOverflow: 'ellipsis', paddingBottom:'0.5rem'}} 
+                      onClick={this.handleRepoLink}>
+                      <span> what is the best choice.</span>
+                    </a>
+                    <span style={{display: 'block',
+                      overflow: 'hidden',
+                      padding: '0.3rem 0 0.5rem',
+                      whiteSpace: 'nowrap',
+                      color:'rgb(158, 158, 158)',
+                      fontSize: '1.4rem',
+                      fontWeight: 300,
+                      textOverflow: 'ellipsis'}}>
+                      伊拉克苏马里亚电视台网站当天报道，“伊斯兰国”媒体发布简短声明，称巴格达迪已经死亡，这一组织将产生新的最高头目。声明没有给出巴格达迪死亡细节
+                    </span>
+                  </div>
+                </div>
+                <div style={{padding:'1.2rem', width:60}}>
+                  <Avatar src="assets/img/kerem-128.jpg" size={30} style={{ verticalAlign:'middle'}} />
+                </div>
+                <div style={styles.colsum}> 3 folders, 12 files 1.3G</div>
+                <div style={styles.colaction}>xxxxx</div>
+                </li>
+                <li style={{paddingLeft:0, display:'flex', borderBottom: '1px solid rgb(224, 224, 224)'}}>
+                <div style={{flexShrink:0, flexGrow:0, padding: '0.5rem'}}>
+                  <IconButton ><CheckboxChecked/></IconButton>
+                </div>
+                <div style={{flex:1,display: 'flex', verticalAlign:'middle'}}>
+                  <div style={{flex: '0 0 35px', verticalAlign:'middle' }}>
                     <span style={{display:'inline-block', height:'100%', verticalAlign:'middle'}}/>
                     <FileFolder style={styles.rowIconStyle}/>
                   </div>
