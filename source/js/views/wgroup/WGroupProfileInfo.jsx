@@ -11,6 +11,7 @@ import CommSwapCall from 'material-ui/svg-icons/communication/swap-calls';
 import CommContacts from 'material-ui/svg-icons/communication/contacts';
 import HWKeyBoardDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
 import HWKeyBoardUp from 'material-ui/svg-icons/hardware/keyboard-arrow-up';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import Divider from 'material-ui/Divider';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import Subheader from 'material-ui/Subheader';
@@ -68,23 +69,39 @@ class WGroupProfileInfo extends React.Component {
     const expandContent = this.state.profileExpand ?
       (<div style={ { marginTop: 5 } }>
         <Divider />
-        <div style={ { paddingTop: 10, paddingBottom: 10 } }>
-          <Avatar src='assets/img/uxceo-128.jpg' size={ 25 } style={ { marginLeft: 5, marginRight: 5 } } />
-          <Avatar src='assets/img/uxceo-128.jpg' size={ 25 } style={ { marginLeft: 5, marginRight: 5 } } />
-          <Avatar src='assets/img/uxceo-128.jpg' size={ 25 } style={ { marginLeft: 5, marginRight: 5 } } />
-          <Avatar src='assets/img/uxceo-128.jpg' size={ 25 } style={ { marginLeft: 5, marginRight: 5 } } />
-          <Avatar src='assets/img/uxceo-128.jpg' size={ 25 } style={ { marginLeft: 5, marginRight: 5 } } />
-          <Avatar src='assets/img/uxceo-128.jpg' size={ 25 } style={ { marginLeft: 5, marginRight: 5 } } />
-          <Avatar src='assets/img/uxceo-128.jpg' size={ 25 } style={ { marginLeft: 5, marginRight: 5 } } />
-          <Avatar src='assets/img/uxceo-128.jpg' size={ 25 } style={ { marginLeft: 5, marginRight: 5 } } />
-          <Avatar src='assets/img/uxceo-128.jpg' size={ 25 } style={ { marginLeft: 5, marginRight: 5 } } />
+        <div>
+          <h3 style={{
+            paddingTop: 10, 
+            color:'rgb(158, 158, 158)',
+            textRendering: 'optimizeLegibility',
+            fontSize: '1.5rem',
+            fontWeight: 400,
+            lineHeight: '3rem',
+            textTransform: 'uppercase'}}>Members</h3>
+          <div style={ { paddingTop: '0.5rem', paddingBottom: 10 } }>
+            <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
+              <Avatar src='assets/img/uxceo-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
+            </IconButton>
+            <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
+              <Avatar src='assets/img/ok-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
+            </IconButton>
+            <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
+              <Avatar src='assets/img/kolage-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
+            </IconButton>
+            <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
+              <Avatar src='assets/img/jsa-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
+            </IconButton>
+            <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
+              <Avatar src='assets/img/kerem-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
+            </IconButton>
+            <IconButton 
+              style={{width:30, height:30, padding:0, borderRadius:'50%',border:'1px dashed #a3a3a3'}} 
+              iconStyle={{ marginTop:0}}>
+              <ContentAdd/>
+            </IconButton>
+          </div>
         </div>
-        <Divider />
-        <div style={ { paddingTop: 10 } }>
-          <FloatingActionButton mini={true}>
-            <HWKeyBoardUp />
-          </FloatingActionButton>
-        </div>
+        
       </div>) : null;
 
     const styles = this.styles;
@@ -114,8 +131,9 @@ class WGroupProfileInfo extends React.Component {
               <h4 style={ { textAlign: 'center' } }>123</h4>
               <span style={ { display: 'block', textAlign: 'center' } }><CommContacts style={ styles.smallIcon } /></span>
             </a>
-            <div style={ { flexGrow: 0, flexBasis: 40 } }>
-              <IconButton onTouchTap={ this.onProfileExpand }>
+            <div style={ { flexGrow: 0, flexBasis: 40, paddingTop: 5 } }>
+              <IconButton onTouchTap={ this.onProfileExpand } style={{width:32, height:32, padding:0}} 
+              iconStyle={{ marginTop:0}}>
                 { this.state.profileExpand ? <HWKeyBoardUp /> : <HWKeyBoardDown />}
               </IconButton>
             </div>
