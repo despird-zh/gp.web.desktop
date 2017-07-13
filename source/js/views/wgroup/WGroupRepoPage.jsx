@@ -53,6 +53,9 @@ function getStyles(muiTheme) {
       display: 'flex',
       paddingLeft: 5,
       position: 'relative',
+      flexBasis: 50,
+      flexShrink: 0,
+      flexGrow:0
     },
     spacer: { flex: 1 },
     filterSearch: {
@@ -434,12 +437,15 @@ class WGroupRepoPage extends Component {
               </div>
             </div>
  
-            <Table multiSelectable={true}
+            <Table multiSelectable={true} wrapperStyle={{flex:1, overflow:'hidden'}}
+              bodyStyle={{overflowY:'scroll', height:'calc(100% - 6.4rem)'}}
+              headerStyle={{paddingRight:15}}
+              fixedHeader={true}
               onRowSelection={this.handleRowSelection}>
               <TableHeader enableSelectAll={true}>
                 {hRowEls}
               </TableHeader>
-              <TableBody deselectOnClickaway={false} preScanRows={true}>
+              <TableBody deselectOnClickaway={false} preScanRows={true} >
                 {rowEls}
               </TableBody>
             </Table>
