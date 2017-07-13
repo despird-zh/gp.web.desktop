@@ -261,14 +261,6 @@ class WGroupRepoPage extends Component {
     this.setState({ collapsed: !this.state.collapsed });
   }
 
-  onTest = () => {
-    this.props.resetRootMenu({menuPaneVisible:true, menuPane: (<RootMenuContent test1={this.onTest1}/>) });
-  }
-
-  onTest1 = () => {
-    console.log('12------3')
-  }
-
   componentDidMount () {
      window.addEventListener('scroll', this.handleScroll);
      this.props.resetRootMenu({menuPaneVisible:true, menuPane: (<RootMenuContent test1={this.onTest1} styles={this.styles}/>) });
