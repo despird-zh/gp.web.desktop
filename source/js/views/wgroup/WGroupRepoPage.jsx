@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import ActDescription from 'material-ui/svg-icons/action/description';
 import ActSearch from 'material-ui/svg-icons/action/search';
 import CtntClear from 'material-ui/svg-icons/content/clear';
+import CommClearAll from 'material-ui/svg-icons/communication/clear-all';
 import FileFolder from 'material-ui/svg-icons/file/folder';
 import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
 import NaviExpandMore from 'material-ui/svg-icons/navigation/expand-more';
@@ -50,13 +51,14 @@ function getStyles(muiTheme) {
     },
     topbar: {
       display: 'flex',
-      paddingLeft: 10,
+      paddingLeft: 5,
       position: 'relative',
     },
     spacer: { flex: 1 },
     filterSearch: {
+      marginLeft: baseTheme.spacing.desktopGutterLess,
       marginRight: baseTheme.spacing.desktopGutterLess,
-      width: 150,
+      width: 250,
     },
     filterType: {
       marginRight: baseTheme.spacing.desktopGutterLess,
@@ -68,26 +70,26 @@ function getStyles(muiTheme) {
     },
     column: {
       padding: '1rem',
-      fontSize: 14
+      fontSize: 16
     },
     colname: {
       padding: '1rem',
-      fontSize: 14
+      fontSize: 16
     },
     colauthor: {
       padding: '1rem',
       textAlign:'center',
       width:60,
-      fontSize: 14
+      fontSize: 16
     },
     colaction: {
       padding: 5,
       width:160,
-      fontSize: 14
+      fontSize: 16
     },
     colsum: {
       padding: 5,
-      fontSize: 14,
+      fontSize: 16,
       width:160
     },
     iconStyle:{
@@ -328,10 +330,10 @@ class WGroupRepoPage extends Component {
     const hasSelected = selectedRows && selectedRows.length > 0;
 
     const hRowEls = !hasSelected ? (<TableRow  style={{height: 64}}>
-                <TableHeaderColumn style={styles.colname}>Name</TableHeaderColumn>
-                <TableHeaderColumn style={styles.colauthor}>Author</TableHeaderColumn>
-                <TableHeaderColumn style={styles.colsum}>Summary</TableHeaderColumn>
-                <TableHeaderColumn style={styles.colaction}>Actions</TableHeaderColumn>
+                <TableHeaderColumn style={Object.assign({},styles.colname,{fontSize:12})}>Name</TableHeaderColumn>
+                <TableHeaderColumn style={Object.assign({},styles.colauthor,{fontSize:12})}>Author</TableHeaderColumn>
+                <TableHeaderColumn style={Object.assign({},styles.colsum,{fontSize:12})}>Summary</TableHeaderColumn>
+                <TableHeaderColumn style={Object.assign({},styles.colaction,{fontSize:12})}>Actions</TableHeaderColumn>
               </TableRow>) :
                (<TableRow  style={{height: 64}}>
                 <TableHeaderColumn style={styles.column} colSpan={4}>
@@ -398,8 +400,8 @@ class WGroupRepoPage extends Component {
             </div>
           </div>
           <div className="page-content" style={{ padding:'1.5rem' }}>
-            <div>
-              <IconButton onTouchTap={this.handleRepoTreeTouchTap} >
+            <div style={ styles.topbar }>
+              <IconButton onTouchTap={this.handleRepoTreeTouchTap} iconStyle={styles.iconStyle}>
                 <CtntLowPriority/>
               </IconButton>
               <Popover
@@ -411,12 +413,6 @@ class WGroupRepoPage extends Component {
                 style={styles.popover}>
                 <TreeList nodeIcon={this.nodeIcon} nodes={nodes} muiTheme={this.props.muiTheme}/>
               </Popover>
-              <Breadcrumb items={links} onJumpClick={this.handleJumpLink} style={{verticalAlign:'top', display:'inline-block'}} muiTheme={this.props.muiTheme}/>
-              <IconButton onTouchTap={ this.handleShowMoreFilter } style={{float:'right'}} iconStyle={styles.iconStyle}>
-                { showMoreFilter ? <NaviExpandLess/> : <NaviExpandMore/> }
-              </IconButton>
-            </div>
-            <div style={ filterStyle }>
               <TextField style={styles.filterSearch} hintText="File or folder name"/>
               <SelectField style={styles.filterType} hintText='Format'>
                 <MenuItem value={ 'doc' } primaryText='Office Word' />
@@ -431,12 +427,13 @@ class WGroupRepoPage extends Component {
                 <MenuItem value={ 'FULL' } primaryText='Credential' />
                 <MenuItem value={ 'ALL' } primaryText='All' />
               </SelectField>
-              <div style={ styles.spacer } />
+
               <div style={{width:96}}>
                 <IconButton iconStyle={styles.iconStyle}><ActSearch/></IconButton>
-                <IconButton iconStyle={styles.iconStyle}><CtntClear/></IconButton>
+                <IconButton iconStyle={styles.iconStyle}><CommClearAll/></IconButton>
               </div>
             </div>
+ 
             <Table multiSelectable={true}
               onRowSelection={this.handleRowSelection}>
               <TableHeader enableSelectAll={true}>

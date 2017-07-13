@@ -54,6 +54,9 @@ function getStyles(muiTheme) {
       borderRadius: 6, 
       margin: '0.8rem'
     },
+    iconStyle:{
+      color: palette.primary2Color
+    },
     pageHeader: {
       backgroundColor: palette.primary1Color,
     }
@@ -106,6 +109,7 @@ class WGroupTopicsPage extends Component {
     });
 
     return (
+      
       <div className="page-wrapper">
         <header className="page-header-wrapper" style={this.styles.pageHeader}>
           <PageHeaderBar muiTheme={ muiTheme }/>
@@ -113,13 +117,11 @@ class WGroupTopicsPage extends Component {
         <div className="page-content-wrapper">
           <div className="page-content">
             <div style={ styles.topBar }>
-              <TextField
-                  hintText="Hint Text"
-                />
-              <IconButton>
+              <TextField hintText="Hint Text"/>
+              <IconButton iconStyle={ styles.iconStyle }>
                 <ActionSearch/>
               </IconButton>
-              <IconButton>
+              <IconButton iconStyle={ styles.iconStyle }>
                 <CommClearAll />
               </IconButton>
             </div>
@@ -142,10 +144,10 @@ class WGroupTopicsPage extends Component {
               <TableBody displayRowCheckbox={ false }>
                 <TableRow>
                   <TableRowColumn style={ titleCol }>
-                    <span style={ { fontSize: 14, fontWeight: 600 } }>
+                    <span style={ { fontSize: 16, fontWeight: 500 ,padding:'0.5rem 0'} }>
                       <a href='/slsl' style={ styles.topicTitle }>如何构建一个出色的应用特别是SPA?</a>
                     </span>
-                    <div style={ { fontSize: 14, color: '#919191', wordBreak: 'break-all', wordWrap: 'break-word', lineHeight: 1.4, whiteSpace: 'normal', paddingRight: 5 } }>
+                    <div style={ { fontSize: 14, fontWeight: 300, color: '#919191', padding:'0.5rem 0',wordBreak: 'break-all', wordWrap: 'break-word', lineHeight: 1.4, whiteSpace: 'normal', paddingRight: 5 } }>
                       <span>在 HTML 4.01 中，不赞成使用 td 元素的 nowrap 属性；在 XHTML 1.0 Strict DTD 中，不支持 td 元素的 nowrap 属性。
                         <a href='/t/welcome-to-the-react-discussion-forum/11'>read more...</a>
                       </span>
@@ -166,7 +168,7 @@ class WGroupTopicsPage extends Component {
                 </TableRow>
                 <TableRow>
                   <TableRowColumn style={ styles.column }>
-                    <span style={ { fontSize: 14, fontWeight: 600 } }>
+                    <span style={ { fontSize: 16, fontWeight: 500 ,padding:'0.5rem 0'} }>
                       <a href='/lklk' style={ styles.topicTitle }>Any good library in React for building DockSpawn style windows on an SPA?</a>
                     </span>
                   </TableRowColumn>
