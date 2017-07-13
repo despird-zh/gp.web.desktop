@@ -360,6 +360,9 @@ class WGroupRepoPage extends Component {
               </a>
               <span style={{display: 'block',overflow: 'hidden',
                 whiteSpace: 'nowrap',
+                color:'rgb(158, 158, 158)',
+                fontSize: '1.4rem',
+                fontWeight: 300,
                 textOverflow: 'ellipsis'}}>
                 {row.name} what is the best choice.
               </span>
