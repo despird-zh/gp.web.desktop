@@ -28,10 +28,10 @@ import NavFirstPage from 'material-ui/svg-icons/navigation/first-page';
 import NavLastPage from 'material-ui/svg-icons/navigation/last-page';
 import IconButton from 'material-ui/IconButton';
 import Divider from 'material-ui/Divider';
-import Chip from 'material-ui/Chip';
 
 import { snackAction, loaderAction } from '../../store/actions/appActions';
 import PageHeaderBar from '../component/PageHeaderBar';
+import Chip from '../mui-ext/Chip';
 
 function getStyles(muiTheme) {
   const { baseTheme:{ palette } } = muiTheme;
