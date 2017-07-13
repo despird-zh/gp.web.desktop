@@ -10,6 +10,7 @@ import WGroupGridListPage from './views/wgroup/WGroupGridListPage';
 import WGroupTopicsPage from './views/wgroup/WGroupTopicsPage';
 import WGroupTopicPage from './views/wgroup/WGroupTopicPage';
 import WGroupAddPage from './views/wgroup/WGroupAddPage';
+import WGroupRepoPage from './views/wgroup/WGroupRepoPage';
 
 export const getRoutes = (store) => {
   const ensureAuthenticated = (nextState, replace) => { // eslint-disable-line no-unused-vars
@@ -39,6 +40,7 @@ export const getRoutes = (store) => {
       <Route path='wgroup-add' component={ WGroupAddPage } />
       <Route path='wgroup-topics' component={ WGroupTopicsPage } />
       <Route path='wgroup-topic' component={ WGroupTopicPage } />
+      <Route path='wgroup-repo' component={ WGroupRepoPage } />
       <Route path='about' component={ AboutPage } />
     </Route>
   );
