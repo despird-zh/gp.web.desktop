@@ -40,6 +40,7 @@ import Breadcrumb from '../component/Breadcrumb';
 import { snackAction, loaderAction } from '../../store/actions/appActions';
 import PageHeaderBar from '../component/PageHeaderBar';
 import Chip from '../mui-ext/Chip';
+import WGroupRepoInfo from './WGroupRepoInfo';
 
 function getStyles(muiTheme) {
   const { baseTheme:{palette, spacing} } = muiTheme;
@@ -171,52 +172,6 @@ var nodes = [
   }
 ];
 
-const links = [
-{
-  id: '1',
-  label: 'link2天涯处理工作如何',
-},
-{
-  id: '2',
-  label: 'link2天涯处理工作如何',
-},
-{
-  id: '21',
-  label: 'link2天涯处理工作如何',
-},
-{
-  id: '22',
-  label: 'link2天涯处理工作如何',
-},
-{
-  id: '23',
-  label: 'link2天涯处理工作如何',
-},
-{
-  id: '24',
-  label: 'link2天涯处理工作如何',
-},
-{
-  id: '3',
-  label: 'link2天涯处理工作如何',
-},
-{
-  id: '31',
-  label: 'link2天涯处理工作如何',
-},
-{
-  id: '32',
-  label: 'link2天涯处理工作如何',
-},
-{
-  id: '33',
-  label: 'link2天涯处理工作如何',
-},
-{
-  id: '4',
-  label: 'link2天涯处理工作如何',
-}
-]
 class WGroupRepoPage extends Component {
 
   constructor(props, context) {
@@ -398,91 +353,7 @@ class WGroupRepoPage extends Component {
         <div className="page-content-wrapper">
           <div className="page-right-menu">
             <div className={ this.state.collapsed ? "right-menu collapsed":"right-menu " }>
-              <div className="menu-body" style={{padding: '2rem 1.5rem 1.5rem'}}>
-                <div style={{display: 'flex', marginBottom:'1rem'}}>
-                  <div style={{flex:1, textAlign:'center'}}>
-                    <h4 style={ styles.sumTitle }>views</h4>
-                    <span style={ { marginRight: 5, verticalAligh:'middle'}}>12K</span>
-                  </div>
-                  <div style={{flex:1, textAlign:'center'}}>
-                    <h4 style={ styles.sumTitle }>replies</h4>
-                    <span style={ { marginRight: 5, verticalAligh:'middle'}}>12K</span>
-                  </div>
-                  <div style={{flex:1, textAlign:'center'}}>
-                    <h4 style={ styles.sumTitle }>joins</h4>
-                    <span style={ { marginRight: 5, verticalAligh:'middle'}}>12</span>
-                  </div>
-                  <div style={{flex:1, textAlign:'center'}}>
-                    <h4 style={ styles.sumTitle }>评论</h4>
-                    <span style={ { marginRight: 5, verticalAligh:'middle'}}>123</span>
-                  </div>
-                </div>
-                <div style={{ display:'block' ,paddingBottom:10}} className="clearfix">
-                  <div style={{float:'left', minWidth:'25%', textAlign:'center'}}>
-                    <h4 style={ styles.sumTitle }>创建</h4>
-                    <div style={{ display:'block'}}>
-                      <a href='' >
-                        <Avatar src={ `assets/img/kerem-128.jpg` } size={ 20 } style={ { marginRight: 5,verticalAlign:'middle'} } /> 
-                      </a>
-                      <span style={ { marginRight: 5, display:'inline-block', verticalAligh:'middle'}}>17天</span>
-                    </div>
-                  </div>
-                  <div style={{float:'left', minWidth:'25%', textAlign:'center'}}>
-                    <h4 style={ styles.sumTitle }>活动</h4>
-                    <div style={{ display:'block'}}>
-                      <a href='' >
-                        <Avatar src={ `assets/img/kerem-128.jpg` } size={ 20 } style={ { marginRight: 5,verticalAlign:'middle'} } /> 
-                      </a>
-                      <span style={ { marginRight: 5, display:'inline-block', verticalAligh:'middle'}}>7H</span>
-                    </div>
-                  </div>
-                </div>
-                <Divider />
-                <div style={{padding:'10px 0'}}>
-                  <Chip style={{margin:4, display: 'inline-block', fontSize: 12}}>
-                    技术
-                  </Chip>
-                  <Chip style={{margin:4, display: 'inline-block'}}>
-                    机械
-                  </Chip>
-                  <Chip style={{margin:4, display: 'inline-block'}}>
-                    加工
-                  </Chip>
-                </div>
-                <Divider />
-                <div>
-                  <h3 style={{
-                    paddingTop: 10, 
-                    color:'rgb(158, 158, 158)',
-                    textRendering: 'optimizeLegibility',
-                    fontSize: '1.5rem',
-                    fontWeight: 400,
-                    lineHeight: '3rem',
-                    textTransform: 'uppercase'}}>Attendees</h3>
-                  <div style={ { paddingTop: '0.5rem', paddingBottom: 10 } }>
-                    <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
-                      <Avatar src='assets/img/uxceo-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
-                    </IconButton>
-                    <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
-                      <Avatar src='assets/img/ok-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
-                    </IconButton>
-                    <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
-                      <Avatar src='assets/img/kolage-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
-                    </IconButton>
-                    <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
-                      <Avatar src='assets/img/jsa-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
-                    </IconButton>
-                    <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
-                      <Avatar src='assets/img/kerem-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
-                    </IconButton>
-                    <IconButton 
-                      style={{width:30, height:30, padding:0, borderRadius:'50%',border:'1px dashed #a3a3a3'}} 
-                      iconStyle={{ marginTop:0}}>
-                      <ContentAdd/>
-                    </IconButton>
-                  </div>
-                </div>
-              </div>
+              <WGroupRepoInfo muiTheme ={muiTheme}/>
               <div className="menu-footer">
                 <IconButton onTouchTap={ this.onCollapseSwitch } iconStyle={this.styles.switchButton}>
                   {this.state.collapsed ? <NavFirstPage /> : <NavLastPage/>}
@@ -551,21 +422,28 @@ class WGroupRepoPage extends Component {
               </div>
               <ul style={{marginLeft:0, padding:0}}>
                 <li style={{paddingLeft:0, display:'flex', borderBottom: '1px solid rgb(224, 224, 224)'}}>
-                <IconButton style={{flexShrink:0, flexGrow:0}}><ActSearch/></IconButton>
+                <div style={{flexShrink:0, flexGrow:0, padding: '0.5rem 0'}}>
+                  <IconButton ><ActSearch/></IconButton>
+                </div>
                 <div style={{flex:1,display: 'flex', verticalAlign:'middle'}}>
                   <div style={{flex: '0 0 30px', verticalAlign:'middle' }}>
                     <span style={{display:'inline-block', height:'100%', verticalAlign:'middle'}}/>
                     <FileFolder style={styles.rowIconStyle}/>
                   </div>
                   <div style={{ flex:1, width:300 , overflow: 'hidden'}}>
-                    <a style={{ textDecoration: 'none', display: 'block',overflow: 'hidden',
+                    <a style={{ textDecoration: 'none', 
+                      display: 'block',
+                      padding: '0.5rem 0 0.2rem',
+                      overflow: 'hidden',
                       whiteSpace: 'nowrap', cursor: 'pointer',
                       color:'rgb(0, 151, 167)',
                       textOverflow: 'ellipsis', paddingBottom:'0.5rem'}} 
                       onClick={this.handleRepoLink}>
-                    <span> what is the best choice.</span>
+                      <span> what is the best choice.</span>
                     </a>
-                    <span style={{display: 'block',overflow: 'hidden',
+                    <span style={{display: 'block',
+                      overflow: 'hidden',
+                      padding: '0.3rem 0 0.5rem',
                       whiteSpace: 'nowrap',
                       color:'rgb(158, 158, 158)',
                       fontSize: '1.4rem',
@@ -575,7 +453,7 @@ class WGroupRepoPage extends Component {
                     </span>
                   </div>
                 </div>
-                <div style={styles.colauthor}>
+                <div style={{padding:'1.2rem', width:60}}>
                   <Avatar src="assets/img/kerem-128.jpg" size={30} style={{ verticalAlign:'middle'}} />
                 </div>
                 <div style={styles.colsum}> 3 folders, 12 files 1.3G</div>
