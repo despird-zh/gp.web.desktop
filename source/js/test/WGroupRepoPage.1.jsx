@@ -13,6 +13,9 @@ import NaviExpandMore from 'material-ui/svg-icons/navigation/expand-more';
 import NaviExpandLess from 'material-ui/svg-icons/navigation/expand-less';
 import CtntLowPriority from 'material-ui/svg-icons/content/low-priority';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import CheckboxOutline from 'material-ui/svg-icons/toggle/check-box-outline-blank';
+import CheckboxChecked from 'material-ui/svg-icons/toggle/check-box';
+import IndeterminateCheckbox from 'material-ui/svg-icons/toggle/indeterminate-check-box';
 import Popover from 'material-ui/Popover';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
@@ -41,7 +44,6 @@ import { snackAction, loaderAction } from '../../store/actions/appActions';
 import PageHeaderBar from '../component/PageHeaderBar';
 import Chip from '../mui-ext/Chip';
 import WGroupRepoInfo from './WGroupRepoInfo';
-import WGroupRepoList from './WGroupRepoList';
 
 function getStyles(muiTheme) {
   const { baseTheme:{palette, spacing} } = muiTheme;
@@ -294,6 +296,58 @@ class WGroupRepoPage extends Component {
 
     const hasSelected = selectedRows && selectedRows.length > 0;
 
+    const hRowEls = !hasSelected ? (<TableRow  style={{height: 64}}>
+                <TableHeaderColumn style={Object.assign({},styles.colname,{fontSize:12})}>Name</TableHeaderColumn>
+                <TableHeaderColumn style={Object.assign({},styles.colauthor,{fontSize:12})}>Author</TableHeaderColumn>
+                <TableHeaderColumn style={Object.assign({},styles.colsum,{fontSize:12})}>Summary</TableHeaderColumn>
+                <TableHeaderColumn style={Object.assign({},styles.colaction,{fontSize:12})}>Actions</TableHeaderColumn>
+              </TableRow>) :
+               (<TableRow  style={{height: 64}}>
+                <TableHeaderColumn style={styles.column} colSpan={4}>
+                  <RaisedButton label='Clear' style={ { margin: 4 } } onTouchTap={ this.handleClear } />
+                </TableHeaderColumn>
+                </TableRow>);
+
+    const rowEls = rows.map((row, index) => {
+
+      let filterRows = selectedRows.filter( i => (i === index) );
+
+      return (
+        <TableRow key={`tr-${row.id}`} selected={ filterRows && filterRows.length > 0} selectable={true}>
+          <TableRowColumn style={styles.colname}>
+          <div style={{display: 'flex', verticalAlign:'middle'}}>
+            <div style={{flex: '0 0 35px', verticalAlign:'middle' }}>
+              <span style={{display:'inline-block', height:'100%', verticalAlign:'middle'}}/>
+              <FileFolder style={styles.rowIconStyle}/>
+            </div>
+            <div style={{ flex:1 , overflow: 'hidden'}}>
+              <a style={{ textDecoration: 'none', display: 'block',overflow: 'hidden',
+                whiteSpace: 'nowrap', cursor: 'pointer',
+                color:'rgb(0, 151, 167)',
+                textOverflow: 'ellipsis', paddingBottom:'0.5rem'}} 
+                onClick={this.handleRepoLink}>
+               <span> {row.name}what is the best choice.</span>
+              </a>
+              <span style={{display: 'block',overflow: 'hidden',
+                whiteSpace: 'nowrap',
+                color:'rgb(158, 158, 158)',
+                fontSize: '1.4rem',
+                fontWeight: 300,
+                textOverflow: 'ellipsis'}}>
+                {row.name} what is the best choice.
+              </span>
+            </div>
+          </div>
+          </TableRowColumn>
+          <TableRowColumn style={styles.colauthor}>
+            <Avatar src="assets/img/kerem-128.jpg" size={30} style={{ verticalAlign:'middle'}} />
+          </TableRowColumn>
+          <TableRowColumn style={styles.colsum}> 3 folders, 12 files 1.3G</TableRowColumn>
+          <TableRowColumn style={styles.colaction}>{row.label}</TableRowColumn>
+        </TableRow>
+      );
+    });
+
     return (
       <div className="page-wrapper">
         <header className="page-header-wrapper" style={this.styles.pageHeader}>
@@ -345,7 +399,19 @@ class WGroupRepoPage extends Component {
               </div>
             </div>
   
-            <WGroupRepoList styles={this.styles} muiTheme={muiTheme}/>
+            <Table multiSelectable={true} wrapperStyle={{flex:1, overflow:'hidden'}}
+              bodyStyle={{overflowY:'scroll', height:'calc(100% - 6.4rem)'}}
+              headerStyle={{paddingRight:15}}
+              fixedHeader={true}
+              onRowSelection={this.handleRowSelection}>
+              <TableHeader enableSelectAll={true}>
+                {hRowEls}
+              </TableHeader>
+              <TableBody deselectOnClickaway={false} preScanRows={true} >
+                {rowEls}
+              </TableBody>
+            </Table>
+            
           </div>
         </div>
       </div>
