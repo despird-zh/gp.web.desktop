@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Scrollbars } from 'react-custom-scrollbars';
 import PropTypes from 'prop-types';
 import IconButton from 'material-ui/IconButton';
 import CheckboxOutline from 'material-ui/svg-icons/toggle/check-box-outline-blank';
@@ -10,14 +10,44 @@ import Avatar from 'material-ui/Avatar';
 
 class WGroupRepoList extends Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      rowCount : 20,
+      hasMore: true,
+      isLoading: false
+    };
+  }
+
+  setLoadIndicator = (el) => {
+    this.loadIndicator = el;
+  }
+
+  handleLoadMore = () => {
+    
+    this.setState({rowCount: this.state.rowCount + 10, isLoading: false});
+  }
+
+  onHandleUpdate = (values) => {
+
+    const { scrollTop, scrollHeight, clientHeight } = values;
+    const bottomScrollTop = scrollHeight - clientHeight;
+    //const shadowBottomOpacity = 1 / 20 * (bottomScrollTop - Math.max(scrollTop, bottomScrollTop - 20));
+    if(scrollTop > bottomScrollTop - 40 && !this.state.isLoading){
+      this.setState({isLoading: true});
+      this.handleLoadMore();
+    }
+    //css(shadowTop, { opacity: shadowTopOpacity });
+    //css(shadowBottom, { opacity: shadowBottomOpacity });
+  }
+
   render(){
     const styles = this.props.styles;
 
     let rows = [];
-    for(let i = 0; i<100; i++){
+    for(let i = 0; i<this.state.rowCount; i++){
       
       let row = (<RepoListRow key={`row-${i}`} rowIndex={i} styles={styles}/>);
-
       rows.push(row);
     }
     return(
@@ -35,9 +65,21 @@ class WGroupRepoList extends Component {
           <div style={styles.colsum}> summ</div>
           <div style={styles.colaction}>xxx</div>
         </div>
-        <ul style={{marginLeft:0, padding:0}}>
-          {rows}
-        </ul>
+        <Scrollbars style={{ height: 'calc( 100% - 6.4rem)' }}
+          // This will activate auto hide
+          autoHide
+          // Hide delay in ms
+          autoHideTimeout={1000}
+          // Duration for hide animation in ms.
+          autoHideDuration={200}
+          onUpdate={this.onHandleUpdate}>
+          <ul style={{marginLeft:0, padding:0}}>
+            {rows}
+            { this.state.hasMore ? <li ref={this.setLoadIndicator} style={{paddingLeft:0, height:40, display:'block', borderBottom: '1px solid rgb(224, 224, 224)'}}>
+              loading...
+            </li>: null}
+          </ul>
+         </Scrollbars>
       </div>
     );
   };
