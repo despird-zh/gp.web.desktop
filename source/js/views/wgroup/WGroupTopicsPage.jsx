@@ -16,11 +16,11 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import ActionSearch from 'material-ui/svg-icons/action/search';
 import TextField from 'material-ui/TextField';
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 
 import { snackAction, loaderAction } from '../../store/actions/appActions';
 import PageHeaderBar from '../component/PageHeaderBar';
 import Chip from '../mui-ext/Chip';
+import WGroupTopicsList from './WGroupTopicsList';
 
 function getStyles(muiTheme) {
   const { baseTheme:{ palette },paper  } = muiTheme;
@@ -30,23 +30,14 @@ function getStyles(muiTheme) {
       marginBottom: '1rem', 
       marginRight:'1rem',
     },
-    column: {
-      padding: 5,
-    },
+
     iconBtn: {
       color: palette.primary2Color,
     },
     topBar:{
-      padding: '1rem 2rem 0',
+      padding: '0  0',
     },
-    gridList: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      margin: 0,
-      width: '100%',
-      padding: '0 1rem 1rem',
-      overflowY: 'auto'
-    },
+
     tileItem: {
       boxShadow: paper.zDepthShadows[1],
       width:'18rem', 
@@ -97,16 +88,6 @@ class WGroupTopicsPage extends Component {
   render() {
     let { muiTheme } = this.props;
     const styles = this.styles;
-    const titleCol = Object.assign({}, styles.column, { paddingTop: 10, paddingBottom: 10});
-    const numCol = Object.assign({}, styles.column, { width: 60, textAlign: 'center' });
-    const cateCol = Object.assign({}, styles.column, { width: 100 });
-    const userCol = Object.assign({}, styles.column, { width: 160, verticalAlign: 'middle' });
-
-    const usersEl = users.map((item, index) => {
-      return (
-        <a key={index} href='' style={ { display: 'block', float: 'left', height: 25 } }><Avatar src={ `assets/img/${ item }` } size={ 25 } style={ { marginRight: 5 } } /></a>
-      );
-    });
 
     return (
       
@@ -115,7 +96,7 @@ class WGroupTopicsPage extends Component {
           <PageHeaderBar muiTheme={ muiTheme }/>
         </header>
         <div className="page-content-wrapper">
-          <div className="page-content">
+          <div className="page-content" style={{ padding:'1.5rem' }}>
             <div style={ styles.topBar }>
               <TextField hintText="Hint Text"/>
               <IconButton iconStyle={ styles.iconStyle }>
@@ -125,68 +106,7 @@ class WGroupTopicsPage extends Component {
                 <CommClearAll />
               </IconButton>
             </div>
-            <Table wrapperStyle={{ padding:'0 1.5rem' }}>
-              <TableHeader
-                adjustForCheckbox={ false }
-                enableSelectAll={ false }
-                displaySelectAll={ false }
-                style={ { borderBottomWidth: 1 } }
-              >
-                <TableRow>
-                  <TableHeaderColumn style={ styles.column }>Topic</TableHeaderColumn>
-                  <TableHeaderColumn style={ cateCol }>Category</TableHeaderColumn>
-                  <TableHeaderColumn style={ userCol }>Users</TableHeaderColumn>
-                  <TableHeaderColumn style={ numCol }>Rep.</TableHeaderColumn>
-                  <TableHeaderColumn style={ numCol }>Vw.</TableHeaderColumn>
-                  <TableHeaderColumn style={ numCol }>Act.</TableHeaderColumn>
-                </TableRow>
-              </TableHeader>
-              <TableBody displayRowCheckbox={ false }>
-                <TableRow>
-                  <TableRowColumn style={ titleCol }>
-                    <span style={ { fontSize: 16, fontWeight: 500 ,padding:'0.5rem 0'} }>
-                      <a href='/slsl' style={ styles.topicTitle }>如何构建一个出色的应用特别是SPA?</a>
-                    </span>
-                    <div style={ { fontSize: 14, fontWeight: 300, color: '#919191', padding:'0.5rem 0',wordBreak: 'break-all', wordWrap: 'break-word', lineHeight: 1.4, whiteSpace: 'normal', paddingRight: 5 } }>
-                      <span>在 HTML 4.01 中，不赞成使用 td 元素的 nowrap 属性；在 XHTML 1.0 Strict DTD 中，不支持 td 元素的 nowrap 属性。
-                        <a href='/t/welcome-to-the-react-discussion-forum/11'>read more...</a>
-                      </span>
-                    </div>
-                  </TableRowColumn>
-                  <TableRowColumn style={ cateCol }>
-                    <span style={ { display: 'block', height: 18, verticalAlign: 'middle' } }>
-                      <AVStop style={ { width: 16, height: 16, color: 'red', display: 'inline-block', verticalAlign:'middle', marginTop: -2, marginRight: 5 } } />
-                      Develop
-                    </span>
-                  </TableRowColumn>
-                  <TableRowColumn style={ userCol }>
-                    {usersEl}
-                  </TableRowColumn>
-                  <TableRowColumn style={ numCol }>34</TableRowColumn>
-                  <TableRowColumn style={ numCol }>3K</TableRowColumn>
-                  <TableRowColumn style={ numCol }>45</TableRowColumn>
-                </TableRow>
-                <TableRow>
-                  <TableRowColumn style={ styles.column }>
-                    <span style={ { fontSize: 16, fontWeight: 500 ,padding:'0.5rem 0'} }>
-                      <a href='/lklk' style={ styles.topicTitle }>Any good library in React for building DockSpawn style windows on an SPA?</a>
-                    </span>
-                  </TableRowColumn>
-                  <TableRowColumn style={ cateCol }>
-                    <span style={ { display: 'block', height: 18, verticalAlign: 'middle' } }>
-                      <AVStop style={ { width: 16, height: 16, color: 'blue', display: 'inline-block', verticalAlign:'middle', marginTop: -2, marginRight: 5 } } />
-                      正常
-                    </span>
-                  </TableRowColumn>
-                  <TableRowColumn style={ userCol }>
-                    {usersEl}
-                  </TableRowColumn>
-                  <TableRowColumn style={ numCol }>34</TableRowColumn>
-                  <TableRowColumn style={ numCol }>3.2K</TableRowColumn>
-                  <TableRowColumn style={ numCol }>4</TableRowColumn>
-                </TableRow>
-              </TableBody>
-            </Table>
+            <WGroupTopicsList muiTheme = {muiTheme} />
           </div>
         </div>
       </div>

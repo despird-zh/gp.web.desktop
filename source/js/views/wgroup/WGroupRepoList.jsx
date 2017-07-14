@@ -34,8 +34,7 @@ function getStyles(muiTheme) {
       fontSize: 16
     },
     colAuthor: {
-      padding: '1.5rem 1rem',
-      textAlign:'center',
+      padding: 5,
       width:60,
       flexShrink:0, 
       flexGrow:0, 
@@ -43,7 +42,7 @@ function getStyles(muiTheme) {
     },
     colAction: {
       padding: 5,
-      width:160,
+      width:60,
       flexShrink:0, 
       flexGrow:0, 
       fontSize: 16
@@ -59,6 +58,15 @@ function getStyles(muiTheme) {
       color: palette.primary2Color,
       verticalAlign:'middle'
     },
+    spanMiddlePre:{
+      height: '100%',
+      display: 'inline-block',  
+      verticalAlign: 'middle'
+    },
+    spanMiddle:{
+      display: 'inline-block',  
+      verticalAlign: 'middle'
+    }
   };
 
   const headerCol = {
@@ -162,7 +170,6 @@ class WGroupRepoList extends Component {
 
     const { rowData, selectData } = this.state;
     const styles = this.styles;
-    const headerNameStyle = Object.assign({}, styles.colName, {});
 
     let rows = rowData.map((data)=>{
       return (<RepoListRow key={`row-${data.id}`} rowData={data} onRowSelect = {this.onRowSelect} styles={ styles }/>);
@@ -173,7 +180,6 @@ class WGroupRepoList extends Component {
     if( rowData.length !== selectData.length && selectData.length > 0 ){
       selectAllIcon = <IndeterminateCheckbox/>;
     }else if(rowData.length === selectData.length && selectData.length > 0){
-      console.log(selectData.length);
       selectAllIcon = <CheckboxChecked/>;
     }
     
@@ -251,10 +257,23 @@ const RepoListRow = ({ rowData, styles, onRowSelect}) => {
         </div>
       </div>
       <div style={ styles.colAuthor }>
-        <Avatar src="assets/img/kerem-128.jpg" size={30} style={{ verticalAlign:'middle'}} />
+        <span style={ styles.spanMiddlePre } ></span>
+        <span style={ styles.spanMiddle }>
+          <Avatar src="assets/img/kerem-128.jpg" size={30} style={{ verticalAlign:'middle'}} />
+        </span>
       </div>
-      <div style={styles.colSum}>{ rowData.summary }</div>
-      <div style={styles.colAction}>xxxxx</div>
+      <div style={styles.colSum}>
+        <span style={ styles.spanMiddlePre } ></span>
+        <span style={ styles.spanMiddle }>
+          { rowData.summary }
+        </span>
+      </div>
+      <div style={styles.colAction}>
+        <span style={ styles.spanMiddlePre } ></span>
+        <span style={ styles.spanMiddle }>
+          xxxx
+        </span>
+      </div>
     </li>
   );
 };
