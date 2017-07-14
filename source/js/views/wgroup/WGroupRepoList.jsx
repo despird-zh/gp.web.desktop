@@ -239,19 +239,21 @@ const RepoListRow = ({ rowData, styles, onRowSelect}) => {
             display: 'block',
             padding: '0.5rem 0 0.2rem',
             overflow: 'hidden',
-            whiteSpace: 'nowrap', cursor: 'pointer',
+            whiteSpace: 'nowrap', 
+            cursor: 'pointer',
             color:'rgb(0, 151, 167)',
             textOverflow: 'ellipsis', paddingBottom:'0.5rem'}} >
             <span> {rowData.name} - {rowData.id}</span>
           </a>
           <span style={{display: 'block',
             overflow: 'hidden',
-            padding: '0.3rem 0 0.5rem',
+            textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
+            padding: '0.3rem 0 0.5rem',
             color:'rgb(158, 158, 158)',
             fontSize: '1.4rem',
             fontWeight: 300,
-            textOverflow: 'ellipsis'}}>
+            }}>
             { rowData.descr }
           </span>
         </div>

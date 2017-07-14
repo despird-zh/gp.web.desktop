@@ -1,43 +1,25 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import PropTypes from 'prop-types';
 import ActDescription from 'material-ui/svg-icons/action/description';
 import ActSearch from 'material-ui/svg-icons/action/search';
-import CtntClear from 'material-ui/svg-icons/content/clear';
 import CommClearAll from 'material-ui/svg-icons/communication/clear-all';
-import FileFolder from 'material-ui/svg-icons/file/folder';
-import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
-import NaviExpandMore from 'material-ui/svg-icons/navigation/expand-more';
-import NaviExpandLess from 'material-ui/svg-icons/navigation/expand-less';
 import CtntLowPriority from 'material-ui/svg-icons/content/low-priority';
-import ContentAdd from 'material-ui/svg-icons/content/add';
 import Popover from 'material-ui/Popover';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import Divider from 'material-ui/Divider';
 import MenuItem from 'material-ui/MenuItem';
 import Avatar from 'material-ui/Avatar';
-import {
-  Table,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
-import TableBody from '../mui-ext/TableBody';
-import TableHeader from '../mui-ext/TableHeader';
+
 import TreeList from '../component/TreeList';
 
 import { Link } from 'react-router';
-import RaisedButton from 'material-ui/RaisedButton';
 
 import NavFirstPage from 'material-ui/svg-icons/navigation/first-page';
 import NavLastPage from 'material-ui/svg-icons/navigation/last-page';
 import IconButton from 'material-ui/IconButton';
 
-import Breadcrumb from '../component/Breadcrumb';
-import { snackAction, loaderAction } from '../../store/actions/appActions';
 import PageHeaderBar from '../component/PageHeaderBar';
 import Chip from '../mui-ext/Chip';
 import WGroupRepoInfo from './WGroupRepoInfo';
@@ -431,12 +413,4 @@ const RootMenuContent = ({ test1 ,styles}) => {
   );
 };
 
-export default connect(
-  (state) => ({}),
-  (dispatch) => (
-    bindActionCreators({
-      snackAction,
-      loaderAction,
-    }, dispatch)
-  )
-)(WGroupRepoPage);
+export default WGroupRepoPage;

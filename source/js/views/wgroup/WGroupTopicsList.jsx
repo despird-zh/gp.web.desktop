@@ -24,13 +24,13 @@ function getStyles(muiTheme) {
       flexGrow:0, 
       width: 100,
       padding: '0.5rem',
-      fontSize: 14
+      fontSize: 16
     },
     colUser:{
       flexShrink:0, 
       flexGrow:0, 
       width: 160,
-      padding: '0.5rem',
+      padding: '1rem 0.5rem',
       verticalAlign: 'middle'
     },
     colNum:{
@@ -53,7 +53,7 @@ function getStyles(muiTheme) {
 
   const headerCol = {
       color: palette.accent3Color,
-      padding: '1.8rem 0.5rem',
+      padding: '1.8rem 1rem',
       fontSize: 14
     };
 
@@ -71,8 +71,8 @@ function getFakeData(cnt){
       data.push({
         id: `id-${i}`,
         title: '随时随地，简单便捷，给您移动办公最佳体验',
-        descr: '伊拉克苏马里亚电视台网站当天报道，“伊斯兰国”媒体发布简短声明，称巴格达迪已经死亡，这一组织将产生新的最高头目。声明没有给出巴格达迪死亡细节',
-        category: 'Developer',
+        descr: (i !== 0) ? null:'伊拉克苏马里亚电视台网站当天报道，“伊斯兰国”媒体发布简短声明，称巴格达迪已经死亡，这一组织将产生新的最高头目。声明没有给出巴格达迪死亡细节',
+        category: 'Develop',
         replies: 34,
         views: 23,
         activities: 21 
@@ -179,14 +179,16 @@ const TopicsListRow = ({ rowData, styles }) => {
   return (
     <li style={ styles.rowStyle }>
       <div style={ styles.colTitle }>
-        <span style={ { fontSize: 16, fontWeight: 500 ,padding:'0.5rem 0'} }>
-          <a href='/slsl' style={ styles.topicTitle }>如何构建一个出色的应用特别是SPA? {rowData.id}</a>
+        { !(rowData.descr) ? <span style={ styles.spanMiddlePre } ></span> : null}
+        <span style={ { 
+          fontSize: 16, 
+          fontWeight: 300 ,
+          padding:'0.5rem 0'} }>
+          <a href='/slsl' style={ styles.topicTitle }>{rowData.title} {rowData.id}</a>
         </span>
-        <div style={ { fontSize: 14, fontWeight: 300, color: '#919191', padding:'0.5rem 0',wordBreak: 'break-all', wordWrap: 'break-word', lineHeight: 1.4, whiteSpace: 'normal', paddingRight: 5 } }>
-          <span>在 HTML 4.01 中，不赞成使用 td 元素的 nowrap 属性；在 XHTML 1.0 Strict DTD 中，不支持 td 元素的 nowrap 属性。
-            <a href='/t/welcome-to-the-react-discussion-forum/11'>read more...</a>
-          </span>
-        </div>
+        { (rowData.descr) ? <div style={ { fontSize: 14, fontWeight: 300, color: '#919191', padding:'0.5rem 0',wordBreak: 'break-all', wordWrap: 'break-word', lineHeight: 1.4, whiteSpace: 'normal', paddingRight: 5 } }>
+          <span>{rowData.descr}</span>
+        </div> : null}
       </div>
       <div style={ styles.colCate }>
         <span style={ styles.spanMiddlePre } ></span>

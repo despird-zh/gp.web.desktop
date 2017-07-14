@@ -3,21 +3,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { Link } from 'react-router';
-import Avatar from 'material-ui/Avatar';
 import CommClearAll from 'material-ui/svg-icons/communication/clear-all';
-import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
-import { grey400, darkBlack } from 'material-ui/styles/colors';
-import AVStop from 'material-ui/svg-icons/av/stop';
-import NavFirstPage from 'material-ui/svg-icons/navigation/first-page';
-import NavLastPage from 'material-ui/svg-icons/navigation/last-page';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 import ActionSearch from 'material-ui/svg-icons/action/search';
 import TextField from 'material-ui/TextField';
 
-import { snackAction, loaderAction } from '../../store/actions/appActions';
 import PageHeaderBar from '../component/PageHeaderBar';
 import Chip from '../mui-ext/Chip';
 import WGroupTopicsList from './WGroupTopicsList';
@@ -30,20 +21,8 @@ function getStyles(muiTheme) {
       marginBottom: '1rem', 
       marginRight:'1rem',
     },
-
-    iconBtn: {
-      color: palette.primary2Color,
-    },
     topBar:{
-      padding: '0  0',
-    },
-
-    tileItem: {
-      boxShadow: paper.zDepthShadows[1],
-      width:'18rem', 
-      height:'12rem', 
-      borderRadius: 6, 
-      margin: '0.8rem'
+      padding: 0,
     },
     iconStyle:{
       color: palette.primary2Color
@@ -175,12 +154,4 @@ const RootMenuContent = ({ test1, styles }) => {
   );
 };
 
-export default connect(
-  (state) => ({}),
-  (dispatch) => (
-    bindActionCreators({
-      snackAction,
-      loaderAction,
-    }, dispatch)
-  )
-)(WGroupTopicsPage);
+export default WGroupTopicsPage;
