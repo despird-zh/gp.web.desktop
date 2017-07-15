@@ -33,6 +33,11 @@ function getStyles(muiTheme) {
       marginBottom: '1rem', 
       marginRight:'1rem',
     },
+    iconBtn: {
+      width:40, 
+      height:40,
+      padding:5
+    },
     pageHeader: {
       backgroundColor: palette.primary1Color,
     },
@@ -294,7 +299,7 @@ class WGroupRepoPage extends Component {
           </div>
           <div className="page-content" style={{ padding:'1.5rem' }}>
             <div style={ styles.topbar }>
-              <IconButton onTouchTap={this.handleRepoTreeTouchTap} iconStyle={styles.iconStyle}>
+              <IconButton style={this.styles.iconBtn} onTouchTap={this.handleRepoTreeTouchTap} iconStyle={styles.iconStyle}>
                 <CtntLowPriority/>
               </IconButton>
               <Popover
@@ -322,8 +327,8 @@ class WGroupRepoPage extends Component {
               </SelectField>
 
               <div style={{width:96}}>
-                <IconButton iconStyle={styles.iconStyle}><ActSearch/></IconButton>
-                <IconButton iconStyle={styles.iconStyle}><CommClearAll/></IconButton>
+                <IconButton style={this.styles.iconBtn} iconStyle={styles.iconStyle}><ActSearch/></IconButton>
+                <IconButton style={this.styles.iconBtn} iconStyle={styles.iconStyle}><CommClearAll/></IconButton>
               </div>
             </div>
   

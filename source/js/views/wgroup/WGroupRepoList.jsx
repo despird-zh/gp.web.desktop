@@ -4,8 +4,11 @@ import PropTypes from 'prop-types';
 import IconButton from 'material-ui/IconButton';
 import CheckboxOutline from 'material-ui/svg-icons/toggle/check-box-outline-blank';
 import CheckboxChecked from 'material-ui/svg-icons/toggle/check-box';
+import ToggleStar from 'material-ui/svg-icons/toggle/star';
+import ToggleStarBorder from 'material-ui/svg-icons/toggle/star-border';
 import IndeterminateCheckbox from 'material-ui/svg-icons/toggle/indeterminate-check-box';
 import FileFolder from 'material-ui/svg-icons/file/folder';
+import AVFiberRecord from 'material-ui/svg-icons/av/fiber-manual-record';
 import Avatar from 'material-ui/Avatar';
 
 function getStyles(muiTheme) {
@@ -14,7 +17,7 @@ function getStyles(muiTheme) {
     iconBtn: {
       width:40, 
       height:40,
-      padding:5
+      padding:5,
     },
     iconStyle:{
       color: palette.primary2Color
@@ -22,6 +25,7 @@ function getStyles(muiTheme) {
     rowStyle:{
       paddingLeft:0, 
       display:'flex', 
+      position: 'relative',
       borderBottom: '1px solid rgb(224, 224, 224)'
     },
     colCheck: {
@@ -46,7 +50,7 @@ function getStyles(muiTheme) {
     },
     colAction: {
       padding: 5,
-      width:60,
+      width:110,
       flexShrink:0, 
       flexGrow:0, 
       fontSize: 16
@@ -56,11 +60,16 @@ function getStyles(muiTheme) {
       fontSize: 16,
       flexShrink:0, 
       flexGrow:0, 
-      width:160
+      width:100
     }, 
     rowIconStyle:{
       color: palette.primary2Color,
       verticalAlign:'middle'
+    },
+    smallIconStyle:{
+      color: palette.primary2Color,
+      width:18,
+      height:18
     },
     spanMiddlePre:{
       height: '100%',
@@ -75,7 +84,8 @@ function getStyles(muiTheme) {
 
   const headerCol = {
       color: palette.accent3Color,
-      padding: '1.5rem 0.5rem'
+      padding: '1.5rem 0.5rem',
+      fontSize: 14
     };
 
   styles.colNameHeader = Object.assign({}, styles.colName, headerCol);
@@ -205,7 +215,7 @@ class WGroupRepoList extends Component {
             Author
           </div>
           <div style={ styles.colSumHeader }> Summary</div>
-          <div style={ styles.colActionHeader }>Action</div>
+          <div style={ styles.colActionHeader }>Classification</div>
         </div>
         <Scrollbars style={{ height: 'calc( 100% - 5.8rem)' }}
           // This will activate auto hide
@@ -228,11 +238,19 @@ class WGroupRepoList extends Component {
 }
 
 const RepoListRow = ({ rowData, styles, onRowSelect}) => {
+
   const handleRowSelect = () => {
     onRowSelect(rowData.id);
   };
   return (
     <li style={ styles.rowStyle }>
+      <AVFiberRecord style={{
+        position:'absolute', 
+        top:2, 
+        left:2,
+        width:14,
+        height:14,
+        color:'red'}}/>
       <div style={ styles.colCheck }>
         <IconButton iconStyle={ styles.iconStyle } onTouchTap={handleRowSelect} 
         style={styles.iconBtn} >
@@ -270,7 +288,11 @@ const RepoListRow = ({ rowData, styles, onRowSelect}) => {
       <div style={styles.colAction}>
         <span style={ styles.spanMiddlePre } ></span>
         <span style={ styles.spanMiddle }>
-          xxxx
+          <ToggleStar style={styles.smallIconStyle}/>
+          <ToggleStar style={styles.smallIconStyle}/>
+          <ToggleStar style={styles.smallIconStyle}/>
+          <ToggleStarBorder style={styles.smallIconStyle}/>
+          <ToggleStarBorder style={styles.smallIconStyle}/>
         </span>
       </div>
     </li>
