@@ -18,6 +18,7 @@ function getStyles(muiTheme) {
       padding: '0.5rem',
       flexShrink:1, 
       flexGrow:1, 
+      width: 100,
     },
     colCate: {
       flexShrink:0, 
@@ -30,7 +31,7 @@ function getStyles(muiTheme) {
       flexShrink:0, 
       flexGrow:0, 
       width: 160,
-      padding: '1rem 0.5rem',
+      padding:  '0.5rem',
       verticalAlign: 'middle'
     },
     colNum:{
@@ -53,7 +54,7 @@ function getStyles(muiTheme) {
 
   const headerCol = {
       color: palette.accent3Color,
-      padding: '1.8rem 1rem',
+      padding: '1.5rem 1rem',
       fontSize: 14
     };
 
@@ -70,7 +71,7 @@ function getFakeData(cnt){
   for(let i = cnt; i<10 + cnt; i++){
       data.push({
         id: `id-${i}`,
-        title: '随时随地，简单便捷，给您移动办公最佳体验',
+        title: '随时随地，简单便捷，给您移动办公最佳体验,随时随地，简单便捷，给您移动办公最佳体验,随时随地，简单便捷，给您移动办公最佳体验,随时随地，简单便捷，给您移动办公最佳体验.',
         descr: (i !== 0) ? null:'伊拉克苏马里亚电视台网站当天报道，“伊斯兰国”媒体发布简短声明，称巴格达迪已经死亡，这一组织将产生新的最高头目。声明没有给出巴格达迪死亡细节',
         category: 'Develop',
         replies: 34,
@@ -179,14 +180,18 @@ const TopicsListRow = ({ rowData, styles }) => {
   return (
     <li style={ styles.rowStyle }>
       <div style={ styles.colTitle }>
-        { !(rowData.descr) ? <span style={ styles.spanMiddlePre } ></span> : null}
-        <span style={ { 
-          fontSize: 16, 
-          fontWeight: 300 ,
-          padding:'0.5rem 0'} }>
-          <a href='/slsl' style={ styles.topicTitle }>{rowData.title} {rowData.id}</a>
-        </span>
-        { (rowData.descr) ? <div style={ { fontSize: 14, fontWeight: 300, color: '#919191', padding:'0.5rem 0',wordBreak: 'break-all', wordWrap: 'break-word', lineHeight: 1.4, whiteSpace: 'normal', paddingRight: 5 } }>
+        <a style={{ textDecoration: 'none', 
+            display: 'block',
+            padding: (rowData.descr) ? '0.5rem 0 0' : '0.9rem 0',
+            overflow: 'hidden',
+            whiteSpace: 'nowrap', 
+            cursor: 'pointer',
+            color:'rgb(0, 151, 167)',
+            textOverflow: 'ellipsis'}} >
+            <span>{rowData.id} - {rowData.title}</span>
+          </a>
+        { (rowData.descr) ? 
+        <div style={ { fontSize: 14, fontWeight: 300, color: '#919191', padding:'0 0 0.5rem',wordBreak: 'break-all', wordWrap: 'break-word', lineHeight: 1.4, whiteSpace: 'normal', paddingRight: 5 } }>
           <span>{rowData.descr}</span>
         </div> : null}
       </div>

@@ -11,6 +11,11 @@ import Avatar from 'material-ui/Avatar';
 function getStyles(muiTheme) {
   const { baseTheme:{palette, spacing} } = muiTheme;
   const styles = {
+    iconBtn: {
+      width:40, 
+      height:40,
+      padding:5
+    },
     iconStyle:{
       color: palette.primary2Color
     },
@@ -28,9 +33,8 @@ function getStyles(muiTheme) {
       flexShrink:1, 
       flexGrow:1,
       flexBasis: '0%',
-      width:300,
-      display: 'flex', 
-      verticalAlign:'middle',
+      width:300, 
+      paddingRight: 5,
       fontSize: 16
     },
     colAuthor: {
@@ -71,7 +75,7 @@ function getStyles(muiTheme) {
 
   const headerCol = {
       color: palette.accent3Color,
-      padding: '1.8rem 0.5rem'
+      padding: '1.5rem 0.5rem'
     };
 
   styles.colNameHeader = Object.assign({}, styles.colName, headerCol);
@@ -87,9 +91,9 @@ function getFakeData(cnt){
   for(let i = cnt; i<10 + cnt; i++){
       data.push({
         id: `id-${i}`,
-        name: '随时随地，简单便捷，给您移动办公最佳体验',
-        descr: '伊拉克苏马里亚电视台网站当天报道，“伊斯兰国”媒体发布简短声明，称巴格达迪已经死亡，这一组织将产生新的最高头目。声明没有给出巴格达迪死亡细节',
-        summary: '3 folders, 12 files 1.3G' 
+        name: '随时随地，简单便捷，给您移动办公最佳体验随时随地，简单便捷，给您移动办公最佳体验随时随地，简单便捷，给您移动办公最佳体验',
+        descr: (i!==0)? null:'伊拉克苏马里亚电视台网站当天报道，“伊斯兰国”媒体发布简短声明，称巴格达迪已经死亡，这一组织将产生新的最高头目。声明没有给出巴格达迪死亡细节',
+        summary: '1.3G' 
       });
     }
   return data;
@@ -187,7 +191,10 @@ class WGroupRepoList extends Component {
       <div style={{flex:1, overflow:'hidden'}}>
         <div style={{display:'flex',borderBottom: '1px solid rgb(224, 224, 224)'}}>
           <div style={ styles.colCheck }>
-            <IconButton iconStyle={ styles.iconStyle } onTouchTap={ this.onAllSelect }>
+            <IconButton 
+              style={styles.iconBtn} 
+              iconStyle={ styles.iconStyle } 
+              onTouchTap={ this.onAllSelect }>
               { selectAllIcon }
             </IconButton>
           </div>
@@ -227,41 +234,31 @@ const RepoListRow = ({ rowData, styles, onRowSelect}) => {
   return (
     <li style={ styles.rowStyle }>
       <div style={ styles.colCheck }>
-        <IconButton iconStyle={ styles.iconStyle } onTouchTap={handleRowSelect} >{ rowData.select ? <CheckboxChecked/>:<CheckboxOutline/>}</IconButton>
+        <IconButton iconStyle={ styles.iconStyle } onTouchTap={handleRowSelect} 
+        style={styles.iconBtn} >
+          { rowData.select ? <CheckboxChecked/>:<CheckboxOutline/>}
+        </IconButton>
       </div>
       <div style={ styles.colName }>
-        <div style={{flex: '0 0 35px', verticalAlign:'middle' }}>
-          <span style={{display:'inline-block', height:'100%', verticalAlign:'middle'}}/>
-          <FileFolder style={styles.rowIconStyle}/>
-        </div>
-        <div style={{ flex:1, width:300 , overflow: 'hidden'}}>
-          <a style={{ textDecoration: 'none', 
+        <a style={{ textDecoration: 'none', 
             display: 'block',
-            padding: '0.5rem 0 0.2rem',
+            padding: (rowData.descr) ? '0.5rem 0 0' : '1.4rem 0 ',
             overflow: 'hidden',
             whiteSpace: 'nowrap', 
             cursor: 'pointer',
             color:'rgb(0, 151, 167)',
-            textOverflow: 'ellipsis', paddingBottom:'0.5rem'}} >
-            <span> {rowData.name} - {rowData.id}</span>
-          </a>
-          <span style={{display: 'block',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-            padding: '0.3rem 0 0.5rem',
-            color:'rgb(158, 158, 158)',
-            fontSize: '1.4rem',
-            fontWeight: 300,
-            }}>
-            { rowData.descr }
-          </span>
-        </div>
+            textOverflow: 'ellipsis'}} >
+            <FileFolder style={styles.rowIconStyle}/> <span>  {rowData.id} - {rowData.name}</span>
+        </a>
+        { (rowData.descr) ? 
+        <div style={ { fontSize: 14, fontWeight: 300, color: '#919191', padding:'0 0 0.5rem',wordBreak: 'break-all', wordWrap: 'break-word', lineHeight: 1.4, whiteSpace: 'normal', paddingRight: 5 } }>
+          <span>{rowData.descr}</span>
+        </div> : null}
       </div>
       <div style={ styles.colAuthor }>
         <span style={ styles.spanMiddlePre } ></span>
         <span style={ styles.spanMiddle }>
-          <Avatar src="assets/img/kerem-128.jpg" size={30} style={{ verticalAlign:'middle'}} />
+          <Avatar src="assets/img/kerem-128.jpg" size={25} style={{ verticalAlign:'middle'}} />
         </span>
       </div>
       <div style={styles.colSum}>
