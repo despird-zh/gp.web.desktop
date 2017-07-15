@@ -184,7 +184,7 @@ const TopicsListRow = ({ rowData, styles }) => {
             display: 'block',
             padding: (rowData.descr) ? '0.5rem 0 0' : '0.9rem 0',
             overflow: 'hidden',
-            whiteSpace: 'nowrap', 
+            whiteSpace: 'nowrap',
             cursor: 'pointer',
             color:'rgb(0, 151, 167)',
             textOverflow: 'ellipsis'}} >
