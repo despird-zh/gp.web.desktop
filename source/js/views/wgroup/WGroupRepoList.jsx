@@ -50,7 +50,7 @@ function getStyles(muiTheme) {
     },
     colAction: {
       padding: 5,
-      width:110,
+      width:90,
       flexShrink:0, 
       flexGrow:0, 
       fontSize: 16
@@ -288,7 +288,6 @@ const RepoListRow = ({ rowData, styles, onRowSelect}) => {
       <div style={styles.colAction}>
         <span style={ styles.spanMiddlePre } ></span>
         <span style={ styles.spanMiddle }>
-          <ToggleStar style={styles.smallIconStyle}/>
           <ToggleStar style={styles.smallIconStyle}/>
           <ToggleStar style={styles.smallIconStyle}/>
           <ToggleStarBorder style={styles.smallIconStyle}/>

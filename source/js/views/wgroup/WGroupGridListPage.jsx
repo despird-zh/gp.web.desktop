@@ -30,7 +30,13 @@ function getStyles(muiTheme) {
       marginRight:'1rem',
     },
     iconBtn: {
-      color: palette.primary2Color,
+      width:40, 
+      height:40,
+      padding:5,
+      marginTop:5,
+    },
+    iconStyle:{
+      color: palette.primary2Color
     },
     topBar:{
       padding: '1rem 2rem 0',
@@ -152,10 +158,10 @@ class WGroupGridListPage extends React.Component {
           <div className="page-content">
             <div style={styles.topBar}>
               <TextField hintText="Input key words"/>
-              <IconButton tooltip="search workgroups" tooltipPosition="bottom-center">
+              <IconButton style={this.styles.iconBtn} iconStyle={this.styles.iconStyle} tooltip="search workgroups" tooltipPosition="bottom-center">
                 <ActionSearch/>
               </IconButton>
-              <IconButton tooltip="clear all the condition" tooltipPosition="bottom-center">
+              <IconButton style={this.styles.iconBtn} iconStyle={this.styles.iconStyle} tooltip="clear all the condition" tooltipPosition="bottom-center">
                 <CommClearAll />
               </IconButton>
             </div>
@@ -188,7 +194,7 @@ const RootMenuContent = ({ test1, styles }) => {
     <header className="panel-header"> 
       <div className="panel-header__container active">
         <h2 className="panel-header__title">Quick Filter</h2>
-        <IconButton >
+        <IconButton style={styles.iconBtn} iconStyle={styles.iconStyle}>
           <CommClearAll />
         </IconButton>
       </div>

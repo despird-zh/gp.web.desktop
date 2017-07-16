@@ -32,6 +32,7 @@ import Divider from 'material-ui/Divider';
 import { snackAction, loaderAction } from '../../store/actions/appActions';
 import PageHeaderBar from '../component/PageHeaderBar';
 import Chip from '../mui-ext/Chip';
+import WGroupTopicInfo from './WGroupTopicInfo';
 
 function getStyles(muiTheme) {
   const { baseTheme:{ palette } } = muiTheme;
@@ -52,14 +53,19 @@ function getStyles(muiTheme) {
       color: palette.textColor,
     },
     iconBtn: {
-      color: palette.primary2Color,
+      width:40, 
+      height:40,
+      padding:5,
+    },
+    iconStyle:{
+      color: palette.primary1Color,
     },
     thumbInfo: {
       color: palette.secondaryTextColor,
       textAlign: 'center',
       fontWeight: 600,
     },
-    answerSortBtn:{padding:12, width:44, height:44},
+    answerSortBtn:{padding:6, width:40, height:40},
     answerSortBtnIcon:{ width:20, height:20 ,color: palette.primary2Color},
     answerSortBtnIcon16:{ width:16, height:16 ,color: palette.primary2Color},
     timeStamp: {
@@ -141,104 +147,25 @@ class WGroupTopicPage extends Component {
         <div className="page-content-wrapper">
           <div className="page-right-menu">
             <div className={ this.state.collapsed ? "right-menu collapsed":"right-menu " }>
-              <div className="menu-body" style={{padding: '2rem 1.5rem 1.5rem'}}>
-                <div style={{display: 'flex', marginBottom:'1rem'}}>
-                  <div style={{flex:1, textAlign:'center'}}>
-                    <h4 style={ styles.sumTitle }>views</h4>
-                    <span style={ { marginRight: 5, verticalAligh:'middle'}}>12K</span>
-                  </div>
-                  <div style={{flex:1, textAlign:'center'}}>
-                    <h4 style={ styles.sumTitle }>replies</h4>
-                    <span style={ { marginRight: 5, verticalAligh:'middle'}}>12K</span>
-                  </div>
-                  <div style={{flex:1, textAlign:'center'}}>
-                    <h4 style={ styles.sumTitle }>joins</h4>
-                    <span style={ { marginRight: 5, verticalAligh:'middle'}}>12</span>
-                  </div>
-                  <div style={{flex:1, textAlign:'center'}}>
-                    <h4 style={ styles.sumTitle }>评论</h4>
-                    <span style={ { marginRight: 5, verticalAligh:'middle'}}>123</span>
-                  </div>
-                </div>
-                <div style={{ display:'block' ,paddingBottom:10}} className="clearfix">
-                  <div style={{float:'left', minWidth:'25%', textAlign:'center'}}>
-                    <h4 style={ styles.sumTitle }>创建</h4>
-                    <div style={{ display:'block'}}>
-                      <a href='' >
-                        <Avatar src={ `assets/img/kerem-128.jpg` } size={ 20 } style={ { marginRight: 5,verticalAlign:'middle'} } /> 
-                      </a>
-                      <span style={ { marginRight: 5, display:'inline-block', verticalAligh:'middle'}}>17天</span>
-                    </div>
-                  </div>
-                  <div style={{float:'left', minWidth:'25%', textAlign:'center'}}>
-                    <h4 style={ styles.sumTitle }>活动</h4>
-                    <div style={{ display:'block'}}>
-                      <a href='' >
-                        <Avatar src={ `assets/img/kerem-128.jpg` } size={ 20 } style={ { marginRight: 5,verticalAlign:'middle'} } /> 
-                      </a>
-                      <span style={ { marginRight: 5, display:'inline-block', verticalAligh:'middle'}}>7H</span>
-                    </div>
-                  </div>
-                </div>
-                <Divider />
-                <div style={{padding:'10px 0'}}>
-                  <Chip style={{margin:4, display: 'inline-block', fontSize: 12}}>
-                    技术
-                  </Chip>
-                  <Chip style={{margin:4, display: 'inline-block'}}>
-                    机械
-                  </Chip>
-                  <Chip style={{margin:4, display: 'inline-block'}}>
-                    加工
-                  </Chip>
-                </div>
-                <Divider />
-                <div>
-                  <h3 style={{
-                    paddingTop: 10, 
-                    color:'rgb(158, 158, 158)',
-                    textRendering: 'optimizeLegibility',
-                    fontSize: '1.5rem',
-                    fontWeight: 400,
-                    lineHeight: '3rem',
-                    textTransform: 'uppercase'}}>Attendees</h3>
-                  <div style={ { paddingTop: '0.5rem', paddingBottom: 10 } }>
-                    <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
-                      <Avatar src='assets/img/uxceo-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
-                    </IconButton>
-                    <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
-                      <Avatar src='assets/img/ok-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
-                    </IconButton>
-                    <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
-                      <Avatar src='assets/img/kolage-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
-                    </IconButton>
-                    <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
-                      <Avatar src='assets/img/jsa-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
-                    </IconButton>
-                    <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
-                      <Avatar src='assets/img/kerem-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
-                    </IconButton>
-                    <IconButton 
-                      style={{width:30, height:30, padding:0, borderRadius:'50%',border:'1px dashed #a3a3a3'}} 
-                      iconStyle={{ marginTop:0}}>
-                      <ContentAdd/>
-                    </IconButton>
-                  </div>
-                </div>
+              <WGroupTopicInfo muiTheme ={muiTheme} collapsed={this.state.collapsed}/>
+              <div className="menu-footer">
+                <IconButton onTouchTap={ this.onCollapseSwitch } iconStyle={this.styles.switchButton}>
+                  {this.state.collapsed ? <NavFirstPage /> : <NavLastPage/>}
+                </IconButton>
               </div>
             </div>
           </div>
           <div className="page-content" style={{overflowY:'auto', padding:'1.5rem'}}>
           <div style={ styles.post }>
             <div style={{ display: 'flex' }}>
-              <div style={{ flexBasis: 60, display: 'flex', flexDirection:'column', paddingLeft: 10, paddingRight:10}}>
-                <Avatar src="assets/img/kerem-128.jpg" size={40} style={{ marginLeft:5}} />
-                <IconButton iconStyle={ styles.iconBtn }><NviArrowUp/></IconButton>
+              <div style={{ flexBasis: 60, display: 'flex', flexDirection:'column', paddingLeft: 0, paddingRight:10}}>
+                <Avatar src="assets/img/kerem-128.jpg" size={40} style={{ marginLeft:0}} />
+                <IconButton style={ styles.iconBtn } iconStyle={styles.iconStyle}><NviArrowUp/></IconButton>
                 <div style={ styles.thumbInfo }>
                   1023
                 </div>
-                <IconButton iconStyle={ styles.iconBtn }><NviArrowDown/></IconButton>
-                <IconButton iconStyle={ styles.iconBtn }><TglStarBorder/></IconButton>
+                <IconButton style={ styles.iconBtn } iconStyle={styles.iconStyle}><NviArrowDown/></IconButton>
+                <IconButton style={ styles.iconBtn } iconStyle={styles.iconStyle}><TglStarBorder/></IconButton>
               </div>
               <div style={{ flex: 1 }}>
                 <div>
@@ -290,7 +217,7 @@ class WGroupTopicPage extends Component {
           </div>
           <div style={{ padding:'0 0.5rem', position:'relative' }}>
             <h4 style={{ padding: '1rem 0 0.5rem', lineHeight: '2.5rem' }} >Answer (8) </h4>
-            <div style={{ position:'absolute', right:0, top:'0' }}>
+            <div style={{ position:'absolute', right:0, top:0 }}>
               <IconButton tooltip="Sort By Activity" style={ styles.answerSortBtn } iconStyle={ styles.answerSortBtnIcon }>
                 <EditBubbleChrt/>
               </IconButton>

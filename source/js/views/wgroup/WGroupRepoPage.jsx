@@ -36,7 +36,8 @@ function getStyles(muiTheme) {
     iconBtn: {
       width:40, 
       height:40,
-      padding:5
+      padding:5,
+      marginTop:5
     },
     pageHeader: {
       backgroundColor: palette.primary1Color,
@@ -289,7 +290,7 @@ class WGroupRepoPage extends Component {
         <div className="page-content-wrapper">
           <div className="page-right-menu">
             <div className={ this.state.collapsed ? "right-menu collapsed":"right-menu " }>
-              <WGroupRepoInfo muiTheme ={muiTheme}/>
+              <WGroupRepoInfo muiTheme ={muiTheme} collapsed={this.state.collapsed}/>
               <div className="menu-footer">
                 <IconButton onTouchTap={ this.onCollapseSwitch } iconStyle={this.styles.switchButton}>
                   {this.state.collapsed ? <NavFirstPage /> : <NavLastPage/>}

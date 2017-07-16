@@ -28,11 +28,31 @@ function getStyles(muiTheme, collapsed) {
     sumText:{
       display:'block',
       verticalAligh:'middle'
+    },
+    iconStyle:{
+      color: palette.primary1Color,
+      marginTop:0
+    },
+    iconBtn:{
+      width:30, 
+      height:30, 
+      padding:0, 
+      marginRight: '1rem'
+    },
+    iconAddBtn:{
+      width:30, 
+      height:30, 
+      padding:0, 
+      marginRight: '1rem',
+      borderRadius:'50%',
+      borderWidth:1,
+      borderStyle:'dashed',
+      borderColor:palette.primary1Color
     }
   };
 }
 
-class WGroupRepoInfo extends Component {
+class WGroupTopicInfo extends Component {
 
   constructor(props, context) {
     super(props, context);
@@ -56,11 +76,11 @@ class WGroupRepoInfo extends Component {
         <div style={{display: 'block', marginBottom:'1rem'}} className="clearfix">
           <div style={ styles.sumInfo }>
             <h4 style={ styles.sumTitle }>views</h4>
-            <span style={ styles.sumText }>12K</span>
+            <span style={ styles.sumText }>12k</span>
           </div>
           <div style={styles.sumInfo}>
             <h4 style={ styles.sumTitle }>rply</h4>
-            <span style={styles.sumText}>12K</span>
+            <span style={styles.sumText}>12k</span>
           </div>
           <div style={styles.sumInfo}>
             <h4 style={ styles.sumTitle }>joins</h4>
@@ -112,24 +132,24 @@ class WGroupRepoInfo extends Component {
             lineHeight: '3rem',
             textTransform: 'uppercase'}}>Attendees</h3>
           <div style={ { paddingTop: '0.5rem', paddingBottom: 10 } }>
-            <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
+            <IconButton style={styles.iconBtn}>
               <Avatar src='assets/img/uxceo-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
             </IconButton>
-            <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
+            <IconButton style={styles.iconBtn}>
               <Avatar src='assets/img/ok-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
             </IconButton>
-            <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
+            <IconButton style={styles.iconBtn}>
               <Avatar src='assets/img/kolage-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
             </IconButton>
-            <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
+            <IconButton style={styles.iconBtn}>
               <Avatar src='assets/img/jsa-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
             </IconButton>
-            <IconButton style={{width:30, height:30, padding:0, marginRight: '1rem'}}>
+            <IconButton style={styles.iconBtn}>
               <Avatar src='assets/img/kerem-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
             </IconButton>
             <IconButton 
-              style={{width:30, height:30, padding:0, borderRadius:'50%',border:'1px dashed #a3a3a3'}} 
-              iconStyle={{ marginTop:0}}>
+              style={styles.iconAddBtn} 
+              iconStyle={styles.iconStyle}>
               <ContentAdd/>
             </IconButton>
           </div>
@@ -139,4 +159,4 @@ class WGroupRepoInfo extends Component {
   }
 }
 
-export default WGroupRepoInfo;
+export default WGroupTopicInfo;
