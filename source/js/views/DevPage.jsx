@@ -10,6 +10,11 @@ import PageHeaderBar from './component/PageHeaderBar';
 import NavFirstPage from 'material-ui/svg-icons/navigation/first-page';
 import NavLastPage from 'material-ui/svg-icons/navigation/last-page';
 import IconButton from 'material-ui/IconButton';
+
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import ActionHomeMenu from 'material-ui/svg-icons/action/home';
+
 function getStyles(muiTheme) {
   const { baseTheme } = muiTheme;
 
@@ -44,13 +49,35 @@ class DevPage extends Component {
     console.log('12------3')
   }
 
-
   componentDidMount(){
+    const menuItems = this.createMenuItems();
     //this.props.resetRootMenu({menuPaneVisible:true, menuPane: null });
-    this.props.resetRootMenu({menuPaneVisible:true, menuPane: (<RootMenuContent test1={this.onTest1}/>) });
+    this.props.resetRootMenu({
+      menuPaneVisible:true, 
+      menuPane: (<RootMenuContent test1={this.onTest1}/>) ,
+      menuItems 
+    });
     //this.props.resetRootMenu({menuPaneVisible:false, menuPane: (<RootMenuContent test1={this.onTest1}/>) });
   }
 
+  onTest2 = () => {
+    console.log('this is test2')
+  }
+  onTest3 = () => {
+    console.log('this is test3')
+  }
+
+  createMenuItems(){
+    return [
+      <FloatingActionButton key={'item-1'} mini={true} onTouchTap={this.onTest2}>
+        <ActionHomeMenu />
+      </FloatingActionButton>
+      ,
+      <FloatingActionButton key={'item-2'} mini={true} onTouchTap={this.onTest3}>
+        <ContentAdd />
+      </FloatingActionButton>
+    ];
+  }
   render() {
     let { muiTheme } = this.props;
 
@@ -72,10 +99,10 @@ class DevPage extends Component {
             </div>
           </div>
           <div className="page-content">
-            <div className="content-body">
+            <div className="content-body" style={{padding:10}}>
               <RaisedButton label="Primary" primary={true} onTouchTap={this.onTest}/>
             </div>
-            <footer className="content-footer">
+            <footer className="content-footer" style={{padding:10}}>
               xx
             </footer>
           </div>
@@ -87,7 +114,7 @@ class DevPage extends Component {
 
 const RootMenuContent = ({ test1 }) => {
   
-  return (<div>
+  return (<div style={{padding:10}}>
     <RaisedButton label="Test" primary={true} onTouchTap={test1}/>
   </div>);
 };

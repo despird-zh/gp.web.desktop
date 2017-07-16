@@ -36,11 +36,30 @@ class RootMenuBar extends React.Component {
     console.log(menuName);
   }
 
+  renderMenuItems(menuItems){
+    const renderedItems = [];
+
+    if(!menuItems) return null;
+
+
+    React.Children.forEach(menuItems, (child, index) => {
+
+      renderedItems.push(
+        <li key={`menu-li-${index}`} className="menu-opt__item">
+          {child}
+        </li>
+      );
+    });
+
+    return renderedItems;
+  }
+
   render() {
 
-    let { menuPane, menuPaneVisible, onMenuSwitch, muiTheme } = this.props;
+    let { menuPane, menuPaneVisible, onMenuSwitch, muiTheme, menuItems } = this.props;
     let styles = getStyles(muiTheme);
 
+    const newMenuItems = this.renderMenuItems(menuItems);
     return (
       <aside className="root-menu-container">
         <section className="root-menu">
@@ -87,6 +106,7 @@ class RootMenuBar extends React.Component {
                       <ActionHomeMenu />
                     </FloatingActionButton>
                   </li>
+                  {newMenuItems}
                 </ul>
               </li>
             { (menuPane) ?

@@ -41,7 +41,8 @@ class App extends Component {
     this.state = { 
         menuActive: '',
         menuPaneVisible : true,
-        menuPane: null
+        menuPane: null,
+        menuItems: null
       };
   }
 
@@ -53,10 +54,10 @@ class App extends Component {
     this._menuBar = refMenuBar;
   }
 
-  resetRootMenu = ({menuPaneVisible, menuPane, menuActive}) => {
-
-    let newState = {menuPaneVisible, menuPane, menuActive};
-
+  resetRootMenu = ({menuPaneVisible, menuPane, menuActive, menuItems}) => {
+    
+    let newState = {menuPaneVisible, menuPane, menuActive, menuItems};
+    
     this.setState( newState );
   }
 
@@ -70,6 +71,7 @@ class App extends Component {
             menuActive={ this.state.menuActive }
             menuPane={ this.state.menuPane }
             onMenuSwitch={ this.onMenuSwitch }
+            menuItems={ this.state.menuItems }
             muiTheme={ rootTheme }
           />
           <div className={ this.state.menuPaneVisible && this.state.menuPane ? 'page-layout root-menu-pinned':'page-layout'}>
