@@ -123,11 +123,25 @@ $panel-header-height: 4.8rem;
         .menu-opt-collection{
             height: 100%;
 
-            .menu-opt-collection-list {
+            .menu-opt__list {
                 height: 100%;
                 margin: 0;
                 list-style: none;
-
+                .menu-opt__item {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    color: white;
+                    text-align: center;
+                    width: 7.4rem;
+                    min-width: 7.4rem;
+                    height: $menu-height;
+                    min-height: $menu-height;
+                    color: #ed1965;
+                    background-color: #fff;
+                    padding-right: 1px;
+                }
             }
         }
         

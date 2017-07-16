@@ -76,7 +76,17 @@ class RootMenuBar extends React.Component {
                 </FloatingActionButton>
               </li>
               <li className="menu-opt-collection">
-                <ul className="menu-opt-collection-list">
+                <ul className="menu-opt__list">
+                  <li className="menu-opt__item">
+                    <FloatingActionButton mini={true}>
+                      <ContentAdd />
+                    </FloatingActionButton>
+                  </li>
+                  <li className="menu-opt__item">
+                    <FloatingActionButton mini={true}>
+                      <ActionHomeMenu />
+                    </FloatingActionButton>
+                  </li>
                 </ul>
               </li>
             { (menuPane) ?
