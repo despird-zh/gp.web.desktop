@@ -1,14 +1,18 @@
 import * as storage from 'redux-storage';
 import createEngine from 'redux-storage-engine-sessionstorage';
+import immutablejs from 'redux-storage-decorator-immutablejs'
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { logger } from './dev';
 import rootReducer from './reducers';
 
 const reducer = storage.reducer(rootReducer);
-const engine = createEngine('gpress-state');
-const session = storage.createMiddleware(engine);
-const load = storage.createLoader(engine);
+let engine = createEngine('gpress-state');
+const newEngine = immutablejs(engine, [
+  ['app'],['dev'],['auth']
+]);
+const session = storage.createMiddleware(newEngine);
+const load = storage.createLoader(newEngine);
 
 function configureStoreProd(initialState) {
   const middlewares = [

@@ -73,7 +73,7 @@ class SigninDialog extends React.Component {
 
   }
   render() {
-    console.log(this);
+
     const actions = [
       (this.props.authing ? <FontIcon className='fa fa-spinner fa-spin' style={ styles.loading } /> : null),
       <FlatButton

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
 import spacing from 'material-ui/styles/spacing';
 import HomeHero from './HomeHero';
 import HomePurpose from './HomePurpose';
@@ -7,6 +7,12 @@ import HomeFeature from './HomeFeature';
 import FullWidthSection from '../component/FullWidthSection';
 
 class HomePage extends Component {
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.authenticated){
+      nextProps.router.push('/main');
+    }
+  }
 
   render() {
     const style = {
@@ -41,4 +47,8 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage;
+export default connect(
+  (state) => ({
+    authenticated: state.auth.get('authenticated'),
+  })
+)(HomePage);

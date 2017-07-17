@@ -16,7 +16,7 @@ import WGroupRepoPage from './views/wgroup/WGroupRepoPage';
 export const getRoutes = (store) => {
 
   const ensureAuthenticated = (nextState, replace) => { // eslint-disable-line no-unused-vars
-
+    console.log('before enter:', store.getState().auth.get('authenticated'));
     if (store.getState().auth.get('authenticated')) {
       replace('/main');
     }

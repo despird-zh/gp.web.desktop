@@ -184,7 +184,7 @@ export function signin(authbody) {
         token: json.data,
       }));
       dispatch(authEnd(json));
-      hashHistory.push('/main');
+      //hashHistory.push('/main');
     })
     .catch(error => trapCatch(dispatch, error, true, true));
   };
