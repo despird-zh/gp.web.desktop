@@ -45,10 +45,6 @@ class SigninDialog extends React.Component {
       password: '1',
       ready: false,
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleOpen = this.handleOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-    this.handleSignin = this.handleSignin.bind(this);
   }
 
   handleOpen = () => {
