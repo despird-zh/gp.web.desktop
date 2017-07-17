@@ -27,9 +27,6 @@ function getStyles(muiTheme) {
   };
 }
 
-// This is a class-based component because the current
-// version of hot reloading won't hot reload a stateless
-// component at the top-level.
 class App extends Component {
 
   constructor(props) {
@@ -96,13 +93,11 @@ class App extends Component {
 
 App.propTypes = {
   children: PropTypes.element,
-  account: PropTypes.string,
   authenticated: PropTypes.bool
 };
 
 export default connect(
   (state) => ({
     authenticated: state.auth.get('authenticated'),
-    account: state.auth.get('account'),
   })
 )(App);

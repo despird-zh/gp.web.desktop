@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
@@ -69,8 +70,10 @@ class SigninDialog extends React.Component {
     };
 
     this.props.signin(authbody);
+
   }
   render() {
+    console.log(this);
     const actions = [
       (this.props.authing ? <FontIcon className='fa fa-spinner fa-spin' style={ styles.loading } /> : null),
       <FlatButton

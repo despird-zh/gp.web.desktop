@@ -1,4 +1,5 @@
 import 'es6-promise';
+import { hashHistory } from 'react-router';
 import 'whatwg-fetch';
 import { loaderAction, snackOnlyAction } from './appActions';
 
@@ -14,7 +15,7 @@ export const AUTH_ACT_END = 'AUTH_ACT_END';
 export const REISSUE_TOKEN_ACT = 'REISSUE_TOKEN_ACT';
 export const FETCH_TOKEN_ACT = 'FETCH_TOKEN_ACT';
 
-const BASE_URL = 'http://localhost:8010/gpapi/';
+const BASE_URL = 'http://localhost:8020/gpapi/';
 const START_LOADER = loaderAction({ shown: true, loaderTip: 'Start RPC Invoking' });
 const END_LOADER = loaderAction({ shown: false, loaderTip: 'End RPC Invoking' });
 
@@ -183,6 +184,7 @@ export function signin(authbody) {
         token: json.data,
       }));
       dispatch(authEnd(json));
+      hashHistory.push('/main');
     })
     .catch(error => trapCatch(dispatch, error, true, true));
   };
