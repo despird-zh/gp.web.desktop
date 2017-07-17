@@ -7,6 +7,8 @@ import FullWidthSection from '../component/FullWidthSection';
 const styles = {
   root: {
     backgroundColor: grey200,
+    paddingTop: 24,
+    paddingBottom: 24
   },
   content: {
     maxWidth: 700,

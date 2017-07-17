@@ -1,35 +1,31 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import Throttle from 'lodash.throttle';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import Paper from 'material-ui/Paper';
-import { grey200 } from 'material-ui/styles/colors';
-import typography from 'material-ui/styles/typography';
 
-import PageHeaderBar from '../component/PageHeaderBar';
 import RootMenuBar from './RootMenuBar';
-
-import ActionHomeMenu from 'material-ui/svg-icons/action/home';
+import SigninDialog from '../component/SigninDialog';
 
 const rootTheme = getMuiTheme(lightBaseTheme);
 
-const styles = {
-
-  header: {
-    background: rootTheme.appBar.color,
-  },
-  footer: {
-    background: grey200,
-    height: 44,
-    color: typography.textDarkBlack,
-  },
-
-};
-
 injectTapEventPlugin();
+
+function getStyles(muiTheme) {
+  const { baseTheme } = muiTheme;
+
+  return {
+    homeLayout: {
+      padding:0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '100%'
+    }
+  };
+}
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
@@ -44,6 +40,7 @@ class App extends Component {
         menuPane: null,
         menuItems: null
       };
+    this.styles = getStyles(rootTheme);
   }
 
   onMenuSwitch = () => {
@@ -62,24 +59,35 @@ class App extends Component {
   }
 
   render() {
+    const { authenticated } = this.props;
     return (
       <MuiThemeProvider muiTheme={ rootTheme }>
         <div className='container'>
-          <RootMenuBar 
-            ref={ this.refMenuBar }
-            menuPaneVisible={ this.state.menuPaneVisible }
-            menuActive={ this.state.menuActive }
-            menuPane={ this.state.menuPane }
-            onMenuSwitch={ this.onMenuSwitch }
-            menuItems={ this.state.menuItems }
-            muiTheme={ rootTheme }
-          />
+          { authenticated ? 
+            <RootMenuBar 
+              ref={ this.refMenuBar }
+              menuPaneVisible={ this.state.menuPaneVisible }
+              menuActive={ this.state.menuActive }
+              menuPane={ this.state.menuPane }
+              onMenuSwitch={ this.onMenuSwitch }
+              menuItems={ this.state.menuItems }
+              muiTheme={ rootTheme }
+            /> : null
+          }
+          { authenticated ? 
           <div className={ this.state.menuPaneVisible && this.state.menuPane ? 'page-layout root-menu-pinned':'page-layout'}>
             {this.props.children && React.cloneElement(this.props.children, {
               resetRootMenu: this.resetRootMenu,
               muiTheme: rootTheme,
             })}
+          </div> :
+          <div className={'page-layout'} style={ this.styles.homeLayout }>
+            {this.props.children && React.cloneElement(this.props.children, {
+              muiTheme: rootTheme,
+            })}
           </div>
+          }
+          <SigninDialog />
         </div>
       </MuiThemeProvider>
     );
@@ -88,6 +96,13 @@ class App extends Component {
 
 App.propTypes = {
   children: PropTypes.element,
+  account: PropTypes.string,
+  authenticated: PropTypes.bool
 };
 
-export default App;
+export default connect(
+  (state) => ({
+    authenticated: state.auth.get('authenticated'),
+    account: state.auth.get('account'),
+  })
+)(App);

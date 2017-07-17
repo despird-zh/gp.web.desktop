@@ -34,7 +34,7 @@ export const getRoutes = (store) => {
   /* <Route path='about' component={ AboutPage } onEnter={skipIfAuthenticated} onLeave={clearMessages} />*/
   return (
     <Route path='/' component={ App }>
-      <IndexRoute component={ DevPage } />
+      <IndexRoute component={ HomePage } />
       <Route path='dev' component={ DevPage } />
       <Route path='wgroup-list' component={ WGroupGridListPage } />
       <Route path='wgroup-add' component={ WGroupAddPage } />

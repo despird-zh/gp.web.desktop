@@ -21,7 +21,8 @@ const styles = {
   svgLogo: {
     marginLeft: 1060 * 0.5 - 210, // eslint-disable-line no-mixed-operators
     width: 420,
-    height: 157,
+    marginTop: 420,
+    display: 'block'
   },
   tagline: {
     margin: '16px auto 0 auto',
@@ -77,6 +78,7 @@ class HomeHero extends Component {
   handleSignin = () => {
     this.props.openSignin(true);
   };
+  
   handleSignup = () => {
     console.log('-=sdfadf');
   };
