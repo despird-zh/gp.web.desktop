@@ -77,6 +77,8 @@
     "react-router": "^3.0.0",
     "react-treeview-mui": "^0.1.2",
     "redux": "^3.3.1",
+    "redux-storage": "^4.1.2",
+    "redux-storage-engine-sessionstorage": "^1.0.2",
     "redux-thunk": "^2.0.1",
     "whatwg-fetch": "^2.0.3"
   },
