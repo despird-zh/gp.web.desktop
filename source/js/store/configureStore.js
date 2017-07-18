@@ -1,40 +1,26 @@
-import * as storage from 'redux-storage';
-import createEngine from 'redux-storage-engine-sessionstorage';
-import immutablejs from 'redux-storage-decorator-immutablejs'
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { logger } from './dev';
 import rootReducer from './reducers';
 
-const reducer = storage.reducer(rootReducer);
-let engine = createEngine('gpress-state');
-const newEngine = immutablejs(engine, [
-  ['app'],['dev'],['auth']
-]);
-const session = storage.createMiddleware(newEngine);
-const load = storage.createLoader(newEngine);
-
 function configureStoreProd(initialState) {
   const middlewares = [
-    thunk, session
+    thunk,
   ];
 
-  const store = createStore(reducer, initialState, compose(
+  return createStore(rootReducer, initialState, compose(
     applyMiddleware(...middlewares)
     )
   );
-
-  load(store);
-  return store;
 }
 
 function configureStoreDev(initialState) {
   const middlewares = [
     // Add other middleware on this line...
-    thunk, logger, session
+    thunk, logger,
   ];
 
-  const store = createStore(reducer, initialState, compose(
+  const store = createStore(rootReducer, initialState, compose(
     applyMiddleware(...middlewares)
     )
   );
@@ -47,9 +33,6 @@ function configureStoreDev(initialState) {
     });
   }
 
-  load(store)
-    .then((newState) => console.log('Loaded state:', newState))
-    .catch(() => console.log('Failed to load previous state'));
   return store;
 }
 
