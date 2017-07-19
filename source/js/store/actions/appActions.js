@@ -2,6 +2,7 @@
 export const APP_SHOW_LOADER = 'APP_SHOW_LOADER';
 export const APP_SHOW_SNACK = 'APP_SHOW_SNACK';
 export const APP_ONLY_SNACK = 'APP_ONLY_SNACK';
+export const APP_STORE_READY = 'APP_STORE_READY';
 
 export const AppApis = {
   StoragesQuery: 'storages-query.do',
@@ -9,6 +10,15 @@ export const AppApis = {
   UsersQuery: 'common-user-list.do',
   OrgNodesQuery: 'common-org-nodes.do',
 };
+
+export function storeReadyAction( storeReady = true ) {
+  return {
+    type: APP_STORE_READY,
+    data: {
+      storeReady
+    },
+  };
+}
 
 export function loaderAction({ shown = true, loaderTip = '' }) {
   return {

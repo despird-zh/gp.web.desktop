@@ -1,9 +1,10 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { logger } from './dev';
-import rootReducer from './reducers';
 import { persistStore } from 'redux-persist'
 import { asyncSessionStorage } from 'redux-persist/storages'
+import { logger } from './dev';
+import rootReducer from './reducers';
+import { storeReadyAction } from './actions/appActions';
 
 function configureStoreProd() {
 
@@ -37,7 +38,7 @@ persistStore(store,
   debounce:33,
   keyPrefix:'gpress:'
 }, () => {
-  console.log('rehydration complete')
+  store.dispatch(storeReadyAction());
 })
 
 export default store;

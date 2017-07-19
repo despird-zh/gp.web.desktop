@@ -21,6 +21,7 @@ import HomePage from '../home';
 import DevPage from '../DevPage';
 import AboutPage from '../AboutPage';
 import MainPage from '../main/MainPage';
+import LoadingPage from '../main/LoadingPage';
 import WGroupGridListPage from '../wgroup/WGroupGridListPage';
 import WGroupTopicsPage from '../wgroup/WGroupTopicsPage';
 import WGroupTopicPage from '../wgroup/WGroupTopicPage';
@@ -74,8 +75,9 @@ class App extends Component {
   }
 
   render() {
-    const { authenticated } = this.props;
+    const { authenticated, storeReady } = this.props;
     const routeProps = {
+      storeReady,
       authenticated : authenticated,
       muiTheme : rootTheme , 
       resetRootMenu : this.resetRootMenu ,
@@ -114,7 +116,7 @@ class App extends Component {
   }
 }
 
-const PublicRoute = ({ component: Component, muiTheme, styles, state, resetRootMenu, authenticated, ...rest }) => (
+const PublicRoute = ({ component: Component, muiTheme, styles, state, storeReady, resetRootMenu, authenticated, ...rest }) => (
   <Route {...rest} render={ props => (
     <div className={'page-layout'} style={ styles.homeLayout }>
       { authenticated ? 
@@ -126,20 +128,22 @@ const PublicRoute = ({ component: Component, muiTheme, styles, state, resetRootM
   }/>
 )
 
-const AuthRoute = ({ component: Component,  muiTheme, styles, state, resetRootMenu, authenticated, ...rest }) => {
-  console.log('auth route:', authenticated, rest);
+const AuthRoute = ({ component: Component,  muiTheme, styles, state, storeReady, resetRootMenu, authenticated, ...rest }) => {
   return (
   <Route {...rest} render={ props => (
     <div className={ state.menuPaneVisible && state.menuPane ? 'page-layout root-menu-pinned':'page-layout'}>
-      { authenticated ? 
-        <Component muiTheme={ muiTheme } resetRootMenu = { resetRootMenu } { ...props} /> :
-        <Redirect to={'/home' }/> 
+      { !storeReady ? 
+        ( <LoadingPage muiTheme={muiTheme} { ...props} /> ) :
+        ( authenticated ? 
+          <Component muiTheme={ muiTheme } resetRootMenu = { resetRootMenu } { ...props} /> :
+          <Redirect to={'/home' }/> 
+        )
       }
     </div>
   )}/>
 )}
 
-const DirectRoute = ({ authenticated }) => (
+const DirectRoute = ({ authenticated, storeReady}) => (
    authenticated ? 
     <Redirect to={{ pathname: '/main' }}/> :
     <Redirect to={{ pathname: '/home' }}/> 
@@ -153,5 +157,6 @@ App.propTypes = {
 export default connect(
   (state) => ({
     authenticated: state.auth.get('authenticated'),
+    storeReady: state.app.get('storeReady'),
   })
 )(App);

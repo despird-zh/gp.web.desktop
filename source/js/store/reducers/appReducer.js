@@ -4,6 +4,7 @@ import {
   APP_SHOW_LOADER,
   APP_SHOW_SNACK,
   APP_ONLY_SNACK,
+  APP_STORE_READY,
 } from '../actions/appActions';
 
 const initialState = Map({
@@ -11,10 +12,15 @@ const initialState = Map({
   loaderTip: '',
   snackOpen: false,
   snackTip: '',
+  storeReady: false
 });
 
 const actionsMap = {
-
+  [APP_STORE_READY]: (state, { type, data }) => { // eslint-disable-line no-unused-vars
+    return state.merge({
+      storeReady: data.storeReady
+    });
+  },
   // Loader Action
   [APP_SHOW_LOADER]: (state, { type, data }) => { // eslint-disable-line no-unused-vars
     return state.merge({
