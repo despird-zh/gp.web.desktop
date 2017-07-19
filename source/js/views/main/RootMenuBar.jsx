@@ -6,7 +6,7 @@ import ActionHomeMenu from 'material-ui/svg-icons/action/home';
 import NavFirstPage from 'material-ui/svg-icons/navigation/first-page';
 import NavLastPage from 'material-ui/svg-icons/navigation/last-page';
 import IconButton from 'material-ui/IconButton';
-
+import { withRouter } from 'react-router'
 import './RootMenuBar.scss';
 
 function getStyles(muiTheme) {
@@ -40,8 +40,6 @@ class RootMenuBar extends React.Component {
     const renderedItems = [];
 
     if(!menuItems) return null;
-
-
     React.Children.forEach(menuItems, (child, index) => {
 
       renderedItems.push(
@@ -52,6 +50,11 @@ class RootMenuBar extends React.Component {
     });
 
     return renderedItems;
+  }
+
+  handleMenuJumpWGroupList = () => {
+    const { history } = this.props;
+    history.push('/wgroup-list');
   }
 
   render() {
@@ -75,7 +78,7 @@ class RootMenuBar extends React.Component {
                   </svg>
               </li>
               <li className="menu-opt opt-all">
-                <FloatingActionButton mini={true}>
+                <FloatingActionButton mini={true} onTouchTap={ this.handleMenuJumpWGroupList }>
                   <ActionHomeMenu />
                 </FloatingActionButton>
               </li>
@@ -99,11 +102,6 @@ class RootMenuBar extends React.Component {
                   <li className="menu-opt__item">
                     <FloatingActionButton mini={true}>
                       <ContentAdd />
-                    </FloatingActionButton>
-                  </li>
-                  <li className="menu-opt__item">
-                    <FloatingActionButton mini={true}>
-                      <ActionHomeMenu />
                     </FloatingActionButton>
                   </li>
                   {newMenuItems}
@@ -133,10 +131,9 @@ class RootMenuBar extends React.Component {
   }
 }
 
-
 RootMenuBar.propTypes = {
   style: PropTypes.object,
   muiTheme: PropTypes.object,
 };
 
-export default RootMenuBar;
+export default withRouter(RootMenuBar);

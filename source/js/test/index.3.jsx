@@ -75,75 +75,119 @@ class App extends Component {
 
   render() {
     const { authenticated } = this.props;
-    const routeProps = {
-      authenticated : authenticated,
-      muiTheme : rootTheme , 
-      resetRootMenu : this.resetRootMenu ,
-      state : this.state,
-      styles: this.styles,
-    }
     return (
       <MuiThemeProvider muiTheme={ rootTheme }>
         <div className='container'>
-           { authenticated ? 
-            <RootMenuBar 
-              ref={ this.refMenuBar }
-              menuPaneVisible={ this.state.menuPaneVisible }
-              menuActive={ this.state.menuActive }
-              menuPane={ this.state.menuPane }
-              onMenuSwitch={ this.onMenuSwitch }
-              menuItems={ this.state.menuItems }
-              muiTheme={ rootTheme }
-            /> : null
-          }
+        <ul>
+          <li><Link to="/public">Public Page</Link></li>
+          <li><Link to="/protected">Protected Page</Link></li>
+        </ul>
           <Switch>
-            <PublicRoute path="/home" component={HomePage} {...routeProps}/>
-            <AuthRoute path="/main" component={ MainPage } {...routeProps}/>
-            <AuthRoute path="/wgroup-list" component={ WGroupGridListPage } {...routeProps}/>
-            <AuthRoute path="/wgroup-add" component={ WGroupAddPage } {...routeProps}/>
-            <AuthRoute path="/wgroup-topics" component={ WGroupTopicsPage } {...routeProps}/>
-            <AuthRoute path="/wgroup-topic" component={ WGroupTopicPage } {...routeProps}/>
-            <AuthRoute path="/wgroup-repo" component={ WGroupRepoPage } {...routeProps}/>
-            <AuthRoute path="/about" component={ AboutPage } {...routeProps}/>
-            <DirectRoute />
+            <PublicRoute path="/public" component={Public}/>
+            <PublicRoute path="/login" component={Login}/>
+            <PrivateRoute path="/protected" component={Protected}/>
+            <DirectRoute component={NoMatch}/>
           </Switch>  
-           <SigninDialog authenticated={ authenticated } />        
+           <SigninDialog />        
         </div>
       </MuiThemeProvider>
     );
   }
 }
 
-const PublicRoute = ({ component: Component, muiTheme, styles, state, resetRootMenu, authenticated, ...rest }) => (
+
+const fakeAuth = {
+  isAuthenticated: false,
+  authenticate(cb) {
+    this.isAuthenticated = true
+    setTimeout(cb, 100) // fake async
+  },
+  signout(cb) {
+    this.isAuthenticated = false
+    setTimeout(cb, 100)
+  }
+}
+
+const AuthButton = withRouter(({ history }) => (
+  fakeAuth.isAuthenticated ? (
+    <p>
+      Welcome! <button onClick={() => {
+        fakeAuth.signout(() => history.push('/'))
+      }}>Sign out</button>
+    </p>
+  ) : (
+    <p>You are not logged in.</p>
+  )
+))
+
+const PublicRoute = ({ component: Component, muiTheme, styles, authenticated, ...rest }) => (
   <Route {...rest} render={ props => (
-    <div className={'page-layout'} style={ styles.homeLayout }>
-      { authenticated ? 
-        <Redirect to={'/main' }/> : 
-        <Component muiTheme={muiTheme} { ...props} />
-      }
-    </div>
+    fakeAuth.isAuthenticated ?
+        <Redirect to={{ pathname: '/protected' }}/> : 
+        <Component muiTheme={muiTheme} { ...props}/>
   )
   }/>
 )
 
-const AuthRoute = ({ component: Component,  muiTheme, styles, state, resetRootMenu, authenticated, ...rest }) => {
-  console.log('auth route:', authenticated, rest);
-  return (
+const DirectRoute = ({ component: Component, muiTheme, styles, authenticated, ...rest }) => (
   <Route {...rest} render={ props => (
-    <div className={ state.menuPaneVisible && state.menuPane ? 'page-layout root-menu-pinned':'page-layout'}>
-      { authenticated ? 
-        <Component muiTheme={ muiTheme } resetRootMenu = { resetRootMenu } { ...props} /> :
-        <Redirect to={'/home' }/> 
-      }
-    </div>
-  )}/>
-)}
-
-const DirectRoute = ({ authenticated }) => (
-   authenticated ? 
-    <Redirect to={{ pathname: '/main' }}/> :
-    <Redirect to={{ pathname: '/home' }}/> 
+    fakeAuth.isAuthenticated ?
+        <Redirect to={{ pathname: '/protected' }}/> : 
+        <Redirect to={{
+        pathname: '/login',
+        state: { from: props.location }
+      }}/>
+  )
+  }/>
 )
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    fakeAuth.isAuthenticated ? (
+      <Component {...props}/>
+    ) : (
+      <Redirect to={{
+        pathname: '/login',
+        state: { from: props.location }
+      }}/>
+    )
+  )}/>
+)
+
+const Public = () => <h3>Public</h3>
+const Protected = () => <h3>Protected</h3>
+
+class Login extends React.Component {
+  state = {
+    redirectToReferrer: false
+  }
+
+  login = () => {
+    fakeAuth.authenticate(() => {
+      this.setState({ redirectToReferrer: true })
+    })
+  }
+
+  render() {
+    const { from } = this.props.location.state || { from: { pathname: '/' } }
+    const { redirectToReferrer } = this.state
+    
+    if (redirectToReferrer) {
+      return (
+        <Redirect to={from}/>
+      )
+    }
+    
+    return (
+      <div>
+        <p>You must log in to view the page at {from.pathname}</p>
+        <button onClick={this.login}>Log in</button>
+      </div>
+    )
+  }
+}
+
+const NoMatch = () => <h3>NoMatch</h3>
 
 App.propTypes = {
   children: PropTypes.element,

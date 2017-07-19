@@ -17,11 +17,12 @@ const styles = {
   root: {
     backgroundColor: cyan500,
     overflow: 'hidden',
+    minHeight: 550
   },
   svgLogo: {
     marginLeft: 1060 * 0.5 - 210, // eslint-disable-line no-mixed-operators
     width: 420,
-    marginTop: 420,
+    marginTop: 200,
     display: 'block'
   },
   tagline: {

@@ -2,26 +2,27 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, hashHistory } from 'react-router';
+import {
+  HashRouter as Router,
+  Route
+} from 'react-router-dom';
 import { syncHistoryWithStore } from 'react-router-redux';
+import createBrowserHistory from 'history/createBrowserHistory'
 import 'babel-polyfill';
-import { getRoutes } from './routes';
-import configureStore from './store/configureStore';
 
+import store from './store';
+import GPressApp from './views/main';
 import '../scss/app.scss'; // Yep, that's right.
 
 require('../assets/favicon.ico'); // Tell webpack to load favicon.ico
 
-// Create a store for application
-const store = configureStore();
-
-// Create an enhanced history that syncs navigation events with the store
-const history = syncHistoryWithStore(hashHistory, store);
+const browserHistory = createBrowserHistory()
+const history = syncHistoryWithStore(browserHistory, store)
 
 render(
   <Provider store={ store }>
-    <Router history={ history }>
-      { getRoutes(store) }
+    <Router history={history}>
+      <Route path="/" component={ GPressApp }/>
     </Router>
   </Provider>, document.getElementById('root')
 );

@@ -4,22 +4,29 @@ const path = require('path');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const SpritePlugin = require('svg-sprite-loader/plugin');
 const autoprefixer = require('autoprefixer');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProduction = nodeEnv === 'production';
 
 const jsSourcePath = path.join(__dirname, './source/js');
-const buildPath = path.join(__dirname, './dist');
+const buildPath = path.join(__dirname, './build');
 const imgPath = path.join(__dirname, './source/assets/img');
+const iconPath = path.join(__dirname, './source/assets/icons');
 const sourcePath = path.join(__dirname, './source');
+
 
 // Common plugins
 const plugins = [
+  new SpritePlugin(),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
-    minChunks: Infinity,
     filename: 'vendor-[hash].js',
+    minChunks(module) {
+      const context = module.context;
+      return context && context.indexOf('node_modules') >= 0;
+    },
   }),
   new webpack.DefinePlugin({
     'process.env': {
@@ -57,6 +64,20 @@ const rules = [
     ],
   },
   {
+    test: /\.svg$/,
+    use: [
+      {
+        loader: 'svg-sprite-loader',
+        options: {
+          extract: true,
+          spriteFilename: 'icons-sprite.svg',
+        },
+      },
+      'svgo-loader',
+    ],
+    include: iconPath,
+  },
+  {
     test: /\.(png|gif|jpg|svg)$/,
     include: imgPath,
     use: 'url-loader?limit=20480&name=assets/[name]-[hash].[ext]',
@@ -85,10 +106,6 @@ const rules = [
 if (isProduction) {
   // Production plugins
   plugins.push(
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false,
-    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
@@ -115,11 +132,7 @@ if (isProduction) {
       test: /\.scss$/,
       loader: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: [
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
-        ],
+        use: 'css-loader!postcss-loader!sass-loader',
       }),
     }
   );
@@ -151,26 +164,14 @@ if (isProduction) {
 }
 
 module.exports = {
-  devtool: !isProduction ? 'cheap-module-eval-source-map' : 'cheap-module-source-map', // 'eval' : 'source-map',
+  devtool: isProduction ? false : 'source-map',
   context: jsSourcePath,
   entry: {
     js: './index.js',
-    vendor: [
-      'babel-polyfill',
-      'es6-promise',
-      'immutable',
-      'isomorphic-fetch',
-      'react-dom',
-      'react-redux',
-      'react-router',
-      'react',
-      'redux-thunk',
-      'redux',
-    ],
   },
   output: {
     path: buildPath,
-    publicPath: '', // '/'
+    publicPath: '/',
     filename: 'app-[hash].js',
   },
   module: {
@@ -182,19 +183,17 @@ module.exports = {
       path.resolve(__dirname, 'node_modules'),
       jsSourcePath,
     ],
-    alias: {
-      'assets': path.resolve(__dirname, 'source/assets'),
-    },
   },
   plugins,
   devServer: {
-    contentBase: isProduction ? './dist' : './source',
+    contentBase: isProduction ? buildPath : sourcePath,
     historyApiFallback: true,
     port: 3000,
     compress: isProduction,
     inline: !isProduction,
     hot: !isProduction,
-    host: 'localhost',
+    host: '0.0.0.0',
+    disableHostCheck: true,
     stats: {
       assets: true,
       children: false,

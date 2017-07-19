@@ -8,12 +8,6 @@ import FullWidthSection from '../component/FullWidthSection';
 
 class HomePage extends Component {
 
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.authenticated){
-      nextProps.router.push('/main');
-    }
-  }
-
   render() {
     const style = {
       paddingTop: spacing.desktopKeylineIncrement,

@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-// import routing from './routeReducer';
 import { routerReducer } from 'react-router-redux';
 import app from './appReducer';
 import dev from './devReducer';

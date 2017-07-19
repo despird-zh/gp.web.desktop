@@ -75,17 +75,45 @@ class App extends Component {
 
   render() {
     const { authenticated } = this.props;
-    const routeProps = {
-      authenticated : authenticated,
-      muiTheme : rootTheme , 
-      resetRootMenu : this.resetRootMenu ,
-      state : this.state,
-      styles: this.styles,
-    }
+    console.log('auth state:',authenticated);
     return (
       <MuiThemeProvider muiTheme={ rootTheme }>
         <div className='container'>
-           { authenticated ? 
+          <Switch>
+            <PublicRoute path="/home" component={HomePage}
+              authenticated={ authenticated } 
+              muiTheme={ rootTheme } 
+              styles={this.styles}/>
+            <AuthRoute path="/main" component={ MainPage }
+              authenticated={ authenticated } 
+              muiTheme={ rootTheme } 
+              resetRootMenu = { this.resetRootMenu }
+              styles={this.styles}/>
+            <Route component={NoMatch}/>
+          </Switch>  
+           <SigninDialog />        
+        </div>
+      </MuiThemeProvider>
+    );
+  }
+}
+
+const PublicRoute = ({ component: Component, muiTheme, styles, authenticated, ...rest }) => (
+  <Route {...rest} render={ props => (
+    <div className={'page-layout'} style={ styles.homeLayout }>
+      { authenticated ? 
+        <Redirect to={{ pathname: '/main' }}/> : 
+        <Component muiTheme={muiTheme} { ...props} />
+      }
+    </div>
+  )
+  }/>
+)
+
+const AuthRoute = ({ component: Component,  muiTheme, styles, resetRootMenu, authenticated, ...rest }) => (
+  <Route {...rest} render={props => (
+    <div className={ this.state.menuPaneVisible && this.state.menuPane ? 'page-layout root-menu-pinned':'page-layout'}>
+      { authenticated ? 
             <RootMenuBar 
               ref={ this.refMenuBar }
               menuPaneVisible={ this.state.menuPaneVisible }
@@ -96,54 +124,15 @@ class App extends Component {
               muiTheme={ rootTheme }
             /> : null
           }
-          <Switch>
-            <PublicRoute path="/home" component={HomePage} {...routeProps}/>
-            <AuthRoute path="/main" component={ MainPage } {...routeProps}/>
-            <AuthRoute path="/wgroup-list" component={ WGroupGridListPage } {...routeProps}/>
-            <AuthRoute path="/wgroup-add" component={ WGroupAddPage } {...routeProps}/>
-            <AuthRoute path="/wgroup-topics" component={ WGroupTopicsPage } {...routeProps}/>
-            <AuthRoute path="/wgroup-topic" component={ WGroupTopicPage } {...routeProps}/>
-            <AuthRoute path="/wgroup-repo" component={ WGroupRepoPage } {...routeProps}/>
-            <AuthRoute path="/about" component={ AboutPage } {...routeProps}/>
-            <DirectRoute />
-          </Switch>  
-           <SigninDialog authenticated={ authenticated } />        
-        </div>
-      </MuiThemeProvider>
-    );
-  }
-}
-
-const PublicRoute = ({ component: Component, muiTheme, styles, state, resetRootMenu, authenticated, ...rest }) => (
-  <Route {...rest} render={ props => (
-    <div className={'page-layout'} style={ styles.homeLayout }>
-      { authenticated ? 
-        <Redirect to={'/main' }/> : 
-        <Component muiTheme={muiTheme} { ...props} />
-      }
-    </div>
-  )
-  }/>
-)
-
-const AuthRoute = ({ component: Component,  muiTheme, styles, state, resetRootMenu, authenticated, ...rest }) => {
-  console.log('auth route:', authenticated, rest);
-  return (
-  <Route {...rest} render={ props => (
-    <div className={ state.menuPaneVisible && state.menuPane ? 'page-layout root-menu-pinned':'page-layout'}>
       { authenticated ? 
         <Component muiTheme={ muiTheme } resetRootMenu = { resetRootMenu } { ...props} /> :
-        <Redirect to={'/home' }/> 
+        <Redirect to={{ pathname: '/home' }}/> 
       }
     </div>
   )}/>
-)}
-
-const DirectRoute = ({ authenticated }) => (
-   authenticated ? 
-    <Redirect to={{ pathname: '/main' }}/> :
-    <Redirect to={{ pathname: '/home' }}/> 
 )
+
+const NoMatch = () => <h3>NoMatch</h3>
 
 App.propTypes = {
   children: PropTypes.element,
