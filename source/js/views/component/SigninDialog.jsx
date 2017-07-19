@@ -10,28 +10,32 @@ import { bindActionCreators } from 'redux';
 
 import { openSignin, signin } from '../../store/actions/authActions';
 
-const styles = {
-  content: {
-    width: 310,
-  },
-  title: {
-    paddingBottom: 0,
-  },
-  body: {
-    paddingBottom: 10,
-  },
-  actions: {
-    paddingBottom: 25,
-    paddingLeft: 30,
-    paddingRight: 30,
-  },
-  loading: {
-    float: 'left',
-    marginTop: 6,
-  },
-  msg: {
-    marginTop: 10,
-  },
+function getStyles( muiTheme ){ 
+  const {baseTheme:{palette}} = muiTheme;
+  return {
+    content: {
+      width: 310,
+    },
+    title: {
+      paddingBottom: 0,
+    },
+    body: {
+      paddingBottom: 10,
+    },
+    actions: {
+      paddingBottom: 25,
+      paddingLeft: 30,
+      paddingRight: 30,
+    },
+    loading: {
+      float: 'left',
+      marginTop: 6,
+      color: palette.primary1Color
+    },
+    msg: {
+      marginTop: 10,
+    },
+  }
 };
 
 /**
@@ -46,6 +50,8 @@ class SigninDialog extends React.Component {
       password: '1',
       ready: false,
     };
+
+    this.styles = getStyles(props.muiTheme);
   }
 
   handleOpen = () => {
@@ -73,7 +79,7 @@ class SigninDialog extends React.Component {
 
   }
   render() {
-
+    const styles = this.styles;
     const actions = [
       (this.props.authing ? <FontIcon className='fa fa-spinner fa-spin' style={ styles.loading } /> : null),
       <FlatButton

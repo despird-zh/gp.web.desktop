@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ActionHomeMenu from 'material-ui/svg-icons/action/home';
+import ActionSettings from 'material-ui/svg-icons/action/settings';
+import ActionExtension from 'material-ui/svg-icons/action/extension';
 import NavFirstPage from 'material-ui/svg-icons/navigation/first-page';
 import NavLastPage from 'material-ui/svg-icons/navigation/last-page';
 import IconButton from 'material-ui/IconButton';
@@ -32,16 +34,11 @@ class RootMenuBar extends React.Component {
     super(props);
   }
 
-  setActiveMenu = (menuName) => {
-    console.log(menuName);
-  }
-
   renderMenuItems(menuItems){
     const renderedItems = [];
 
     if(!menuItems) return null;
     React.Children.forEach(menuItems, (child, index) => {
-
       renderedItems.push(
         <li key={`menu-li-${index}`} className="menu-opt__item">
           {child}
@@ -57,9 +54,14 @@ class RootMenuBar extends React.Component {
     history.push('/wgroup-list');
   }
 
+  handleMenuJumpMain = () => {
+    const { history } = this.props;
+    history.push('/main');
+  }
+
   render() {
 
-    let { menuPane, menuPaneVisible, onMenuSwitch, muiTheme, menuItems } = this.props;
+    let { menuPane, menuPaneVisible, onMenuSwitch, muiTheme, menuItems, menuActive } = this.props;
     let styles = getStyles(muiTheme);
 
     const newMenuItems = this.renderMenuItems(menuItems);
@@ -78,17 +80,22 @@ class RootMenuBar extends React.Component {
                   </svg>
               </li>
               <li className="menu-opt opt-all">
-                <FloatingActionButton mini={true} onTouchTap={ this.handleMenuJumpWGroupList }>
+                <FloatingActionButton mini={true} 
+                  secondary={ menuActive === 'main'}
+                  onTouchTap={ this.handleMenuJumpMain }>
                   <ActionHomeMenu />
                 </FloatingActionButton>
               </li>
               <li className="menu-opt opt-search">
-                <FloatingActionButton mini={true} >
-                  <ActionHomeMenu />
+                <FloatingActionButton mini={true} 
+                  secondary={ menuActive === 'wgroup-list'}
+                  onTouchTap={ this.handleMenuJumpWGroupList }>
+                  <ActionExtension />
                 </FloatingActionButton>
               </li>
               <li className="menu-opt opt-query">
-                <FloatingActionButton mini={true} secondary={true}>
+                <FloatingActionButton mini={true} 
+                  secondary={ menuActive === ''}>
                   <ContentAdd />
                 </FloatingActionButton>
               </li>
@@ -101,7 +108,7 @@ class RootMenuBar extends React.Component {
                 <ul className="menu-opt__list">
                   <li className="menu-opt__item">
                     <FloatingActionButton mini={true}>
-                      <ContentAdd />
+                      <ActionSettings />
                     </FloatingActionButton>
                   </li>
                   {newMenuItems}

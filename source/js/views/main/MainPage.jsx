@@ -43,7 +43,10 @@ class MainPage extends Component {
   }
 
   onTest = () => {
-    this.props.resetRootMenu({menuPaneVisible:true, menuPane: (<RootMenuContent test1={this.onTest1}/>) });
+    this.props.resetRootMenu({menuPaneVisible:true, 
+      menuPane: (<RootMenuContent test1={this.onTest1}/>) ,
+      menuActive: 'main'
+      });
   }
 
   onTest1 = () => {
@@ -56,6 +59,7 @@ class MainPage extends Component {
     this.props.resetRootMenu({
       menuPaneVisible:true, 
       menuPane: (<RootMenuContent test1={this.onTest1}/>) ,
+      menuActive: 'main',
       menuItems 
     });
     //this.props.resetRootMenu({menuPaneVisible:false, menuPane: (<RootMenuContent test1={this.onTest1}/>) });

@@ -127,7 +127,8 @@ class WGroupGridListPage extends React.Component {
   componentDidMount() {
     this.props.resetRootMenu({
       menuPaneVisible:true, 
-      menuPane: (<RootMenuContent test1={this.onTest1} styles={this.styles}/>) 
+      menuPane: (<RootMenuContent test1={this.onTest1} styles={this.styles}/>) ,
+      menuActive: 'wgroup-list',
     });
   }
 

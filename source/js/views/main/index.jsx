@@ -109,7 +109,7 @@ class App extends Component {
             <AuthRoute path="/about" component={ AboutPage } {...routeProps}/>
             <DirectRoute />
           </Switch>  
-           <SigninDialog authenticated={ authenticated } />        
+          <SigninDialog authenticated={ authenticated } muiTheme={ rootTheme }/>        
         </div>
       </MuiThemeProvider>
     );
