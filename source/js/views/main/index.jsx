@@ -28,6 +28,8 @@ import WGroupTopicPage from '../wgroup/WGroupTopicPage';
 import WGroupAddPage from '../wgroup/WGroupAddPage';
 import WGroupRepoPage from '../wgroup/WGroupRepoPage';
 
+import SysSettingsPage from '../config/SysSettingsPage';
+
 const rootTheme = getMuiTheme(lightBaseTheme);
 
 injectTapEventPlugin();
@@ -106,6 +108,7 @@ class App extends Component {
             <AuthRoute path="/wgroup-topics" component={ WGroupTopicsPage } {...routeProps}/>
             <AuthRoute path="/wgroup-topic" component={ WGroupTopicPage } {...routeProps}/>
             <AuthRoute path="/wgroup-repo" component={ WGroupRepoPage } {...routeProps}/>
+            <AuthRoute path="/sys-settings" component={ SysSettingsPage } {...routeProps}/>
             <AuthRoute path="/about" component={ AboutPage } {...routeProps}/>
             <DirectRoute />
           </Switch>  

@@ -59,6 +59,11 @@ class RootMenuBar extends React.Component {
     history.push('/main');
   }
 
+  handleMenuJumpConfig = () => {
+    const { history } = this.props;
+    history.push('/sys-settings');
+  }
+
   render() {
 
     let { menuPane, menuPaneVisible, onMenuSwitch, muiTheme, menuItems, menuActive } = this.props;
@@ -107,7 +112,9 @@ class RootMenuBar extends React.Component {
               <li className="menu-opt-collection">
                 <ul className="menu-opt__list">
                   <li className="menu-opt__item">
-                    <FloatingActionButton mini={true}>
+                    <FloatingActionButton mini={true}
+                      secondary={ menuActive === 'sys-settings'}
+                      onTouchTap={ this.handleMenuJumpConfig }>
                       <ActionSettings />
                     </FloatingActionButton>
                   </li>
