@@ -13,22 +13,22 @@ import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-import RootMenuBar from './RootMenuBar';
-import SigninDialog from '../component/SigninDialog';
+import RootMenuBar from './main/RootMenuBar';
+import SigninDialog from './component/SigninDialog';
 
-import HomePage from '../home';
+import HomePage from './home';
 
-import DevPage from '../DevPage';
-import AboutPage from '../AboutPage';
-import MainPage from '../main/MainPage';
-import LoadingPage from '../main/LoadingPage';
-import WGroupGridListPage from '../wgroup/WGroupGridListPage';
-import WGroupTopicsPage from '../wgroup/WGroupTopicsPage';
-import WGroupTopicPage from '../wgroup/WGroupTopicPage';
-import WGroupAddPage from '../wgroup/WGroupAddPage';
-import WGroupRepoPage from '../wgroup/WGroupRepoPage';
+import DevPage from './DevPage';
+import AboutPage from './AboutPage';
+import MainPage from './main/MainPage';
+import LoadingPage from './main/LoadingPage';
+import WGroupGridListPage from './wgroup/WGroupGridListPage';
+import WGroupTopicsPage from './wgroup/WGroupTopicsPage';
+import WGroupTopicPage from './wgroup/WGroupTopicPage';
+import WGroupAddPage from './wgroup/WGroupAddPage';
+import WGroupRepoPage from './wgroup/WGroupRepoPage';
 
-import SysSettingsPage from '../config/SysSettingsPage';
+import SysSettingsPage from './config/SysSettingsPage';
 
 const rootTheme = getMuiTheme(lightBaseTheme);
 
