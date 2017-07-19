@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import { Link } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
-
+import CommClearAll from 'material-ui/svg-icons/communication/clear-all';
 import NavFirstPage from 'material-ui/svg-icons/navigation/first-page';
 import NavLastPage from 'material-ui/svg-icons/navigation/last-page';
 import IconButton from 'material-ui/IconButton';
@@ -17,15 +17,23 @@ import { snackAction, loaderAction } from '../../store/actions/appActions';
 import PageHeaderBar from '../component/PageHeaderBar';
 
 function getStyles(muiTheme) {
-  const { baseTheme } = muiTheme;
+  const { baseTheme:{palette} } = muiTheme;
 
   return {
     pageHeader: {
-      backgroundColor: baseTheme.palette.primary1Color,
+      backgroundColor: palette.primary1Color,
     },
     switchButton:{
-      color: baseTheme.palette.primary2Color,
-    }
+      color: palette.primary2Color,
+    },    
+    iconBtn: {
+      width:40, 
+      height:40,
+      padding:5,
+    },
+    iconStyle:{
+      color: palette.primary2Color
+    },
   };
 }
 
@@ -55,7 +63,7 @@ class SysSettingsPage extends Component {
     //this.props.resetRootMenu({menuPaneVisible:true, menuPane: null });
     this.props.resetRootMenu({
       menuPaneVisible:true, 
-      menuPane: (<RootMenuContent test1={this.onTest1}/>) ,
+      menuPane: (<RootMenuContent test1={this.onTest1} styles={this.styles}/>) ,
       menuActive: 'sys-settings',
       menuItems 
     });
@@ -114,10 +122,20 @@ class SysSettingsPage extends Component {
   }
 }
 
-const RootMenuContent = ({ test1 }) => {
+const RootMenuContent = ({ test1, styles }) => {
   
-  return (<div style={{padding:10}}>
-    <RaisedButton label="Test" primary={true} onTouchTap={test1}/>
+  return (<div>
+    <header className="panel-header"> 
+      <div className="panel-header__container active">
+        <h2 className="panel-header__title">Quick Filter</h2>
+        <IconButton style={styles.iconBtn} iconStyle={styles.iconStyle}>
+          <CommClearAll />
+        </IconButton>
+      </div>
+    </header>
+    <div style={{padding:'0 15px 15px'}}>
+      xxxxxxxx
+    </div>
   </div>);
 };
 
