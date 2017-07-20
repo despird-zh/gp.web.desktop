@@ -15,7 +15,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import RootMenuBar from './main/RootMenuBar';
 import SigninDialog from './component/SigninDialog';
-
+import AffiliateBars from './component/AffiliateBars';
 import HomePage from './home';
 
 import DevPage from './DevPage';
@@ -112,7 +112,8 @@ class App extends Component {
             <AuthRoute path="/about" component={ AboutPage } {...routeProps}/>
             <DirectRoute />
           </Switch>  
-          <SigninDialog muiTheme={ rootTheme }/>        
+          <SigninDialog muiTheme={ rootTheme }/>
+          <AffiliateBars muiTheme={ rootTheme }/>         
         </div>
       </MuiThemeProvider>
     );
