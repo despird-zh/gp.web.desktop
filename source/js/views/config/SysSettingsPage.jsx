@@ -1,9 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
-import { Link } from 'react-router';
-import RaisedButton from 'material-ui/RaisedButton';
 import CommClearAll from 'material-ui/svg-icons/communication/clear-all';
 import ActionSearch from 'material-ui/svg-icons/action/search';
 import ContentSave from 'material-ui/svg-icons/content/save';
@@ -22,6 +18,8 @@ import MenuItem from 'material-ui/MenuItem';
 
 import { snackAction, loaderAction } from '../../store/actions/appActions';
 import PageHeaderBar from '../component/PageHeaderBar';
+import AuthConnect from '../component/AuthConnect';
+import { settingsSave, ConfigApis } from '../../store/actions/configActions';
 import SysSettingsList from './SysSettingsList';
 
 function getStyles(muiTheme) {
@@ -105,6 +103,12 @@ class SysSettingsPage extends Component {
     console.log('this is test3')
   }
 
+  handleSettingsQuery = () => {
+    const {rpcInvoke} = this.props;
+
+    rpcInvoke(ConfigApis.SysOptsQuery, {}, settingsSave, false);
+  }
+
   createMenuItems(){
     return [
       <FloatingActionButton key={'item-1'} mini={true} onTouchTap={this.onTest2}>
@@ -123,7 +127,7 @@ class SysSettingsPage extends Component {
   }
 
   render() {
-    const { muiTheme } = this.props;
+    const { muiTheme, settings } = this.props;
     const styles = this.styles;
     return (
       <div className="page-wrapper">
@@ -181,14 +185,14 @@ class SysSettingsPage extends Component {
           <div className="page-content"  style={{ padding:'1.5rem' }}>
             <div style={ styles.topBar }>
               <TextField hintText="Setting Filter"/>
-              <IconButton style={styles.iconBtn} iconStyle={ styles.iconStyle }>
+              <IconButton style={styles.iconBtn} iconStyle={ styles.iconStyle } onTouchTap={this.handleSettingsQuery}>
                 <ActionSearch/>
               </IconButton>
               <IconButton style={styles.iconBtn} iconStyle={ styles.iconStyle }>
                 <CommClearAll />
               </IconButton>
             </div>
-            <SysSettingsList muiTheme={ muiTheme } onRowEdit={ this.handleRowEdit }/>
+            <SysSettingsList muiTheme={ muiTheme } onRowEdit={ this.handleRowEdit } settings={settings}/>
           </div>
         </div>
       </div>
@@ -213,12 +217,10 @@ const RootMenuContent = ({ test1, styles }) => {
   </div>);
 };
 
-export default connect(
-  (state) => ({}),
-  (dispatch) => (
-    bindActionCreators({
-      snackAction,
-      loaderAction,
-    }, dispatch)
-  )
-)(SysSettingsPage);
+const NewComponent = AuthConnect(
+  SysSettingsPage,
+  (state) => ({
+    settings: state.config.get('settings'),
+  }));
+
+export default NewComponent;

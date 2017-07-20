@@ -38,7 +38,7 @@ function getStyles(muiTheme) {
     },
     colKey: {
       padding: 5,
-      width:90,
+      width:190,
       flexShrink:0, 
       flexGrow:0, 
       fontSize: 16
@@ -48,7 +48,7 @@ function getStyles(muiTheme) {
       fontSize: 16,
       flexShrink:0, 
       flexGrow:0, 
-      width:100
+      width:190
     }, 
     colAction: {
       padding: 5,
@@ -109,21 +109,15 @@ class SysSettingsList extends Component {
 
   constructor(props){
     super(props);
-    let data = getFakeData(0);
-    this.state = {
-      rowData : data
-    };
     this.styles = getStyles(props.muiTheme);
   }
 
   render(){
-
-    const { rowData } = this.state;
-    const { onRowEdit } = this.props;
+    const { onRowEdit, settings } = this.props;
     const styles = this.styles;
 
-    let rows = rowData.map((data)=>{
-      return (<RepoListRow key={`row-${data.opt_key}`} rowData={data} styles={ styles } onRowEdit={onRowEdit}/>);
+    let rows = settings.map((data)=>{
+      return (<RepoListRow key={`row-${data.option_id}`} rowData={data} styles={ styles } onRowEdit={onRowEdit}/>);
     });
     
     return (
@@ -163,25 +157,25 @@ const RepoListRow = ({ rowData, styles, onRowEdit}) => {
       <div style={ styles.colGroup }>
         <span style={ styles.spanMiddlePre } ></span>
         <span style={ styles.spanMiddle }>
-          {rowData.opt_group}
+          {rowData.group}
         </span>
       </div>
       <div style={ styles.colKey }>
         <span style={ styles.spanMiddlePre } ></span>
         <span style={ styles.spanMiddle }>
-          {rowData.opt_key}
+          {rowData.option}
         </span>
       </div>
       <div style={styles.colValue}>
         <span style={ styles.spanMiddlePre } ></span>
         <span style={ styles.spanMiddle }>
-          { rowData.opt_value }
+          { rowData.value }
         </span>
       </div>
       <div style={styles.colDescr}>
         <span style={ styles.spanMiddlePre } ></span>
         <span style={ styles.spanMiddle }>
-          { rowData.descr }
+          { rowData.description }
         </span>
       </div>
       <div style={styles.colAction}>

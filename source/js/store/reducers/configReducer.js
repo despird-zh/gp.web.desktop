@@ -1,5 +1,5 @@
 import { Map } from 'immutable';
-
+import {REHYDRATE} from 'redux-persist/constants';
 import {
   CFG_SAVE_PROFILE,
   CFG_SAVE_SETTINGS,
@@ -11,7 +11,11 @@ const initialState = Map({
 });
 
 const actionsMap = {
-
+  [REHYDRATE] : (state, action) => {
+    var configState = action.payload.config
+    return state.mergeDeep({profile: configState.profile})
+            .set('settings', configState.settings);
+  },
   // Loader Action
   [CFG_SAVE_PROFILE]: (state, { type, data }) => { // eslint-disable-line no-unused-vars
     return state.mergeDeep({

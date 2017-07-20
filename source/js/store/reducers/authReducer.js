@@ -1,5 +1,5 @@
 import { Map } from 'immutable';
-import {REHYDRATE} from 'redux-persist/constants'
+import {REHYDRATE} from 'redux-persist/constants';
 import {
   OPEN_SIGNIN_ACT,
   SAVE_TOKEN_ACT,
@@ -24,7 +24,6 @@ const initialState = Map({
 const actionsMap = {
   [REHYDRATE] : (state, action) => {
     var authState = action.payload.auth
-    
     return state.merge(authState);
   },
   [OPEN_SIGNIN_ACT]: (state, { type, data }) => { // eslint-disable-line no-unused-vars
