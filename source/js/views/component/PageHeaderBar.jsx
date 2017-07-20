@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import IconButton from 'material-ui/IconButton';
+import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
 /** icons */
 import ActionHomeMenu from 'material-ui/svg-icons/action/home';
 import ActionOpenBrowser from 'material-ui/svg-icons/action/open-in-browser';
@@ -12,17 +13,27 @@ import ActionLaunch from 'material-ui/svg-icons/action/launch';
 import HardwareSecurity from 'material-ui/svg-icons/hardware/security';
 import HardwareDvcHub from 'material-ui/svg-icons/hardware/device-hub';
 import DeviceWidgets from 'material-ui/svg-icons/device/widgets';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
+import Avatar from 'material-ui/Avatar';
 
-import { hashHistory } from 'react-router';
-import muiThemeable from 'material-ui/styles/muiThemeable';
 import { openSignin, signoff } from '../../store/actions/authActions';
 
 function getStyles(muiTheme) {
-  const { baseTheme } = muiTheme;
+  const { baseTheme:{palette} } = muiTheme;
 
   return {
     pageHeader: {
-      backgroundColor: baseTheme.palette.primary1Color,
+      backgroundColor: palette.primary1Color,
+    },
+    avatar: {
+      margin: 0
+    },
+    iconBtn: {
+      width:35, 
+      height:35,
+      padding:0,
+      marginTop:5,
     }
   };
 }
@@ -32,10 +43,36 @@ class HeaderBar extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.styles = getStyles(props.muiTheme);
+    this.state = {
+      avatarPopover: false,
+      avatarAnchor: null,
+    };
   }
 
-  render() {
+  handleTouchTap = (event) => {
+    // This prevents ghost click.
+    event.preventDefault();
 
+    this.setState({
+      avatarPopover: true,
+      avatarAnchor: event.currentTarget,
+    });
+  };
+
+  handleRequestClose = () => {
+    this.setState({
+      avatarPopover: false,
+    });
+  };
+
+  handleSignoff = () => {
+    this.props.signoff({
+      principal: this.props.account
+    });
+  };
+
+  render() {
+    const styles = this.styles;
 
     return (
       <div className="page-header">
@@ -68,8 +105,26 @@ class HeaderBar extends React.Component {
           <button className="header-action">
             <i className="fa fa-cog" ></i>
           </button>
-          <div className="header-profile">
-            <img src="https://avatars-02.gitter.im/gh/uv/3/despird-zh" className="profile-avatar"/>
+          <div className="header-profile" style={{paddingLeft:15, paddingRight:10, paddingTop:10}}>
+            <IconButton style={styles.iconBtn} iconStyle={styles.avatar} 
+              onTouchTap={this.handleTouchTap}>
+              <Avatar
+                src="assets/img/uxceo-128.jpg"
+                size={35}/>
+            </IconButton>
+            <Popover
+              open={this.state.avatarPopover}
+              anchorEl={this.state.avatarAnchor}
+              anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+              targetOrigin={{horizontal: 'right', vertical: 'top'}}
+              onRequestClose={this.handleRequestClose}
+              animation={PopoverAnimationVertical}
+            >
+              <Menu>
+                <MenuItem primaryText="Settings" />
+                <MenuItem primaryText="Sign out" onTouchTap={this.handleSignoff}/>
+              </Menu>
+            </Popover>
           </div>
         </div>
       </div>
@@ -81,6 +136,7 @@ HeaderBar.propTypes = {
   muiTheme: PropTypes.object,
   signoff: PropTypes.func,
   authenticated: PropTypes.bool,
+  account: PropTypes.string
 };
 
 export default connect(
@@ -93,4 +149,4 @@ export default connect(
       openSignin, signoff,
     }, dispatch)
   )
-)(muiThemeable()(HeaderBar));
+)(HeaderBar);

@@ -132,6 +132,7 @@ class SigninDialog extends React.Component {
 }
 
 SigninDialog.propTypes = {
+  muiTheme: PropTypes.object,
   opening: PropTypes.bool,
   authing: PropTypes.bool,
   audience: PropTypes.string,
