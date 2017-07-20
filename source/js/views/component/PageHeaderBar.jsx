@@ -16,7 +16,7 @@ import DeviceWidgets from 'material-ui/svg-icons/device/widgets';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Avatar from 'material-ui/Avatar';
-
+import { persistor } from '../../store';
 import { openSignin, signoff } from '../../store/actions/authActions';
 
 function getStyles(muiTheme) {
@@ -66,6 +66,7 @@ class HeaderBar extends React.Component {
   };
 
   handleSignoff = () => {
+    persistor.purge(['auth','config','app']);
     this.props.signoff({
       principal: this.props.account
     });

@@ -30,9 +30,9 @@ function configureStoreDev() {
 
 }
 
-let store = process.env.NODE_ENV === 'production' ? configureStoreProd(): configureStoreDev();
+export const store = process.env.NODE_ENV === 'production' ? configureStoreProd(): configureStoreDev();
 
-persistStore(store, 
+export const persistor = persistStore(store, 
 { 
   storage: asyncSessionStorage,
   debounce:33,
@@ -41,4 +41,3 @@ persistStore(store,
   store.dispatch(storeReadyAction());
 })
 
-export default store;

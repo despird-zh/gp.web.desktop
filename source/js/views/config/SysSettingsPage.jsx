@@ -109,6 +109,12 @@ class SysSettingsPage extends Component {
     rpcInvoke(ConfigApis.SysOptsQuery, {}, settingsSave, false);
   }
 
+  handleSettingsClear = () => {
+
+    const {settingsSave} = this.props;
+    settingsSave([]);
+  };
+
   createMenuItems(){
     return [
       <FloatingActionButton key={'item-1'} mini={true} onTouchTap={this.onTest2}>
@@ -188,7 +194,7 @@ class SysSettingsPage extends Component {
               <IconButton style={styles.iconBtn} iconStyle={ styles.iconStyle } onTouchTap={this.handleSettingsQuery}>
                 <ActionSearch/>
               </IconButton>
-              <IconButton style={styles.iconBtn} iconStyle={ styles.iconStyle }>
+              <IconButton style={styles.iconBtn} iconStyle={ styles.iconStyle } onTouchTap={this.handleSettingsClear}>
                 <CommClearAll />
               </IconButton>
             </div>
@@ -221,6 +227,7 @@ const NewComponent = AuthConnect(
   SysSettingsPage,
   (state) => ({
     settings: state.config.get('settings'),
-  }));
+  }),
+  {settingsSave});
 
 export default NewComponent;

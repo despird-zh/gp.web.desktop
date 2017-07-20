@@ -10,7 +10,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import createBrowserHistory from 'history/createBrowserHistory'
 import 'babel-polyfill';
 
-import store from './store';
+import { store } from './store';
 import GPressApp from './views/GPressApp';
 import '../scss/app.scss'; // Yep, that's right.
 
