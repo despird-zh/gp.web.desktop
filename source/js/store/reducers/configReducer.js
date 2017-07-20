@@ -14,7 +14,7 @@ const initialState = Map({
 });
 
 const actionsMap = {
-  [REHYDRATE] : (state, action) => {
+  [REHYDRATE] : (state, action) => { // eslint-disable-line no-unused-vars
     var configState = action.payload.config;
     
     if(!configState) return state;
