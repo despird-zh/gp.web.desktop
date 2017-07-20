@@ -5,6 +5,10 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 import CommClearAll from 'material-ui/svg-icons/communication/clear-all';
+import ActionSearch from 'material-ui/svg-icons/action/search';
+import ContentSave from 'material-ui/svg-icons/content/save';
+
+import TextField from 'material-ui/TextField';
 import NavFirstPage from 'material-ui/svg-icons/navigation/first-page';
 import NavLastPage from 'material-ui/svg-icons/navigation/last-page';
 import IconButton from 'material-ui/IconButton';
@@ -13,8 +17,12 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ActionHomeMenu from 'material-ui/svg-icons/action/home';
 
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+
 import { snackAction, loaderAction } from '../../store/actions/appActions';
 import PageHeaderBar from '../component/PageHeaderBar';
+import SysSettingsList from './SysSettingsList';
 
 function getStyles(muiTheme) {
   const { baseTheme:{palette} } = muiTheme;
@@ -25,15 +33,35 @@ function getStyles(muiTheme) {
     },
     switchButton:{
       color: palette.primary2Color,
-    },    
+    },
+    topBar:{
+      padding: 0,
+    },  
     iconBtn: {
       width:40, 
       height:40,
       padding:5,
+      marginTop:2,
     },
     iconStyle:{
       color: palette.primary2Color
     },
+    menuHeader:{
+      textRendering: 'optimizeLegibility',
+      boxSizing: 'border-box',
+      maxWidth: '90%',
+      margin: '0 0.5rem 0 0',
+      overflow: 'hidden',
+      fontWeight: 400,
+      fontSize: '1.5rem',
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
+      textTransform: 'uppercase',
+      padding: '0 0 0 1.6rem',
+      lineHeight: '4.8rem',
+      color: '#a2a3a3'
+    }
+    
   };
 }
 
@@ -88,33 +116,79 @@ class SysSettingsPage extends Component {
       </FloatingActionButton>
     ];
   }
-  render() {
-    let { muiTheme } = this.props;
 
+  handleRowEdit = (rowData) => {
+    this.setState({ collapsed: false });
+    console.log(rowData);
+  }
+
+  render() {
+    const { muiTheme } = this.props;
+    const styles = this.styles;
     return (
       <div className="page-wrapper">
         <header className="page-header-wrapper" style={this.styles.pageHeader}>
           <PageHeaderBar muiTheme={ muiTheme }/>
         </header>
         <div className="page-content-wrapper">
-          <div className="page-right-menu">
-            <div className={ this.state.collapsed ? "right-menu collapsed":"right-menu " }>
-              <div className="menu-body">
+          { this.state.collapsed ? null:(<div className="page-right-menu">
+            <div className={ "right-menu " }>
+              <div style={{height:'4.8rem', flexShrink:0, flexGrow:0, margin:'1.5rem 0 0', display:'flex'}}>
+                <h3 style={styles.menuHeader}>Edit Setting</h3>
+                <IconButton style={styles.iconBtn} iconStyle={styles.iconStyle}>
+                  <ContentSave />
+                </IconButton>
+              </div>
+              <div className="menu-body" style={{padding:'0 1.5rem 0'}}>
+                <TextField
+                  disabled={true}
+                  fullWidth={true}
+                  hintText="Disabled Hint Text"
+                  defaultValue="Disabled With Floating Label"
+                  floatingLabelText="Floating Label Text"/>
+                <SelectField
+                  floatingLabelFixed={true}
+                  floatingLabelText="Category"
+                  value={this.state.value}
+                  hintText="Select category of setting"
+                  fullWidth={true}
+                  onChange={this.handleChange}>
+                  <MenuItem value={'CAPACITY'} primaryText="Capacity" />
+                  <MenuItem value={'BASIC'} primaryText="Basic" />
+                  <MenuItem value={'SECURITY'} primaryText="Security" />
+                  <MenuItem value={'NETWORK'} primaryText="Network" />
+                </SelectField>
+                <TextField
+                  fullWidth={true}
+                  hintText="the value setting Text"
+                  defaultValue="xxx.ss.xx"
+                  floatingLabelText="The setting value"
+                  floatingLabelFixed={true}/>
+                <TextField
+                  fullWidth={true}
+                  hintText="Disabled Hint Text"
+                  defaultValue="Disabled With Floating Label"
+                  floatingLabelText="Floating Label Text"
+                  floatingLabelFixed={true}/>
               </div>
               <div className="menu-footer">
-                <IconButton onTouchTap={ this.onCollapseSwitch } iconStyle={this.styles.switchButton}>
+                <IconButton onTouchTap={ this.onCollapseSwitch } iconStyle={styles.switchButton}>
                   {this.state.collapsed ? <NavFirstPage /> : <NavLastPage/>}
                 </IconButton>
               </div>
             </div>
-          </div>
-          <div className="page-content">
-            <div className="content-body" style={{padding:10}}>
-              <RaisedButton label="Primary" primary={true} onTouchTap={this.onTest}/>
+          </div>)}
+          <div className="page-content"  style={{ padding:'1.5rem' }}>
+            <div style={ styles.topBar }>
+              <TextField hintText="Hint Text"/>
+              <IconButton style={styles.iconBtn} iconStyle={ styles.iconStyle }>
+                <ActionSearch/>
+              </IconButton>
+              <IconButton style={styles.iconBtn} iconStyle={ styles.iconStyle }>
+                <CommClearAll />
+              </IconButton>
             </div>
-            <footer className="content-footer" style={{padding:10}}>
-              xx
-            </footer>
+            <SysSettingsList muiTheme={ muiTheme } onRowEdit={ this.handleRowEdit }/>
           </div>
         </div>
       </div>
@@ -127,7 +201,7 @@ const RootMenuContent = ({ test1, styles }) => {
   return (<div>
     <header className="panel-header"> 
       <div className="panel-header__container active">
-        <h2 className="panel-header__title">Quick Filter</h2>
+        <h3 className="panel-header__title">Quick Filter</h3>
         <IconButton style={styles.iconBtn} iconStyle={styles.iconStyle}>
           <CommClearAll />
         </IconButton>
