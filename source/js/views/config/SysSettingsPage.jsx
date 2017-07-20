@@ -180,7 +180,7 @@ class SysSettingsPage extends Component {
           </div>)}
           <div className="page-content"  style={{ padding:'1.5rem' }}>
             <div style={ styles.topBar }>
-              <TextField hintText="Hint Text"/>
+              <TextField hintText="Setting Filter"/>
               <IconButton style={styles.iconBtn} iconStyle={ styles.iconStyle }>
                 <ActionSearch/>
               </IconButton>
