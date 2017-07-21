@@ -16,11 +16,12 @@ import ActionHomeMenu from 'material-ui/svg-icons/action/home';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-import { snackAction, loaderAction } from '../../store/actions/appActions';
-import PageHeaderBar from '../component/PageHeaderBar';
-import AuthConnect from '../component/AuthConnect';
-import { settingsSave, ConfigApis } from '../../store/actions/configActions';
-import SysSettingsList from './SysSettingsList';
+import { snackAction, loaderAction } from '../../../store/actions/appActions';
+import PageHeaderBar from '../../component/PageHeaderBar';
+import AuthConnect from '../../component/AuthConnect';
+import { settingsSave, ConfigApis } from '../../../store/actions/configActions';
+import SysSettingList from './SysSettingList';
+import SysSettingInfo from './SysSettingInfo';
 
 function getStyles(muiTheme) {
   const { baseTheme:{palette} } = muiTheme;
@@ -68,7 +69,9 @@ class SysSettingsPage extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {collapsed: false};
+    this.state = {collapsed: false,
+      setting: null,
+    };
     this.styles = getStyles(props.muiTheme);
   }
 
@@ -128,8 +131,7 @@ class SysSettingsPage extends Component {
   }
 
   handleRowEdit = (rowData) => {
-    this.setState({ collapsed: false });
-    console.log(rowData);
+    this.setState({ collapsed: false,setting: rowData });
   }
 
   render() {
@@ -149,38 +151,7 @@ class SysSettingsPage extends Component {
                   <ContentSave />
                 </IconButton>
               </div>
-              <div className="menu-body" style={{padding:'0 1.5rem 0'}}>
-                <TextField
-                  disabled={true}
-                  fullWidth={true}
-                  hintText="Disabled Hint Text"
-                  defaultValue="Disabled With Floating Label"
-                  floatingLabelText="Floating Label Text"/>
-                <SelectField
-                  floatingLabelFixed={true}
-                  floatingLabelText="Category"
-                  value={this.state.value}
-                  hintText="Select category of setting"
-                  fullWidth={true}
-                  onChange={this.handleChange}>
-                  <MenuItem value={'CAPACITY'} primaryText="Capacity" />
-                  <MenuItem value={'BASIC'} primaryText="Basic" />
-                  <MenuItem value={'SECURITY'} primaryText="Security" />
-                  <MenuItem value={'NETWORK'} primaryText="Network" />
-                </SelectField>
-                <TextField
-                  fullWidth={true}
-                  hintText="the value setting Text"
-                  defaultValue="xxx.ss.xx"
-                  floatingLabelText="The setting value"
-                  floatingLabelFixed={true}/>
-                <TextField
-                  fullWidth={true}
-                  hintText="Disabled Hint Text"
-                  defaultValue="Disabled With Floating Label"
-                  floatingLabelText="Floating Label Text"
-                  floatingLabelFixed={true}/>
-              </div>
+              <SysSettingInfo ref={'setting_edit'} muiTheme={ muiTheme } setting={ this.state.setting }/>
               <div className="menu-footer">
                 <IconButton onTouchTap={ this.onCollapseSwitch } iconStyle={styles.switchButton}>
                   {this.state.collapsed ? <NavFirstPage /> : <NavLastPage/>}
@@ -198,7 +169,7 @@ class SysSettingsPage extends Component {
                 <CommClearAll />
               </IconButton>
             </div>
-            <SysSettingsList muiTheme={ muiTheme } onRowEdit={ this.handleRowEdit } settings={settings}/>
+            <SysSettingList muiTheme={ muiTheme } onRowEdit={ this.handleRowEdit } settings={settings}/>
           </div>
         </div>
       </div>

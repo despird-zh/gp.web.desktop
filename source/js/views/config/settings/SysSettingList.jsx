@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 import PropTypes from 'prop-types';
 import IconButton from 'material-ui/IconButton';
@@ -19,7 +19,9 @@ function getStyles(muiTheme) {
       paddingLeft:0, 
       display:'flex', 
       position: 'relative',
-      borderBottom: '1px solid rgb(224, 224, 224)'
+      borderBottomWidth: 1,
+      borderBottomStyle: 'solid',
+      borderBottomColor: palette.borderColor
     },
     colDescr: {
       flexShrink:1, 
@@ -46,9 +48,10 @@ function getStyles(muiTheme) {
     colValue: {
       padding: 5,
       fontSize: 16,
-      flexShrink:0, 
-      flexGrow:0, 
-      width:190
+      flexShrink:1, 
+      flexGrow:1, 
+      width: 190,
+      flexBasis:'0%'
     }, 
     colAction: {
       padding: 5,
@@ -92,20 +95,7 @@ function getStyles(muiTheme) {
   return styles;
 }
 
-function getFakeData(cnt){
-  let data = [];
-  for(let i = cnt; i<10 + cnt; i++){
-      data.push({
-        opt_key: `key-${i}`,
-        opt_group: 'CPPACTITY',
-        descr: '伊拉克苏马里亚电视台网站当天报道，',
-        opt_value: '1.333G' 
-      });
-    }
-  return data;
-}
-
-class SysSettingsList extends Component {
+class SysSettingsList extends PureComponent {
 
   constructor(props){
     super(props);
@@ -122,7 +112,7 @@ class SysSettingsList extends Component {
     
     return (
       <div style={{flex:1, overflow:'hidden'}}>
-        <div style={{display:'flex',borderBottom: '1px solid rgb(224, 224, 224)'}}>
+        <div style={styles.rowStyle}>
           <div style={ styles.colGroupHeader }>
             Group Name
           </div>

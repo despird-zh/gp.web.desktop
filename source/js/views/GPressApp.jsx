@@ -28,7 +28,7 @@ import WGroupTopicPage from './wgroup/WGroupTopicPage';
 import WGroupAddPage from './wgroup/WGroupAddPage';
 import WGroupRepoPage from './wgroup/WGroupRepoPage';
 
-import SysSettingsPage from './config/SysSettingsPage';
+import SysSettingsPage from './config/settings';
 
 const rootTheme = getMuiTheme(lightBaseTheme);
 
