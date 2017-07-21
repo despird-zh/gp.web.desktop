@@ -25,16 +25,14 @@ import { settingsSave, ConfigApis } from '../../../store/actions/configActions';
 import SysSettingList from './SysSettingList';
 import SysSettingInfo from './SysSettingInfo';
 import PageJumpers from '../PageJumpers';
+import QuickFilter from '../QuickFilter';
 import Chip from '../../mui-ext/Chip';
 
 function getStyles(muiTheme) {
   const { baseTheme:{palette} } = muiTheme;
 
   const styles = {
-    chipItem: {
-      marginBottom: '1rem', 
-      marginRight:'1rem',
-    },
+    
     pageHeader: {
       backgroundColor: palette.primary1Color,
     },
@@ -127,7 +125,7 @@ class SysSettingsPage extends Component {
 
     this.props.resetRootMenu({
       menuPaneVisible:true, 
-      menuPane: (<RootMenuContent test1={this.onTest1} styles={this.styles}/>) ,
+      menuPane: (<RootMenuContent test1={this.onTest1} styles={this.styles} muiTheme={this.props.muiTheme}/>) ,
       menuActive: 'sys-settings',
       menuItems 
     });
@@ -223,8 +221,8 @@ class SysSettingsPage extends Component {
   }
 }
 
-const RootMenuContent = ({ test1, styles }) => {
-  const handleDelete = () => {};
+const RootMenuContent = ({ test1, styles, muiTheme }) => {
+  
   return (<div style={{display:'relative'}}>
     <header className="panel-header"> 
       <div className="panel-header__container active">
@@ -234,49 +232,7 @@ const RootMenuContent = ({ test1, styles }) => {
         </IconButton>
       </div>
     </header>
-    <div style={{padding:'0 1.5rem'}}>
-      <div style={{display: 'flex',flexWrap: 'wrap'}}>
-        <Chip
-          key={1}
-          onRequestDelete={handleDelete}
-          style={styles.chipItem}>
-          Joined
-        </Chip>
-        <Chip
-          key={2}
-          onRequestDelete={handleDelete}
-          style={styles.chipItem}>
-          Top 10(Active)
-        </Chip>
-      </div>
-      <Divider style={{marginBottom:10}}/>
-      <div style={{display: 'flex',flexWrap: 'wrap'}}>
-        <Chip
-          key={1}
-          onRequestAdd={handleDelete}
-          style={styles.chipItem}>
-          Test Tag
-        </Chip>
-        <Chip
-          key={2}
-          onRequestAdd={handleDelete}
-          style={styles.chipItem}>
-          Test Tag
-        </Chip>
-                <Chip
-          key={3}
-          onRequestAdd={handleDelete}
-          style={styles.chipItem}>
-          Test Tag
-        </Chip>
-        <Chip
-          key={4}
-          onRequestAdd={handleDelete}
-          style={styles.chipItem}>
-          Test Tag
-        </Chip>
-      </div>
-    </div>
+    <QuickFilter muiTheme={muiTheme}/>
     <PageJumpers buttonLabel={'Other Config'}>
       <MenuItem primaryText="Refresh" />
         <MenuItem primaryText="Help &amp; feedback" />
