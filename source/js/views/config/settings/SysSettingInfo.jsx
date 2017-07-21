@@ -38,7 +38,7 @@ class SysSettingInfo extends PureComponent {
     };
 
     componentWillReceiveProps(newProps){
-      console.log(newProps.setting)
+
       if(newProps.setting)
         this.setState(newProps.setting);
     }

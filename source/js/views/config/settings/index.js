@@ -16,7 +16,7 @@ import ActionHomeMenu from 'material-ui/svg-icons/action/home';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-import { snackAction, loaderAction } from '../../../store/actions/appActions';
+import { snackOnlyAction, loaderAction } from '../../../store/actions/appActions';
 import PageHeaderBar from '../../component/PageHeaderBar';
 import AuthConnect from '../../component/AuthConnect';
 import { settingsSave, ConfigApis } from '../../../store/actions/configActions';
@@ -69,7 +69,7 @@ class SysSettingsPage extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {collapsed: false,
+    this.state = {collapsed: true,
       setting: null,
     };
     this.styles = getStyles(props.muiTheme);
@@ -118,6 +118,15 @@ class SysSettingsPage extends Component {
     settingsSave([]);
   };
 
+  handleSettingSave = () => {
+    const setting = this.refs['setting_edit'].state;
+    const {rpcInvoke} = this.props;
+   
+    rpcInvoke(ConfigApis.SysOptSave, setting, (response)=>{
+      return snackOnlyAction({shown: true, snackTip: response.meta.message });
+    }, true, true);
+  };
+
   createMenuItems(){
     return [
       <FloatingActionButton key={'item-1'} mini={true} onTouchTap={this.onTest2}>
@@ -143,11 +152,11 @@ class SysSettingsPage extends Component {
           <PageHeaderBar muiTheme={ muiTheme }/>
         </header>
         <div className="page-content-wrapper">
-          { this.state.collapsed ? null:(<div className="page-right-menu">
+          <div className={ this.state.collapsed ? "hidden" : "page-right-menu"} >
             <div className={ "right-menu " }>
               <div style={{height:'4.8rem', flexShrink:0, flexGrow:0, margin:'1.5rem 0 0', display:'flex'}}>
                 <h3 style={styles.menuHeader}>Edit Setting</h3>
-                <IconButton style={styles.iconBtn} iconStyle={styles.iconStyle}>
+                <IconButton style={styles.iconBtn} iconStyle={styles.iconStyle} onTouchTap={ this.handleSettingSave }>
                   <ContentSave />
                 </IconButton>
               </div>
@@ -158,7 +167,7 @@ class SysSettingsPage extends Component {
                 </IconButton>
               </div>
             </div>
-          </div>)}
+          </div>
           <div className="page-content"  style={{ padding:'1.5rem' }}>
             <div style={ styles.topBar }>
               <TextField hintText="Setting Filter"/>
