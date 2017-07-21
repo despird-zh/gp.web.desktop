@@ -7,6 +7,7 @@ import ActionSettings from 'material-ui/svg-icons/action/settings';
 import ActionExtension from 'material-ui/svg-icons/action/extension';
 import NavFirstPage from 'material-ui/svg-icons/navigation/first-page';
 import NavLastPage from 'material-ui/svg-icons/navigation/last-page';
+import HardwareSecurity from 'material-ui/svg-icons/hardware/security';
 import IconButton from 'material-ui/IconButton';
 import { withRouter } from 'react-router'
 import './RootMenuBar.scss';
@@ -21,6 +22,9 @@ function getStyles(muiTheme) {
     },
     menuPaneHeader:{
       backgroundColor: baseTheme.palette.primary1Color,
+    },
+    menuPaneContainer:{
+      height: 'calc(100% - 6.5rem)'
     },
     switchButton:{
       color: baseTheme.palette.primary2Color,
@@ -62,6 +66,11 @@ class RootMenuBar extends React.Component {
   handleMenuJumpConfig = () => {
     const { history } = this.props;
     history.push('/sys-settings');
+  }
+
+  handleMenuJumpSecurity = () => {
+    const { history } = this.props;
+    history.push('/security');
   }
 
   render() {
@@ -118,6 +127,13 @@ class RootMenuBar extends React.Component {
                       <ActionSettings />
                     </FloatingActionButton>
                   </li>
+                  <li className="menu-opt__item">
+                    <FloatingActionButton mini={true}
+                      secondary={ menuActive === 'security'}
+                      onTouchTap={ this.handleMenuJumpSecurity }>
+                      <HardwareSecurity />
+                    </FloatingActionButton>
+                  </li>
                   {newMenuItems}
                 </ul>
               </li>
@@ -136,7 +152,9 @@ class RootMenuBar extends React.Component {
             <div className="header-brand" style={styles.menuPaneHeader}>
               <img className="header-brand-logo" src="//cdn03.gitter.im/_s/708c5ff/images/svg/gitter-logos/logo-white-lettering.svg"/>
             </div>
+            <div style={styles.menuPaneContainer}>
             { menuPane }
+            </div>
           </div> : null
          }
         </section>

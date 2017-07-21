@@ -121,7 +121,7 @@ class HeaderBar extends React.Component {
               onRequestClose={this.handleRequestClose}
               animation={PopoverAnimationVertical}
             >
-              <Menu>
+              <Menu desktop={true}>
                 <MenuItem primaryText="Settings" />
                 <MenuItem primaryText="Sign out" onTouchTap={this.handleSignoff}/>
               </Menu>

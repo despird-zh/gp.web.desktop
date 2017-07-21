@@ -1,18 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 
+import { Link } from 'react-router-dom'; 
 import CommClearAll from 'material-ui/svg-icons/communication/clear-all';
 import ActionSearch from 'material-ui/svg-icons/action/search';
 import ContentSave from 'material-ui/svg-icons/content/save';
-
+import ContentSort from 'material-ui/svg-icons/content/sort';
+import Divider from 'material-ui/Divider';
 import TextField from 'material-ui/TextField';
 import NavFirstPage from 'material-ui/svg-icons/navigation/first-page';
 import NavLastPage from 'material-ui/svg-icons/navigation/last-page';
 import IconButton from 'material-ui/IconButton';
-
+import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ActionHomeMenu from 'material-ui/svg-icons/action/home';
-
+import CommCallMade from 'material-ui/svg-icons/communication/call-made';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -22,11 +24,17 @@ import AuthConnect from '../../component/AuthConnect';
 import { settingsSave, ConfigApis } from '../../../store/actions/configActions';
 import SysSettingList from './SysSettingList';
 import SysSettingInfo from './SysSettingInfo';
+import PageJumpers from '../PageJumpers';
+import Chip from '../../mui-ext/Chip';
 
 function getStyles(muiTheme) {
   const { baseTheme:{palette} } = muiTheme;
 
-  return {
+  const styles = {
+    chipItem: {
+      marginBottom: '1rem', 
+      marginRight:'1rem',
+    },
     pageHeader: {
       backgroundColor: palette.primary1Color,
     },
@@ -35,6 +43,7 @@ function getStyles(muiTheme) {
     },
     topBar:{
       padding: 0,
+      position: 'relative'
     },  
     iconBtn: {
       width:40, 
@@ -59,9 +68,35 @@ function getStyles(muiTheme) {
       padding: '0 0 0 1.6rem',
       lineHeight: '4.8rem',
       color: '#a2a3a3'
+    },
+    jumpLink:{
+      textRendering: 'optimizeLegibility',
+      boxSizing: 'border-box',
+      maxWidth: '90%',
+      overflow: 'hidden',
+      fontWeight: 400,
+      fontSize: '1.5rem',
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
+      textTransform: 'uppercase',
+      padding: '0 0 0 1.5rem',
+      lineHeight: '4rem',
+      color: '#a2a3a3'
+    },
+    spanMiddlePre:{
+      height: '100%',
+      display: 'inline-block',  
+      verticalAlign: 'middle'
+    },
+    spanMiddle:{
+      display: 'inline-block',  
+      verticalAlign: 'middle'
     }
-    
   };
+
+  styles.sortButton = Object.assign({}, styles.iconBtn, {position:'absolute', right:15, marginTop:5});
+
+  return styles;
 }
 
 class SysSettingsPage extends Component {
@@ -89,14 +124,13 @@ class SysSettingsPage extends Component {
 
   componentDidMount(){
     const menuItems = this.createMenuItems();
-    //this.props.resetRootMenu({menuPaneVisible:true, menuPane: null });
+
     this.props.resetRootMenu({
       menuPaneVisible:true, 
       menuPane: (<RootMenuContent test1={this.onTest1} styles={this.styles}/>) ,
       menuActive: 'sys-settings',
       menuItems 
     });
-    //this.props.resetRootMenu({menuPaneVisible:false, menuPane: (<RootMenuContent test1={this.onTest1}/>) });
   }
 
   onTest2 = () => {
@@ -177,6 +211,9 @@ class SysSettingsPage extends Component {
               <IconButton style={styles.iconBtn} iconStyle={ styles.iconStyle } onTouchTap={this.handleSettingsClear}>
                 <CommClearAll />
               </IconButton>
+              <IconButton style={ styles.sortButton } iconStyle={ styles.iconStyle } onTouchTap={this.handleSettingsClear}>
+                <ContentSort />
+              </IconButton>
             </div>
             <SysSettingList muiTheme={ muiTheme } onRowEdit={ this.handleRowEdit } settings={settings}/>
           </div>
@@ -187,8 +224,8 @@ class SysSettingsPage extends Component {
 }
 
 const RootMenuContent = ({ test1, styles }) => {
-  
-  return (<div>
+  const handleDelete = () => {};
+  return (<div style={{display:'relative'}}>
     <header className="panel-header"> 
       <div className="panel-header__container active">
         <h3 className="panel-header__title">Quick Filter</h3>
@@ -197,9 +234,55 @@ const RootMenuContent = ({ test1, styles }) => {
         </IconButton>
       </div>
     </header>
-    <div style={{padding:'0 15px 15px'}}>
-      xxxxxxxx
+    <div style={{padding:'0 1.5rem'}}>
+      <div style={{display: 'flex',flexWrap: 'wrap'}}>
+        <Chip
+          key={1}
+          onRequestDelete={handleDelete}
+          style={styles.chipItem}>
+          Joined
+        </Chip>
+        <Chip
+          key={2}
+          onRequestDelete={handleDelete}
+          style={styles.chipItem}>
+          Top 10(Active)
+        </Chip>
+      </div>
+      <Divider style={{marginBottom:10}}/>
+      <div style={{display: 'flex',flexWrap: 'wrap'}}>
+        <Chip
+          key={1}
+          onRequestAdd={handleDelete}
+          style={styles.chipItem}>
+          Test Tag
+        </Chip>
+        <Chip
+          key={2}
+          onRequestAdd={handleDelete}
+          style={styles.chipItem}>
+          Test Tag
+        </Chip>
+                <Chip
+          key={3}
+          onRequestAdd={handleDelete}
+          style={styles.chipItem}>
+          Test Tag
+        </Chip>
+        <Chip
+          key={4}
+          onRequestAdd={handleDelete}
+          style={styles.chipItem}>
+          Test Tag
+        </Chip>
+      </div>
     </div>
+    <PageJumpers buttonLabel={'Other Config'}>
+      <MenuItem primaryText="Refresh" />
+        <MenuItem primaryText="Help &amp; feedback" />
+        <MenuItem primaryText="Settings" />
+        <MenuItem primaryText="Sign out" />
+    </PageJumpers>
   </div>);
 };
 
