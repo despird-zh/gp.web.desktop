@@ -234,7 +234,7 @@ const RootMenuContent = ({ test1, styles, muiTheme }) => {
     </header>
     <QuickFilter muiTheme={muiTheme}/>
     <PageJumpers buttonLabel={'Other Config'}>
-      <MenuItem primaryText="Refresh" />
+        <MenuItem primaryText="Refresh" />
         <MenuItem primaryText="Help &amp; feedback" />
         <MenuItem primaryText="Settings" />
         <MenuItem primaryText="Sign out" />
