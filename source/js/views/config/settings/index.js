@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 
 import { withRouter } from 'react-router'
 
-import { Link } from 'react-router-dom'; 
 import CommClearAll from 'material-ui/svg-icons/communication/clear-all';
 import ActionSearch from 'material-ui/svg-icons/action/search';
 import ContentSave from 'material-ui/svg-icons/content/save';
@@ -128,7 +127,7 @@ class SysSettingsPage extends Component {
     this.props.resetRootMenu({
       menuPaneVisible:true, 
       menuPane: (<RootMenuContent test1={this.onTest1} styles={this.styles} muiTheme={this.props.muiTheme}/>) ,
-      menuActive: 'sys-settings',
+      menuActive: 'config',
       menuItems 
     });
   }

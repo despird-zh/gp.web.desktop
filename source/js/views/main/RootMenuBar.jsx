@@ -118,7 +118,7 @@ class RootMenuBar extends React.Component {
                 <ul className="menu-opt__list">
                   <li className="menu-opt__item">
                     <FloatingActionButton mini={true}
-                      secondary={ menuActive === 'sys-settings'}
+                      secondary={ menuActive === 'config'}
                       onTouchTap={ this.handleMenuJumpConfig }>
                       <ActionSettings />
                     </FloatingActionButton>
