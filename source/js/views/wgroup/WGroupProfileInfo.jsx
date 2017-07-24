@@ -107,7 +107,7 @@ class WGroupProfileInfo extends React.Component {
     const styles = this.styles;
 
     return (
-      <div style={ this.props.style }>
+      <div className="menu-body" style={ this.props.style }>
         <div style={ { display: 'flex' } }>
           <Avatar src='assets/img/uxceo-128.jpg' size={ 60 } style={ { marginTop: 5, marginLeft: 5, marginRight: 5, borderRadius: 5 } } />
           <div style={ { flex: 1, marginLeft: '1rem', marginTop: '0.5rem' } }>

@@ -33,15 +33,6 @@ $panel-header-height: 4.8rem;
             transform: translate3d(0,0,0);
         }
 
-        .menu-bar-inner {
-            position: absolute;
-            top: 70px + $menu-height * 4;
-            bottom: 70px ;
-            height: auto;
-            width: 100%;
-            background-color: #fff;
-        }
-
         .menu-opts{
             overflow-y: hidden;
             display: flex;
@@ -103,23 +94,28 @@ $panel-header-height: 4.8rem;
             color: #ed1965;
             background-color: #fff;
             padding-right: 1px;
-            &.opt-all{
+            &.opt-global{
                 top: 70px;
             }
-            &.opt-search{
+            &.opt-wgroup{
                 top: 70px + $menu-height * 1;
             }
-            &.opt-query{
+            &.opt-wspace{
                 top: 70px + $menu-height * 2;
-            }
-            &.opt-plus{
-                top: 70px + $menu-height * 3;
             }
             &.opt-pinner{
                 bottom: 5px;
             }
         }
 
+        .menu-bar-inner {
+            position: absolute;
+            top: 70px + $menu-height * 3;
+            bottom: 70px ;
+            height: auto;
+            width: 100%;
+            background-color: #fff;
+        }
         .menu-opt-collection{
             height: 100%;
 

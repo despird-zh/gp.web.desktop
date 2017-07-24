@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import MapsPersonPin from 'material-ui/svg-icons/maps/person-pin';
 import ActionHomeMenu from 'material-ui/svg-icons/action/home';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import ActionExtension from 'material-ui/svg-icons/action/extension';
@@ -93,29 +94,24 @@ class RootMenuBar extends React.Component {
                     <rect width="2" height="15"></rect>
                   </svg>
               </li>
-              <li className="menu-opt opt-all">
+              <li className="menu-opt opt-global">
                 <FloatingActionButton mini={true} 
                   secondary={ menuActive === 'main'}
                   onTouchTap={ this.handleMenuJumpMain }>
                   <ActionHomeMenu />
                 </FloatingActionButton>
               </li>
-              <li className="menu-opt opt-search">
+              <li className="menu-opt opt-wgroup">
                 <FloatingActionButton mini={true} 
                   secondary={ menuActive === 'wgroup-list'}
                   onTouchTap={ this.handleMenuJumpWGroupList }>
                   <ActionExtension />
                 </FloatingActionButton>
               </li>
-              <li className="menu-opt opt-query">
+              <li className="menu-opt opt-wspace">
                 <FloatingActionButton mini={true} 
-                  secondary={ menuActive === ''}>
-                  <ContentAdd />
-                </FloatingActionButton>
-              </li>
-              <li className="menu-opt opt-plus">
-                <FloatingActionButton mini={true}>
-                  <ContentAdd />
+                  secondary={ menuActive === 'workspace'}>
+                  <MapsPersonPin />
                 </FloatingActionButton>
               </li>
               <li className="menu-opt-collection">

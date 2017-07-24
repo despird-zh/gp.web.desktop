@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import { withRouter } from 'react-router'
+
 import { Link } from 'react-router-dom'; 
 import CommClearAll from 'material-ui/svg-icons/communication/clear-all';
 import ActionSearch from 'material-ui/svg-icons/action/search';
@@ -221,9 +223,13 @@ class SysSettingsPage extends Component {
   }
 }
 
-const RootMenuContent = ({ test1, styles, muiTheme }) => {
-  
-  return (<div style={{display:'relative'}}>
+const _Content = ({ styles, muiTheme, ...rest }) => {
+
+  const jumpProfile = ()=>{
+    rest.history.push('/profile');
+  }
+
+  return (<div>
     <header className="panel-header"> 
       <div className="panel-header__container active">
         <h3 className="panel-header__title">Quick Filter</h3>
@@ -234,13 +240,15 @@ const RootMenuContent = ({ test1, styles, muiTheme }) => {
     </header>
     <QuickFilter muiTheme={muiTheme}/>
     <PageJumpers buttonLabel={'Other Config'}>
-        <MenuItem primaryText="Refresh" />
+        <MenuItem primaryText="Profile" onTouchTap={jumpProfile}/>
         <MenuItem primaryText="Help &amp; feedback" />
         <MenuItem primaryText="Settings" />
         <MenuItem primaryText="Sign out" />
     </PageJumpers>
   </div>);
 };
+
+const RootMenuContent = withRouter(_Content);
 
 const NewComponent = AuthConnect(
   SysSettingsPage,

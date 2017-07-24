@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { Link } from 'react-router';
+import CommClearAll from 'material-ui/svg-icons/communication/clear-all';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import NavFirstPage from 'material-ui/svg-icons/navigation/first-page';
@@ -13,10 +14,13 @@ import ContentSave from 'material-ui/svg-icons/content/save';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ActionHomeMenu from 'material-ui/svg-icons/action/home';
-
+import MenuItem from 'material-ui/MenuItem';
 import { snackOnlyAction, loaderAction } from '../../../store/actions/appActions';
 import PageHeaderBar from '../../component/PageHeaderBar';
 import Chip from '../../mui-ext/Chip';
+import ProfileInfo from './ProfileInfo';
+import PageJumpers from '../PageJumpers';
+import QuickFilter from '../QuickFilter';
 
 function getStyles(muiTheme) {
   const { baseTheme:{palette} } = muiTheme;
@@ -25,7 +29,6 @@ function getStyles(muiTheme) {
     topBar: {
       display: 'flex',
       position: 'relative',
-      marginTop: 10,
     },
     iconBtn: {
       width:40, 
@@ -69,14 +72,12 @@ class ProfilePage extends Component {
 
   componentDidMount(){
     const menuItems = this.createMenuItems();
-    //this.props.resetRootMenu({menuPaneVisible:true, menuPane: null });
     this.props.resetRootMenu({
       menuPaneVisible:true, 
-      menuPane: (<RootMenuContent test1={this.onTest1}/>) ,
+      menuPane: (<RootMenuContent muiTheme={ this.props.muiTheme } styles={this.styles}/>) ,
       menuActive: 'sys-settings',
       menuItems 
     });
-    //this.props.resetRootMenu({menuPaneVisible:false, menuPane: (<RootMenuContent test1={this.onTest1}/>) });
   }
 
   onTest2 = () => {
@@ -112,8 +113,7 @@ class ProfilePage extends Component {
         <div className="page-content-wrapper">
           <div className="page-right-menu">
             <div className={ this.state.collapsed ? "right-menu collapsed":"right-menu " }>
-              <div className="menu-body">
-              </div>
+              <ProfileInfo muiTheme ={muiTheme} collapsed={this.state.collapsed}/>
               <div className="menu-footer">
                 <IconButton onTouchTap={ this.onCollapseSwitch } iconStyle={this.styles.switchButton}>
                   {this.state.collapsed ? <NavFirstPage /> : <NavLastPage/>}
@@ -232,10 +232,24 @@ class ProfilePage extends Component {
   }
 }
 
-const RootMenuContent = ({ test1 }) => {
+const RootMenuContent = ({ styles , muiTheme}) => {
   
-  return (<div style={{padding:10}}>
-    <RaisedButton label="Test" primary={true} onTouchTap={test1}/>
+  return (<div>
+    <header className="panel-header"> 
+      <div className="panel-header__container active">
+        <h3 className="panel-header__title">Quick Filter</h3>
+        <IconButton style={styles.iconBtn} iconStyle={styles.iconStyle}>
+          <CommClearAll />
+        </IconButton>
+      </div>
+    </header>
+    <QuickFilter muiTheme={muiTheme}/>
+    <PageJumpers buttonLabel={'Other Config'}>
+        <MenuItem primaryText="Profile"/>
+        <MenuItem primaryText="Help &amp; feedback" />
+        <MenuItem primaryText="Settings" />
+        <MenuItem primaryText="Sign out" />
+    </PageJumpers>
   </div>);
 };
 
