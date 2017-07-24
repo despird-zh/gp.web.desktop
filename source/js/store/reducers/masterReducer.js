@@ -47,39 +47,40 @@ const actionsMap = {
     var masterState = action.payload.master;
     
     if(!masterState) return state;
-    return state;
+
+    return state.withMutations((map) => {
+      map.setIn(['storagelist','storages'],[]);
+      map.setIn(['storagelist','type'],'ALL');
+      map.setIn(['storagelist','state'],'ALL');
+      map.setIn(['dictlist','entries'],[]);
+      map.setIn(['dictlist','search'],'ALL');
+      map.setIn(['dictlist','group'],'ALL');
+      map.setIn(['entitylist','entities'], masterState.entitylist.entities);
+      map.setIn(['imagelist','images'],[]);
+      map.setIn(['imagelist','category'],'ALL');
+      map.setIn(['imagelist','format'],'ALL');
+      map.setIn(['orghier','orgnodes'],[]);
+      map.setIn(['orghier','orgmembers'],[]);
+      map.setIn(['orghier','format'],'ALL');
+    });
   },
   [PURGE_TOKEN_ACT]: (state, { type }) => { // eslint-disable-line no-unused-vars
-    return state.merge({
-      storagelist: Map({
-        storages: [],
-        type: 'ALL',
-        state: 'ALL',
-      }),
-      dictlist: Map({
-        entries: [],
-        search: '',
-        group: '',
-        language: 'en_us',
-      }),
-      entitylist: Map({
-        entities: [],
-
-      }),
-      imagelist: Map({
-        images: [],
-        category: '',
-        format: '',
-      }),
-      orghier: Map({
-        orgnodes: [],
-        orgmembers: [],
-        infomode: 'mbr-add',
-        orgadd: {},
-        orgedit: {},
-        memberadd: {},
-      }),
+    return state.withMutations((map) => {
+      map.setIn(['storagelist','storages'],[]);
+      map.setIn(['storagelist','type'],'ALL');
+      map.setIn(['storagelist','state'],'ALL');
+      map.setIn(['dictlist','entries'],[]);
+      map.setIn(['dictlist','search'],'ALL');
+      map.setIn(['dictlist','group'],'ALL');
+      map.setIn(['entitylist','entities'],[]);
+      map.setIn(['imagelist','images'],[]);
+      map.setIn(['imagelist','category'],'ALL');
+      map.setIn(['imagelist','format'],'ALL');
+      map.setIn(['orghier','orgnodes'],[]);
+      map.setIn(['orghier','orgmembers'],[]);
+      map.setIn(['orghier','format'],'ALL');
     });
+    
   },
   // Loader Action
   [MST_SAVE_STORAGES]: (state, { type, data }) => { // eslint-disable-line no-unused-vars
