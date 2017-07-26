@@ -137,7 +137,7 @@ class NodesPage extends Component {
   handleEntitiesQuery = () => {
     const {rpcInvoke} = this.props;
 
-    rpcInvoke(MasterApis.EntitiesQuery, {}, (json)=>{
+    rpcInvoke(SecurityApis.UsersQuery, {state:'ALL', type:'ALL'}, (json)=>{
       return saveUsers({users: json})
     }, false);
   }

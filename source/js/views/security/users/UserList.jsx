@@ -23,7 +23,7 @@ function getStyles(muiTheme) {
       borderBottomStyle: 'solid',
       borderBottomColor: palette.borderColor
     },
-    colCode: {
+    colAccount: {
       padding: 5,
       width:100,
       flexShrink:0, 
@@ -38,26 +38,33 @@ function getStyles(muiTheme) {
       width: 100,
       flexBasis:'0%'
     },
-    colAbbr: {
+    colName: {
       padding: 5,
-      width:100,
-      flexShrink:0, 
-      flexGrow:0, 
+      flexShrink:1, 
+      flexGrow:1, 
+      width: 100,
+      flexBasis:'0%',
       fontSize: 16
     }, 
-    colState: {
+    colMobile: {
       padding: 5,
       fontSize: 16,
       flexShrink:0, 
       flexGrow:0, 
-      width:90
+      width:100
     }, 
-    colDescr: {
-      flexShrink:1, 
-      flexGrow:1,
-      flexBasis: '0%',
-      width:100, 
-      paddingRight: 5,
+    colMailbox: {
+      padding: 5,
+      fontSize: 16,
+      flexShrink:0, 
+      flexGrow:0, 
+      width:100
+    }, 
+    colState: {
+      flexShrink:0, 
+      flexGrow:0,
+      width:90, 
+      padding: 5,
       fontSize: 16
     },
     colAction: {
@@ -83,12 +90,12 @@ function getStyles(muiTheme) {
     },
     spanMiddle:{
       display: 'inline-block',  
+      lineHeight: '4rem',
       verticalAlign: 'middle'
     },
     colEllipsis: { 
       textDecoration: 'none', 
       display: 'block',
-      padding: '1.5rem 0',
       overflow: 'hidden',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis'}
@@ -100,11 +107,12 @@ function getStyles(muiTheme) {
       fontSize: 14
     };
 
-  styles.colDescrHeader = Object.assign({}, styles.colDescr, headerCol);
-  styles.colCodeHeader = Object.assign({}, styles.colCode, headerCol);
+  styles.colAccountHeader = Object.assign({}, styles.colAccount, headerCol);
   styles.colSourceHeader = Object.assign({}, styles.colSource, headerCol);
-  styles.colAbbrHeader = Object.assign({}, styles.colAbbr, headerCol);
+  styles.colNameHeader = Object.assign({}, styles.colName, headerCol);
+  styles.colMobileHeader = Object.assign({}, styles.colMobile, headerCol);
   styles.colStateHeader = Object.assign({}, styles.colState, headerCol);
+  styles.colMailboxHeader = Object.assign({}, styles.colMailbox, headerCol);
   styles.colActionHeader = Object.assign({}, styles.colAction, headerCol);
 
   return styles;
@@ -122,23 +130,18 @@ class SysSettingsList extends PureComponent {
     const styles = this.styles;
 
     let rows = users.map((data)=>{
-      return (<RepoListRow key={`row-${data.source_id}`} rowData={data} styles={ styles } onRowEdit={onRowEdit}/>);
+      return (<RepoListRow key={`row-${data.user_id}`} rowData={data} styles={ styles } onRowEdit={onRowEdit}/>);
     });
     
     return (
       <div style={{flex:1, overflow:'hidden'}}>
         <div style={styles.rowStyle}>
-          <div style={ styles.colCodeHeader }>
-            Account
-          </div>
-          <div style={ styles.colSourceHeader }>
-            User Name
-          </div>
-          <div style={ styles.colAbbrHeader }>
-            Mobile
-          </div>
+          <div style={ styles.colAccountHeader }>Account</div>
+          <div style={ styles.colSourceHeader }>Source</div>
+          <div style={ styles.colNameHeader }>Name</div>
+          <div style={ styles.colMobileHeader }>Mobile</div>
           <div style={ styles.colStateHeader }>State</div>
-          <div style={ styles.colDescrHeader }>Mailbox</div>
+          <div style={ styles.colMailboxHeader }>Mailbox</div>
           <div style={ styles.colActionHeader }>Action</div>
         </div>
         <Scrollbars style={{ height: 'calc( 100% - 5.8rem)' }}
@@ -162,33 +165,34 @@ const RepoListRow = ({ rowData, styles, onRowEdit}) => {
 
   return (
     <li style={ styles.rowStyle }>
-      <div style={ styles.colCode }>
-        <span style={ styles.spanMiddlePre } ></span>
+      <div style={ styles.colAccount }>
         <span style={ styles.spanMiddle }>
-          {rowData.entity_code}
+          {rowData.account}
         </span>
       </div>
       <div style={ styles.colSource }>
-        <span style={ styles.spanMiddlePre } ></span>
         <span style={ styles.spanMiddle }>
-          {rowData.name}
+          {rowData.source_name}
         </span>
       </div>
-      <div style={styles.colAbbr}>
-        <span style={ styles.spanMiddlePre } ></span>
+      <div style={styles.colName}>
         <span style={ styles.spanMiddle }>
-          { rowData.abbr }
+          { rowData.name }
+        </span>
+      </div>
+      <div style={styles.colMobile}>
+        <span style={ styles.spanMiddle }>
+          { rowData.mobile }
         </span>
       </div>
       <div style={styles.colState}>
-        <span style={ styles.spanMiddlePre } ></span>
         <span style={ styles.spanMiddle }>
           { rowData.state }
         </span>
       </div>
-      <div style={styles.colDescr}>
+      <div style={styles.colMailbox}>
         <span style={ Object.assign({}, styles.spanMiddle, styles.colEllipsis) }>
-          { rowData.description }
+          { rowData.email }
         </span>
       </div>
       <div style={styles.colAction}>
