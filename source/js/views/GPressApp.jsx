@@ -31,6 +31,7 @@ import WGroupRepoPage from './wgroup/WGroupRepoPage';
 import SysSettingsPage from './config/settings';
 import ProfilePage from './config/profile';
 import NodesPage from './config/nodes';
+import UsersPage from './security/users';
 
 const rootTheme = getMuiTheme(lightBaseTheme);
 
@@ -114,6 +115,7 @@ class App extends Component {
             <AuthRoute path="/nodes" component={ NodesPage } {...routeProps}/>
             <AuthRoute path="/profile" component={ ProfilePage } {...routeProps}/>
             <AuthRoute path="/about" component={ AboutPage } {...routeProps}/>
+            <AuthRoute path="/users" component={ UsersPage } {...routeProps}/>
             <DirectRoute />
           </Switch>  
           <SigninDialog muiTheme={ rootTheme }/>

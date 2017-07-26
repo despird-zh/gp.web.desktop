@@ -75,7 +75,7 @@ class ProfilePage extends Component {
     this.props.resetRootMenu({
       menuPaneVisible:true, 
       menuPane: (<RootMenuContent muiTheme={ this.props.muiTheme } styles={this.styles}/>) ,
-      menuActive: 'sys-settings',
+      menuActive: 'config',
       menuItems 
     });
   }

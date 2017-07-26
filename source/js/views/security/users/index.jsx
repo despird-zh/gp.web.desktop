@@ -22,9 +22,9 @@ import MenuItem from 'material-ui/MenuItem';
 import { snackOnlyAction, loaderAction } from '../../../store/actions/appActions';
 import PageHeaderBar from '../../component/PageHeaderBar';
 import AuthConnect from '../../component/AuthConnect';
-import { saveEntities, MasterApis } from '../../../store/actions/masterActions';
-import NodeList from './NodeList';
-import NodeInfo from './NodeInfo';
+import { saveUsers, SecurityApis } from '../../../store/actions/securityActions';
+import UserList from './UserList';
+import UserInfo from './UserInfo';
 import Chip from '../../mui-ext/Chip';
 
 function getStyles(muiTheme) {
@@ -124,26 +124,26 @@ class NodesPage extends Component {
     this.props.resetRootMenu({
       menuPaneVisible:true, 
       menuPane: (<RootMenuContent test1={this.onTest1}/>) ,
-      menuActive: 'config' 
+      menuActive: 'security' 
     });
   }
 
   handleEntitiesClear = () => {
 
-    const {saveEntities} = this.props;
-    saveEntities({entities: []});
+    const {saveUsers} = this.props;
+    saveUsers({users: []});
   };
 
   handleEntitiesQuery = () => {
     const {rpcInvoke} = this.props;
 
     rpcInvoke(MasterApis.EntitiesQuery, {}, (json)=>{
-      return saveEntities({entities: json})
+      return saveUsers({users: json})
     }, false);
   }
 
   render() {
-    const { muiTheme, entities } = this.props;
+    const { muiTheme, users } = this.props;
     const styles = this.styles;
 
     return (
@@ -160,7 +160,7 @@ class NodesPage extends Component {
                   <ContentSave />
                 </IconButton>
               </div>
-              <NodeInfo ref={'setting_edit'} muiTheme={ muiTheme } setting={ this.state.setting }/>
+              <UserInfo ref={'setting_edit'} muiTheme={ muiTheme } setting={ this.state.setting }/>
               <div className="menu-footer">
                 <IconButton onTouchTap={ this.onCollapseSwitch } iconStyle={styles.switchButton}>
                   {this.state.collapsed ? <NavFirstPage /> : <NavLastPage/>}
@@ -170,7 +170,7 @@ class NodesPage extends Component {
           </div>
           <div className="page-content"  style={{ padding:'1.5rem' }}>
             <div style={ styles.topBar }>
-              <TextField hintText="Entity Filter"/>
+              <TextField hintText="User Filter"/>
               <IconButton style={styles.iconBtn} iconStyle={ styles.iconStyle } onTouchTap={this.handleEntitiesQuery}>
                 <ActionSearch/>
               </IconButton>
@@ -181,7 +181,7 @@ class NodesPage extends Component {
                 <ContentSort />
               </IconButton>
             </div>
-            <NodeList muiTheme={ muiTheme } onRowEdit={ this.handleRowEdit } entities={entities}/>
+            <UserList muiTheme={ muiTheme } onRowEdit={ this.handleRowEdit } users={users}/>
           </div>
         </div>
       </div>
@@ -199,8 +199,8 @@ const RootMenuContent = ({ test1 }) => {
 const NewComponent = AuthConnect(
   NodesPage,
   (state) => ({
-    entities: state.master.getIn(['entitylist','entities']),
+    users: state.security.getIn(['userlist','users']),
   }),
-  {saveEntities});
+  {saveUsers});
 
 export default NewComponent;

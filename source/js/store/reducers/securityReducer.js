@@ -1,5 +1,5 @@
 import { Map, List } from 'immutable';
-
+import {REHYDRATE} from 'redux-persist/constants';
 import {
   SEC_SAVE_USERS,
   SEC_SAVE_USER_EDIT,
@@ -8,7 +8,7 @@ import {
 
 const initialState = Map({
   userlist: Map({
-    users: List(),
+    users: [],
     search: '',
     internal: false,
     external: false,
@@ -22,7 +22,16 @@ const initialState = Map({
 });
 
 const actionsMap = {
+  [REHYDRATE] : (state, action) => { // eslint-disable-line no-unused-vars
+    var securityState = action.payload.security;
+    
+    if(!securityState) return state;
 
+    return state.withMutations((map) => {
+      map.setIn(['userlist','users'],[]);
+
+    });
+  },
   [SEC_SAVE_USERS]: (state, { type, data }) => { // eslint-disable-line no-unused-vars
     return state.withMutations((map) => {
       if (data.users) {

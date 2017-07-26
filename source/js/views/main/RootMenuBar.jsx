@@ -71,7 +71,7 @@ class RootMenuBar extends React.Component {
 
   handleMenuJumpSecurity = () => {
     const { history } = this.props;
-    history.push('/security');
+    history.push('/users');
   }
 
   render() {
