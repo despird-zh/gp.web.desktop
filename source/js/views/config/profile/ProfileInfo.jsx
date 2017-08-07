@@ -48,6 +48,10 @@ function getStyles(muiTheme, collapsed) {
       borderWidth:1,
       borderStyle:'dashed',
       borderColor:palette.primary1Color
+    },
+    menuBody:{
+      display: 'flex',
+      flexDirection: 'column'
     }
   };
 }
@@ -70,43 +74,33 @@ class ProfileInfo extends Component {
     const filterStyle = showMoreFilter ? styles.topbar : Object.assign({}, styles.topbar, {display: 'none'});
 
     const hasSelected = selectedRows && selectedRows.length > 0;
-
+    const bodyStyle = Object.assign(styles.menuBody, {padding: collapsed ? '2rem 1rem 7.5rem':'2rem 1.5rem 7.5rem'});
     return (
-      <div className="menu-body" style={{padding: collapsed ? '2rem 1rem 1.5rem':'2rem 1.5rem 1.5rem'}}>
+      <div className="menu-body" style={bodyStyle}>
         <div style={{display: 'block', marginBottom:'1rem'}} className="clearfix">
           <div style={ styles.sumInfo }>
-            <h4 style={ styles.sumTitle }>Groups</h4>
-            <span style={ styles.sumText }>12k</span>
+            <h4 style={ styles.sumTitle }>Mbrs</h4>
+            <span style={ styles.sumText }>200</span>
           </div>
           <div style={styles.sumInfo}>
-            <h4 style={ styles.sumTitle }>Ext Grps</h4>
-            <span style={styles.sumText}>12k</span>
+            <h4 style={ styles.sumTitle }>Grps</h4>
+            <span style={styles.sumText}>300</span>
           </div>
           <div style={styles.sumInfo}>
-            <h4 style={ styles.sumTitle }>Topics</h4>
-            <span style={styles.sumText}>12</span>
+            <h4 style={ styles.sumTitle }>Tpcs</h4>
+            <span style={styles.sumText}>12K</span>
           </div>
           <div style={styles.sumInfo}>
             <h4 style={ styles.sumTitle }>Files</h4>
-            <span style={styles.sumText}>123</span>
+            <span style={styles.sumText}>123K</span>
           </div>
           <div style={styles.sumInfo}>
-            <h4 style={ styles.sumTitle }>Answers</h4>
-            <div style={{ display:'block'}}>
-              <a href='' >
-                <Avatar src={ `assets/img/kerem-128.jpg` } size={ 20 } style={ { marginRight: 5,verticalAlign:'middle'} } /> 
-              </a>
-              <span style={ { marginRight: 5, display:'inline-block', verticalAligh:'middle'}}>17天</span>
-            </div>
+            <h4 style={ styles.sumTitle }>Ptns</h4>
+            <span style={styles.sumText}>12K</span>
           </div>
           <div style={styles.sumInfo}>
-            <h4 style={ styles.sumTitle }>活动</h4>
-            <div style={{ display:'block'}}>
-              <a href='' >
-                <Avatar src={ `assets/img/kerem-128.jpg` } size={ 20 } style={ { marginRight: 5,verticalAlign:'middle'} } /> 
-              </a>
-              <span style={ { marginRight: 5, display:'inline-block', verticalAligh:'middle'}}>7H</span>
-            </div>
+            <h4 style={ styles.sumTitle }>Exps</h4>
+            <span style={styles.sumText}>23</span>
           </div>
         </div>
         <Divider style={{display: collapsed? 'none':''}}/>
@@ -122,7 +116,7 @@ class ProfileInfo extends Component {
           </Chip>
         </div>
         <Divider style={{display: collapsed? 'none':''}}/>
-        <div style={{display: collapsed? 'none':''}}>
+        <div style={{display: collapsed? 'none':'', flex: '1'}}>
           <h3 style={{
             paddingTop: 10, 
             color:'rgb(158, 158, 158)',
