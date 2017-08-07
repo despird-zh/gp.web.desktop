@@ -15,7 +15,10 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ActionHomeMenu from 'material-ui/svg-icons/action/home';
 import MenuItem from 'material-ui/MenuItem';
+
 import { snackOnlyAction, loaderAction } from '../../../store/actions/appActions';
+import AuthConnect from '../../component/AuthConnect';
+import { profileSave, ConfigApis } from '../../../store/actions/configActions';
 import PageHeaderBar from '../../component/PageHeaderBar';
 import Chip from '../../mui-ext/Chip';
 import ProfileInfo from './ProfileInfo';
@@ -62,12 +65,9 @@ class ProfilePage extends Component {
     this.setState({ collapsed: !this.state.collapsed });
   }
 
-  onTest = () => {
-    this.props.resetRootMenu({menuPaneVisible:true, menuPane: (<RootMenuContent test1={this.onTest1}/>) });
-  }
-
-  onTest1 = () => {
-    console.log('12------3')
+  componentWillMount() {
+    const {rpcInvoke} = this.props;
+    rpcInvoke(ConfigApis.EntProfileQuery, {},profileSave);
   }
 
   componentDidMount(){
@@ -80,20 +80,13 @@ class ProfilePage extends Component {
     });
   }
 
-  onTest2 = () => {
-    console.log('this is test2')
-  }
-  onTest3 = () => {
-    console.log('this is test3')
-  }
-
   createMenuItems(){
     return [
-      <FloatingActionButton key={'item-1'} mini={true} onTouchTap={this.onTest2}>
+      <FloatingActionButton key={'item-1'} mini={true}>
         <ActionHomeMenu />
       </FloatingActionButton>
       ,
-      <FloatingActionButton key={'item-2'} mini={true} onTouchTap={this.onTest3}>
+      <FloatingActionButton key={'item-2'} mini={true}>
         <ContentAdd />
       </FloatingActionButton>
     ];
@@ -105,6 +98,7 @@ class ProfilePage extends Component {
       marginRight: gutter,
     };
     const styles = this.styles;
+    const profile = this.props.profile.toJS();
     return (
       <div className="page-wrapper">
         <header className="page-header-wrapper" style={this.styles.pageHeader}>
@@ -123,10 +117,8 @@ class ProfilePage extends Component {
           </div>
           <div className="page-content" style={{padding:'1.5rem'}}>
             <div style={ styles.topBar }>
-          <Chip
-            style={ { margin: 6 } }
-          >
-            2017-3-4 12:12:12 Modified By bego
+          <Chip style={ { margin: 6 } } >
+            {profile.last_modified} Modified By {profile.modifier}
           </Chip>
           <div style={ styles.spacer } />
           <div>
@@ -143,17 +135,15 @@ class ProfilePage extends Component {
             <TextField
               style={ input }
               floatingLabelText='Entity code'
-              eventKey='entity-code'
               onHandleChange={ this.handleFieldChange }
-              value={ '' }
+              value={ profile.entity_code }
             />
             <TextField
               style={ input }
               hintText='Hint Text'
               floatingLabelText='Node code'
-              eventKey='node-code'
               onHandleChange={ this.handleFieldChange }
-              value={ '' }
+              value={ profile.node_code }
             />
           </div>
           <div style={ styles.container }>
@@ -161,17 +151,15 @@ class ProfilePage extends Component {
               style={ input }
               hintText='Hint Text'
               floatingLabelText='Short Name'
-              eventKey='short-name'
               onHandleChange={ this.handleFieldChange }
-              value={ '' }
+              value={ profile.short_name }
             />
             <TextField
               style={ Object.assign({}, input, { width: 100 }) }
               hintText='Hint Text'
               floatingLabelText='Abbreviation'
-              eventKey='abbr'
               onHandleChange={ this.handleFieldChange }
-              value={ '' }
+              value={ profile.abbr }
             />
           </div>
           <div style={ styles.container }>
@@ -179,9 +167,8 @@ class ProfilePage extends Component {
               style={ Object.assign({}, input, { width: 512 + gutter }) }
               hintText='Hint Text'
               floatingLabelText='Entity Name'
-              eventKey='name'
               onHandleChange={ this.handleFieldChange }
-              value={ '' }
+              value={ profile.name }
             />
           </div>
           <div style={ styles.container }>
@@ -189,9 +176,8 @@ class ProfilePage extends Component {
               style={ input }
               hintText='Hint Text'
               floatingLabelText='Administrator'
-              eventKey='admin'
               onHandleChange={ this.handleFieldChange }
-              value={ '' }
+              value={ profile.admin }
             />
           </div>
           <div style={ styles.container }>
@@ -199,9 +185,8 @@ class ProfilePage extends Component {
               style={ Object.assign({}, input, { width: 512 + gutter }) }
               hintText='Hint Text'
               floatingLabelText='Service URL'
-              eventKey='service-url'
               onHandleChange={ this.handleFieldChange }
-              value={ '' }
+              value={ profile.service_url }
             />
           </div>
           <div style={ styles.container }>
@@ -209,17 +194,15 @@ class ProfilePage extends Component {
               style={ Object.assign({}, input, { width: 512 + gutter }) }
               hintText='Hint Text'
               floatingLabelText='Binary URL'
-              eventKey='binary-url'
               onHandleChange={ this.handleFieldChange }
-              value={ '' }
+              value={ profile.binary_url }
             />
           </div>
           <div style={ styles.container }>
             <TextField
               style={ Object.assign({}, input, { width: 512 + gutter }) }
               hintText='Hint Text'
-              value={ '' }
-              eventKey='description'
+              value={ profile.description }
               onHandleChange={ this.handleFieldChange }
               floatingLabelText='Description'
             />
@@ -253,12 +236,11 @@ const RootMenuContent = ({ styles , muiTheme}) => {
   </div>);
 };
 
-export default connect(
-  (state) => ({}),
-  (dispatch) => (
-    bindActionCreators({
-      snackOnlyAction,
-      loaderAction,
-    }, dispatch)
-  )
-)(ProfilePage);
+const NewComponent = AuthConnect(
+  ProfilePage,
+  (state) => ({
+    profile: state.config.getIn(['profile']),
+  }),
+  {profileSave});
+
+export default NewComponent;

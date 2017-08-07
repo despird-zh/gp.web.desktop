@@ -51,7 +51,7 @@ function getStyles(muiTheme) {
       fontSize: 16,
       flexShrink:0, 
       flexGrow:0, 
-      width:100
+      width:110
     }, 
     colMailbox: {
       padding: 5,
@@ -63,7 +63,7 @@ function getStyles(muiTheme) {
     colState: {
       flexShrink:0, 
       flexGrow:0,
-      width:90, 
+      width:80, 
       padding: 5,
       fontSize: 16
     },
