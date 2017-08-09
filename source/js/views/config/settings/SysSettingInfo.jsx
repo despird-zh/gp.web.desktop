@@ -63,6 +63,7 @@ class SysSettingInfo extends PureComponent {
           <MenuItem value={'BASIC'} primaryText="Basic" />
           <MenuItem value={'SECURITY'} primaryText="Security" />
           <MenuItem value={'NETWORK'} primaryText="Network" />
+          <MenuItem value={'SYNC'} primaryText="Sync Ext" />
         </SelectField>
         <TextField
           fullWidth={true}
