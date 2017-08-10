@@ -18,7 +18,7 @@ import MenuItem from 'material-ui/MenuItem';
 
 import { snackOnlyAction, loaderAction } from '../../../store/actions/appActions';
 import AuthConnect from '../../component/AuthConnect';
-import { profileSave, ConfigApis } from '../../../store/actions/configActions';
+import { profileSave, profileSumSave, ConfigApis } from '../../../store/actions/configActions';
 import PageHeaderBar from '../../component/PageHeaderBar';
 import Chip from '../../mui-ext/Chip';
 import ProfileInfo from './ProfileInfo';
@@ -39,6 +39,9 @@ function getStyles(muiTheme) {
       padding:5,
       marginTop:2,
     },
+    rowContainer:{
+      display: 'flex'
+    },
     iconStyle:{
       color: palette.primary2Color
     },
@@ -57,7 +60,10 @@ class ProfilePage extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {collapsed: false};
+    this.state = {
+      collapsed: false,
+      errtips:{},
+    };
     this.styles = getStyles(props.muiTheme);
   }
 
@@ -68,6 +74,7 @@ class ProfilePage extends Component {
   componentWillMount() {
     const {rpcInvoke} = this.props;
     rpcInvoke(ConfigApis.EntProfileQuery, {},profileSave);
+    rpcInvoke(ConfigApis.EntProfileSum, {},profileSumSave);
   }
 
   componentDidMount(){
@@ -91,14 +98,36 @@ class ProfilePage extends Component {
       </FloatingActionButton>
     ];
   }
+
+  handleFieldChange = (event) => {
+    //console.log(event.target.name + ' / ' + event.target.value)
+    let { profileSave } = this.props;
+    let data = {};
+    data[event.target.name] = event.target.value;
+    profileSave(data);
+  }
+
+  handleSave = () => {
+    const { rpcInvoke, profile } = this.props;
+    let data = (profile === null)? {} : profile.toJS();
+    delete data.summary;
+    rpcInvoke(ConfigApis.EntProfileSave, data, (json)=>{
+      let errtips = (json === null) ? {} : json;
+      this.setState({
+        errtips
+      });
+    });
+  }
+
   render() {
-    let { muiTheme } = this.props;
+    let { muiTheme, profile } = this.props;
     const gutter = muiTheme.spacing.desktopGutter;
     const input = {
       marginRight: gutter,
     };
     const styles = this.styles;
-    const profile = this.props.profile.toJS();
+    profile = ( profile === null )?{} : profile.toJS();
+    const { errtips } = this.state;
     return (
       <div className="page-wrapper">
         <header className="page-header-wrapper" style={this.styles.pageHeader}>
@@ -107,7 +136,7 @@ class ProfilePage extends Component {
         <div className="page-content-wrapper">
           <div className="page-right-menu">
             <div className={ this.state.collapsed ? "right-menu collapsed":"right-menu " }>
-              <ProfileInfo muiTheme ={muiTheme} collapsed={this.state.collapsed}/>
+              <ProfileInfo muiTheme ={muiTheme} collapsed={this.state.collapsed} summary={profile.summary}/>
               <div className="menu-footer">
                 <IconButton onTouchTap={ this.onCollapseSwitch } iconStyle={this.styles.switchButton}>
                   {this.state.collapsed ? <NavFirstPage /> : <NavLastPage/>}
@@ -131,80 +160,119 @@ class ProfilePage extends Component {
           </div>
         </div>
         <div>
-          <div style={ styles.container }>
+          <div style={ styles.rowContainer }>
             <TextField
               style={ input }
               floatingLabelText='Entity code'
-              onHandleChange={ this.handleFieldChange }
+              floatingLabelFixed={true}
+              name='entity_code'
+              onChange={ this.handleFieldChange }
               value={ profile.entity_code }
+              errorText={ errtips.entity_code }
             />
             <TextField
               style={ input }
               hintText='Hint Text'
               floatingLabelText='Node code'
-              onHandleChange={ this.handleFieldChange }
+              floatingLabelFixed={true}
+              name='node_code'
+              onChange={ this.handleFieldChange }
               value={ profile.node_code }
+              errorText={ errtips.node_code }
             />
           </div>
-          <div style={ styles.container }>
+          <div style={ styles.rowContainer }>
             <TextField
               style={ input }
               hintText='Hint Text'
               floatingLabelText='Short Name'
-              onHandleChange={ this.handleFieldChange }
+              floatingLabelFixed={true}
+              name='short_name'
+              onChange={ this.handleFieldChange }
               value={ profile.short_name }
+              errorText={ errtips.short_name }
             />
             <TextField
               style={ Object.assign({}, input, { width: 100 }) }
               hintText='Hint Text'
               floatingLabelText='Abbreviation'
-              onHandleChange={ this.handleFieldChange }
+              floatingLabelFixed={true}
+              name='abbr'
+              onChange={ this.handleFieldChange }
               value={ profile.abbr }
+              errorText={ errtips.abbr }
             />
           </div>
-          <div style={ styles.container }>
+          <div style={ styles.rowContainer }>
             <TextField
               style={ Object.assign({}, input, { width: 512 + gutter }) }
               hintText='Hint Text'
               floatingLabelText='Entity Name'
-              onHandleChange={ this.handleFieldChange }
-              value={ profile.name }
+              floatingLabelFixed={true}
+              name='entity_name'
+              onChange={ this.handleFieldChange }
+              value={ profile.entity_name }
+              errorText={ errtips.entity_name }
             />
           </div>
-          <div style={ styles.container }>
+          <div style={ styles.rowContainer }>
+            <TextField
+              style={ Object.assign({}, input, { width: 512 + gutter }) }
+              hintText='Hint Text'
+              floatingLabelText='Source Name'
+              floatingLabelFixed={true}
+              name='source_name'
+              onChange={ this.handleFieldChange }
+              value={ profile.source_name }
+              errorText={ errtips.source_name }
+            />
+          </div>
+          <div style={ styles.rowContainer }>
             <TextField
               style={ input }
               hintText='Hint Text'
               floatingLabelText='Administrator'
-              onHandleChange={ this.handleFieldChange }
+              floatingLabelFixed={true}
+              name='admin'
+              onChange={ this.handleFieldChange }
               value={ profile.admin }
+               errorText={ errtips.admin }
             />
           </div>
-          <div style={ styles.container }>
+          <div style={ styles.rowContainer }>
             <TextField
               style={ Object.assign({}, input, { width: 512 + gutter }) }
               hintText='Hint Text'
               floatingLabelText='Service URL'
-              onHandleChange={ this.handleFieldChange }
+              floatingLabelFixed={true}
+              name='service_url'
+              onChange={ this.handleFieldChange }
               value={ profile.service_url }
+              errorText={ errtips.service_url }
             />
           </div>
-          <div style={ styles.container }>
+          <div style={ styles.rowContainer }>
             <TextField
               style={ Object.assign({}, input, { width: 512 + gutter }) }
               hintText='Hint Text'
               floatingLabelText='Binary URL'
-              onHandleChange={ this.handleFieldChange }
+              floatingLabelFixed={true}
+              name='binary_url'
+              onChange={ this.handleFieldChange }
               value={ profile.binary_url }
+              errorText={ errtips.binary_url }
             />
           </div>
-          <div style={ styles.container }>
+          <div style={ styles.rowContainer }>
             <TextField
               style={ Object.assign({}, input, { width: 512 + gutter }) }
               hintText='Hint Text'
               value={ profile.description }
-              onHandleChange={ this.handleFieldChange }
+              name='description'
+              onChange={ this.handleFieldChange }
               floatingLabelText='Description'
+              floatingLabelFixed={true}
+              errorText={ errtips.description }
             />
           </div>
         </div>

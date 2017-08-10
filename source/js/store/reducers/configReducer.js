@@ -2,6 +2,7 @@ import { Map } from 'immutable';
 import {REHYDRATE} from 'redux-persist/constants';
 import {
   CFG_SAVE_PROFILE,
+  CFG_SAVE_PROFILE_SUM,
   CFG_SAVE_SETTINGS,
 } from '../actions/configActions';
 import {
@@ -33,7 +34,9 @@ const actionsMap = {
       profile: data,
     });
   },
-
+  [CFG_SAVE_PROFILE_SUM]: (state, { type, data }) => { // eslint-disable-line no-unused-vars
+    return state.setIn(['profile','summary'], data);
+  },
   [CFG_SAVE_SETTINGS]: (state, { type, data }) => { // eslint-disable-line no-unused-vars
     return state.set('settings', data);
   },

@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import Divider from 'material-ui/Divider';
-
+import { Scrollbars } from 'react-custom-scrollbars';
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
+
 import Chip from '../../mui-ext/Chip';
 
 function getStyles(muiTheme, collapsed) {
@@ -29,26 +30,14 @@ function getStyles(muiTheme, collapsed) {
       display:'block',
       verticalAligh:'middle'
     },
-    iconStyle:{
-      color: palette.primary1Color,
-      marginTop:0
-    },
-    iconBtn:{
-      width:30, 
-      height:30, 
-      padding:0, 
-      marginRight: '1rem'
-    },
-    iconAddBtn:{
-      width:30, 
-      height:30, 
-      padding:0, 
-      marginRight: '1rem',
-      borderRadius:'50%',
-      borderWidth:1,
-      borderStyle:'dashed',
-      borderColor:palette.primary1Color
-    },
+    rowHeader:{
+      paddingTop: 10, 
+      color:'rgb(158, 158, 158)',
+      textRendering: 'optimizeLegibility',
+      fontSize: '1.5rem',
+      fontWeight: 400,
+      lineHeight: '3rem',
+      textTransform: 'uppercase'},
     menuBody:{
       display: 'flex',
       flexDirection: 'column'
@@ -64,43 +53,56 @@ class ProfileInfo extends Component {
     this.state = {};
   }
 
+  createRows (){
+    const rows =[];
+    for(let i = 0; i<20; i++)
+    {
+      rows.push(
+        <li style={{height:40, paddingRight:10, display:'flex', marginLeft:0, marginBottom: '1rem'}} key={'tem'+i}>
+          <div style={{display: 'inline-block', flexBasis:32, width: 32, marginRight: 5, marginTop:5}}>
+            <Avatar src={ `assets/img/kerem-128.jpg` } size={ 30 } /> 
+          </div>
+          <a href='/f' style={{display:'inline-block', textDecoration: 'none', flex:1, whiteSpace:'normal'}}>
+            index:{i} fine and expected until the data source is modified in someway (rows are removed, for example)
+          </a>
+        </li>
+      );
+    }
+
+    return rows;
+  }
   render() {
-
-    const { muiTheme, collapsed } = this.props;
+    let { muiTheme, collapsed, summary } = this.props;
     const styles = getStyles(muiTheme, collapsed);
-
-    const { openRepoTree, showMoreFilter, selectedRows, rows } = this.state;
-
-    const filterStyle = showMoreFilter ? styles.topbar : Object.assign({}, styles.topbar, {display: 'none'});
-
-    const hasSelected = selectedRows && selectedRows.length > 0;
+    const rows = this.createRows();
+    summary = (summary === undefined || summary === null) ? {}: summary;
     const bodyStyle = Object.assign(styles.menuBody, {padding: collapsed ? '2rem 1rem 7.5rem':'2rem 1.5rem 7.5rem'});
     return (
       <div className="menu-body" style={bodyStyle}>
         <div style={{display: 'block', marginBottom:'1rem'}} className="clearfix">
           <div style={ styles.sumInfo }>
             <h4 style={ styles.sumTitle }>Mbrs</h4>
-            <span style={ styles.sumText }>200</span>
+            <span style={ styles.sumText }>{summary.members}</span>
           </div>
           <div style={styles.sumInfo}>
             <h4 style={ styles.sumTitle }>Grps</h4>
-            <span style={styles.sumText}>300</span>
+            <span style={styles.sumText}>{summary.groups}</span>
           </div>
           <div style={styles.sumInfo}>
             <h4 style={ styles.sumTitle }>Tpcs</h4>
-            <span style={styles.sumText}>12K</span>
+            <span style={styles.sumText}>{summary.topics}</span>
           </div>
           <div style={styles.sumInfo}>
             <h4 style={ styles.sumTitle }>Files</h4>
-            <span style={styles.sumText}>123K</span>
+            <span style={styles.sumText}>{summary.files}</span>
           </div>
           <div style={styles.sumInfo}>
             <h4 style={ styles.sumTitle }>Ptns</h4>
-            <span style={styles.sumText}>12K</span>
+            <span style={styles.sumText}>{summary.points}</span>
           </div>
           <div style={styles.sumInfo}>
             <h4 style={ styles.sumTitle }>Exps</h4>
-            <span style={styles.sumText}>23</span>
+            <span style={styles.sumText}>{summary.experts}</span>
           </div>
         </div>
         <Divider style={{display: collapsed? 'none':''}}/>
@@ -116,37 +118,16 @@ class ProfileInfo extends Component {
           </Chip>
         </div>
         <Divider style={{display: collapsed? 'none':''}}/>
-        <div style={{display: collapsed? 'none':'', flex: '1'}}>
-          <h3 style={{
-            paddingTop: 10, 
-            color:'rgb(158, 158, 158)',
-            textRendering: 'optimizeLegibility',
-            fontSize: '1.5rem',
-            fontWeight: 400,
-            lineHeight: '3rem',
-            textTransform: 'uppercase'}}>Attendees</h3>
-          <div style={ { paddingTop: '0.5rem', paddingBottom: 10 } }>
-            <IconButton style={styles.iconBtn}>
-              <Avatar src='assets/img/uxceo-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
-            </IconButton>
-            <IconButton style={styles.iconBtn}>
-              <Avatar src='assets/img/ok-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
-            </IconButton>
-            <IconButton style={styles.iconBtn}>
-              <Avatar src='assets/img/kolage-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
-            </IconButton>
-            <IconButton style={styles.iconBtn}>
-              <Avatar src='assets/img/jsa-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
-            </IconButton>
-            <IconButton style={styles.iconBtn}>
-              <Avatar src='assets/img/kerem-128.jpg' size={ 30 } style={ { marginRight: 5 } } />
-            </IconButton>
-            <IconButton 
-              style={styles.iconAddBtn} 
-              iconStyle={styles.iconStyle}>
-              <ContentAdd/>
-            </IconButton>
-          </div>
+        <div style={{display: collapsed? 'none':'', flex: '1', position:'relative'}}>
+          <h3 style={styles.rowHeader}>Attendees</h3>
+          <Scrollbars style={{ height: 'calc( 100% - 2.5rem)'}}
+          autoHide={true}
+          autoHideTimeout={1000}
+          autoHideDuration={200}>
+          <ul style={{margin:0, padding:0}}>
+            {rows}
+          </ul>
+         </Scrollbars>
         </div>
       </div>
     );
