@@ -59,12 +59,14 @@ class ProfileInfo extends Component {
     {
       rows.push(
         <li style={{height:40, paddingRight:10, display:'flex', marginLeft:0, marginBottom: '1rem'}} key={'tem'+i}>
-          <div style={{display: 'inline-block', flexBasis:32, width: 32, marginRight: 5, marginTop:5}}>
+          <div style={{display: 'block', flexBasis:32, width: 32, marginRight: 5, marginTop:5}}>
             <Avatar src={ `assets/img/kerem-128.jpg` } size={ 30 } /> 
           </div>
-          <a href='/f' style={{display:'inline-block', textDecoration: 'none', flex:1, whiteSpace:'normal'}}>
-            index:{i} fine and expected until the data source is modified in someway (rows are removed, for example)
-          </a>
+          <div style={{display: 'block'}}>
+            <a href='/f' style={{display:'inline-block', textDecoration: 'none', flex:1, whiteSpace:'normal'}}>
+              index:{i} fine and expected until the data source is modified in someway (rows are removed, for example)
+            </a>
+          </div>
         </li>
       );
     }
